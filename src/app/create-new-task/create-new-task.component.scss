@@ -1,0 +1,421 @@
+::ng-deep .custom-dialog-container {
+  box-shadow: 0 0 30px white !important; // Adjust as needed
+  border-radius: 8px !important; // Optional for rounded corners
+}
+
+::ng-deep .btn-check:checked+.btn-secondary, .btn-check:active+.btn-secondary, .btn-secondary:active, .btn-secondary.active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #12e19f !important;
+    min-width: 175px !important;
+    width: 175px !important;
+
+    &.option-selected {
+      color: #12e19f !important;
+    }
+}
+
+::ng-deep .mdc-form-field>label {
+  color: white !important;
+}
+
+::ng-deep .date-container .mat-form-field.mat-focused {
+  box-shadow: 0 0 10px #12e19f !important;
+  border-radius: 5px !important; /* Optional for smooth edges */
+  transition: box-shadow 0.3s ease-in-out !important;
+}
+
+::ng-deep .dropdown-toggle:focus + .dropdown-menu {
+  box-shadow: 0px 0 15px #12e19f !important;
+}
+
+h1 {
+  margin-bottom: 0 !important;
+}
+
+::ng-deep .option-selected {
+  color: #12e19f !important;
+}
+  
+.container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    width: 100%;
+    height: 100vh;
+}
+
+.subject-line-container {
+    margin-bottom: 0;
+}
+
+.subject-line {
+    width: 100%;
+    border: solid 1px #dcdcdc !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 8px;
+}
+
+.form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    cursor: grab;
+}
+
+.footer {
+    margin-top: 35px;
+}
+
+.form-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #12e19f;
+    margin-top: 0 !important
+}
+
+hr {
+    width: 120%;
+    margin-left: -50px;
+    font-size: 1px;
+    color: lightgray;
+    margin-top: 0 !important;
+}
+
+.hr-2 {
+    width: 120%;
+    margin-left: -50px;
+    font-size: 1px;
+    color: lightgray;
+}
+
+.close-btn {
+    margin: 10px 5px 15px 0;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+
+.cancel-button {
+    background-color: black !important;
+    color: white !important;
+    border-color: red !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    margin-right: 15px;
+    transition: 1s;
+    
+    &:hover {
+        background-color: black !important;
+        border-color: red !important;
+        box-shadow: 0 0 15px red !important;
+        transform: scale(1.1);
+        color: red !important;
+    }
+  }
+
+  .send-button {
+    background-color: black !important;
+    color: white;
+    border-color: #12e19f !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    transition: 1s;
+    
+    &:hover {
+        background-color: black !important;
+        color: #12e19f !important;
+        transform: scale(1.1);
+        box-shadow: 0 0 15px #12e19f !important;
+        cursor: pointer;
+    }
+  }
+
+  ::ng-deep textarea.form-control {
+    background-color: black !important;
+    color: white !important; /* Set your desired default font color */
+  }
+
+  ::ng-deep .mdc-switch:enabled .mdc-switch__track::after {
+    background-color: red !important;
+  }
+
+  ::ng-deep .mdc-switch__icons {
+    background-color: red !important;
+    color: black !important;
+    border-radius: 50% !important;
+  }
+
+  ::ng-deep angular-editor .angular-editor-textarea {
+    background-color: black !important;
+    color: white !important; /* Set your desired default font color */
+    resize: none !important;
+    margin-top: 0 !important;
+    border-top: solid 1px #dcdcdc !important;
+
+    &:focus {
+        border-color: #12e19f !important;
+        box-shadow: 0 0 15px #12e19f !important;
+    }
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border: none !important;
+    width: 100%;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    color: white !important;
+}
+
+  ::ng-deep .subject-line:focus { 
+    border-color: #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+  }
+
+  ::ng-deep .mat-mdc-form-field-icon-suffix {
+    color: white !important
+  }
+
+  ::ng-deep .mat-datepicker-toggle {
+    color: #12e19f !important;
+}
+
+  .influencer-info-container {
+    margin: 2rem 0;
+  }
+
+  .influencer-info {
+    display: inline;
+  }
+
+  .influencer-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .influencer-followers {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .example-form-field {
+    width: 100%;
+}
+
+
+.recipient-container {
+    width: 100%;
+    border: solid 1px #dcdcdc !important;
+    border-radius: 5px;
+    padding: 8px;
+    margin: 10px 10px 10px 0;
+}
+
+.to {
+    margin-right: 5px;
+}
+
+::ng-deep mat-chip {
+    margin-right: 3px !important; /* Adds space between chips */
+}
+
+::ng-deep mat-label {
+  color: #757575 !important;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track::before {
+  border: 1px solid red !important;
+  border-color: red !important;
+  background-color: black !important;
+}
+
+::ng-deep .mdc-switch:enabled .mdc-switch__track::after {
+  border: 1px solid red !important;
+  border-color: red !important
+}
+
+::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled + .mdc-label {
+  color: red !important;
+}
+
+::ng-deep .mdc-label {
+  margin-right: 5px !important;
+  color: red !important;
+}
+
+.date-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.date {
+    margin-right: 5px;
+    width: 100%;
+}
+
+.time {
+    width: 100%;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+    background-color: black !important;
+    border: solid 1px #12e19f;
+    border-radius: 6px;
+    width: 100%;
+    color: white;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border: none !important;
+    width: 100%;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border: none !important;
+    width: 100%;
+}
+
+::ng-deep .time-field {
+    width: 100% !important; /* Adjust to your preferred width */
+}
+
+::ng-deep .mat-input-element:focus {
+    background-color: transparent !important; /* Remove background color */
+}
+
+.dropdown-section {
+    margin-top: -5px;
+}
+
+.dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dropdown-menu > a {
+  background-image: none;
+  background-color: black !important;
+  color: #fff;
+}
+
+.dropdown-menu > a:hover {
+    background-image: none;
+    background-color: #12e19f !important;
+    color: #fff;
+  }
+  
+  .dropdown-menu > div > a:hover {
+    background-image: none;
+    background-color: #12e19f !important;
+    color: #fff;
+  }
+  
+  .dropdown-icon {
+    margin-left: 10px;
+    color: white;
+  }
+
+  a.dropdown-item {
+    cursor: pointer;
+    color: white;
+  }
+  
+  .dropdown-menu{
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: black;
+    border: 1px solid #12e19f;
+    box-shadow: 0 0 15px #12e19f;
+    color: white;
+  }
+
+  .flag-section {
+    margin-top: 20px;
+  }
+
+  .flag-title {
+    color: black;
+    font-weight: bold;
+  }
+
+  ::ng-deep .mat-mdc-slide-toggle .mdc-switch:enabled+.mdc-label {
+    color: white !important;
+    font-weight: 550 !important;
+  }
+
+.description-field {
+    padding: 10px 0 10px 10px;
+    margin-left: -10px;
+    background-color: black;
+    color: white;
+}
+
+::ng-deep .form-control {
+  border: solid 1px #12e19f !important;
+  border-color: #12e19f !important;
+  resize: none !important;
+}
+
+::ng-deep .form-control:focus {
+  border: solid 1px #12e19f !important;
+  border-color: #12e19f !important;
+  box-shadow: 0 0 15px #12e19f !important;
+}
+
+.input-box{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 20px 0 10px;
+}
+
+::ng-deep .input-box:focus {
+  box-shadow: 0 0 15px #12e19f !important;
+}
+
+::ng-deep .spinner-color {
+  color: #12e19f !important
+}
+
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid #12e19f !important;
+  font-size: 16px;
+  padding: 10px;
+}
+
+::ng-deep .close-btn .btn-close {
+  color: white !important;  /* Ensures the icon color is white */
+  background-color: transparent !important;  /* Removes default background */
+  filter: invert(1); /* Inverts colors (useful for Bootstrap btn-close) */
+  z-index: 9999; /* Ensures it is on top */
+  position: relative; /* Ensures z-index takes effect */
+}
+
+span {
+  color: white;
+}
+
+::ng-deep span.mat-mdc-icon-button .mat-mdc-button-touch-target {
+  color: white !important;
+}

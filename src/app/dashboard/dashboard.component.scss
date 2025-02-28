@@ -1,0 +1,213 @@
+/* Webpixels CSS */
+/* Utility and component-centric Design System based on Bootstrap for fast, responsive UI development */
+/* URL: https://github.com/webpixels/css */
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+.parent {
+    overflow-y: auto;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #12e19f !important;
+    border-color: #12e19f !important;
+}
+
+.col {
+    padding-right: 0;
+}
+
+.col-auto {
+    padding-left: 0;
+}
+
+.dark-banner-text {
+    color: black;
+}
+
+.banner-container {
+    width: 99.5%;
+    margin-left: 0.6rem;
+}
+
+.table-title {
+    font-weight: 600;
+}
+
+.dashboard-body {
+    width: 100% !important;
+    margin-top: 50px !important;
+}
+
+.recent-searches {
+    font-size: 12px !important;
+    height: 10em;
+    margin: 0 5px 100px !important;
+}
+
+.featured-section {
+    font-size: 12px !important;
+    height: 10em !important;
+    margin: 0 !important;
+}
+
+.dashboard-body {
+    display: flex;
+    flex-direction: row
+}
+
+.dashboard-body-title {
+    font-size: 17px;
+    color: black;
+    font-weight: 500;
+}
+
+.card-title {
+    font-size: 12px !important;
+}
+
+.card-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.card-body {
+    background-color: black !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    border-radius: 12px !important;
+}
+
+header {
+    background-color: black !important;
+}
+
+.card-title {
+    color: #12e19f !important
+}
+
+.card-sub-title {
+    color: #12e19f !important
+}
+
+.card-body-1::before {
+    background-color: rgba(0, 0, 0, 0.5) !important; /* Black overlay with 50% opacity */
+    z-index: 1 !important; /* Ensure it appears behind the text */
+}
+
+.card-body-1 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-radius: 10px;
+    margin-right: 30px;
+    height: 14em;
+    width: 20em;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1737647939/yoga-6723315_1280_aaqm7g.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.card-body-1 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.card-body-2 {
+    font-size: 14px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    margin-right: 30px;
+    height: 14em;
+    width: 20em;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1738015672/woman-8444805_1280_cgwqqh.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.card-body-2 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.card-body-3 {
+    font-size: 14px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    height: 14em;
+    width: 20em;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1738015675/podcast-8683196_1280_w4et3u.jpg'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.card-body-3 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.card-body-1:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 0 15px #12e19f !important;
+  }
+
+.card-body-2:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 0 15px #12e19f !important;
+  }
+
+.card-body-3:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 0 15px #12e19f !important;
+  }
+
+.row-body {
+    height: 10em;
+    width: 15em;
+    background-color: white;
+    color: white;
+    border-radius: 5px;
+}
+
+.featured-title {
+    margin-bottom: -10px !important;
+    color: white !important
+}
+
+main {
+    background-color: black !important;
+}
+
+.main-background {
+    background-color: black !important;
+}
+
+h1 {
+    color: #12e19f !important;
+}
+
+span.h3 {
+    color: white !important;
+}

@@ -1,0 +1,67 @@
+<div class="form">
+    <div class="form-wrapper drag" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+        <div>
+            <h1 class="form-title">Add Influencer to List</h1>
+        </div>
+        <div class="close-btn">
+            <button (click)="dialog.close(false)" type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+    </div>
+    <hr class="hr" />
+    <div class="list-container" *ngIf="form">
+        <div>
+            <a class="btn btn-secondary dropdown-toggle list-button" 
+               role="button" 
+               id="list" 
+               data-bs-toggle="dropdown" 
+               aria-haspopup="true" 
+               aria-expanded="false"
+               [ngClass]="{ 'option-selected': form.controls['listName'].value ? 'option-selected': '' }">
+                Select a list
+              </a>
+              <div class="dropdown-menu" aria-labelledby="list">
+                  <div *ngFor="let list of influencerLists">
+                      <a class="dropdown-item" (click)="dropdownSelected('list', list)">{{ list.name }}</a>
+                  </div>
+              </div>
+        </div>
+        <div class="list-button-container">
+            <a class="btn btn-secondary dropdown-toggle list-button-2" 
+               role="button" id="status" 
+               data-bs-toggle="dropdown" 
+               aria-haspopup="true" 
+               aria-expanded="false"
+               [ngClass]="{ 'option-selected': form.controls['influencerStatus'].value ? 'option-selected': '' }">
+                Status
+            </a>
+            <div class="dropdown-menu" aria-labelledby="status">
+                <div *ngFor="let type of influencerListTypes">
+                  <a class="dropdown-item" (click)="dropdownSelected('status', type)">{{ type.name }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="more-details" *ngIf="form">
+        <span *ngIf="!isShowDetails" (click)="openMoreDetails()"><span><i class="bi bi-chevron-right chevron-logo"></i></span><span class="chevron-logo">Add more details</span></span>
+        <span *ngIf="isShowDetails" (click)="openMoreDetails()"><span><i class="bi bi-chevron-down chevron-logo"></i></span><span class="chevron-logo hide-details">Hide details</span></span>
+        <div *ngIf="isShowDetails" class="show-details">
+            <div data-mdb-input-init class="form-outline mb-1 description-field">
+                <textarea (keyup)="onKeyUp(description.value)" rows="3" name="description" #description type="text" class="form-control ps-5" placeholder="Details"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="save-button-container" *ngIf="form">
+        <div class="buttons-container">
+            <button (click)="dialog.close(false)" class="btn btn-secondary cancel-button" type="button" role="button">
+                Cancel
+            </button>
+            <button [disabled]="!form?.valid" (click)="onSave()" class="btn btn-secondary send-button" type="button" role="button">
+                <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>  
+                Add Influencer
+            </button>
+        </div>
+    </div>
+</div>

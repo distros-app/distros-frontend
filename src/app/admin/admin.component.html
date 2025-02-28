@@ -1,0 +1,30 @@
+<div class="parent">
+    <div>
+        <h1>Admin Dashboard</h1>
+    </div>
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Update Existing Influencers in DB:</span>
+        </div>
+        <div>
+            <input (change)="onFileSelected($event)" #fileInput type="file">
+        </div>
+    </div>
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Add New Influencers to DB:</span>
+        </div>
+        <div>
+            <input (change)="onFileSelected($event)" #fileInput type="file">
+        </div>
+    </div>
+
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Extract Usernames for Apify:</span>
+        </div>
+        <div>
+            <input (change)="extractUsernames($event)" #fileInput type="file">
+        </div>
+    </div>
+</div>

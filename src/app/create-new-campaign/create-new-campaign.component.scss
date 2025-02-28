@@ -1,0 +1,588 @@
+@use '@angular/material' as mat;
+
+:root {
+    --mat-radio-disabled-selected-icon-color: orange;
+    --mat-radio-disabled-unselected-icon-color: red;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+::ng-deep .btn-check:checked+.btn-secondary, .btn-check:active+.btn-secondary, .btn-secondary:active, .btn-secondary.active, .show>.btn-secondary.dropdown-toggle {
+    color: white !important;
+    background-color: #000 !important;
+    border-color: #12e19f !important;
+}
+
+::ng-deep .dropdown-menu {
+    background-image: none;
+    background-color: black !important;
+    color: #fff !important;
+    padding: 10px 0 !important;
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+  }
+  
+::ng-deep .dropdown-item {
+    color: #fff !important;
+}
+
+.row-1 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+  
+.dropdown-icon {
+    margin-left: 10px;
+    color: #fff !important;
+}
+  
+.dropdown-icon:hover {
+    margin-left: 10px;
+    color: #fff !important;
+}
+
+.or {
+    padding: 20px 15px 0 15px;
+    color: #12e19f;
+}
+
+::ng-deep .client-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #12e19f !important;
+    border: 2px solid #12e19f !important;
+    min-width: 165px !important;
+    width: 240px !important;
+    padding: 12px 20px !important;
+    margin: 2em 0 0.5em !important;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+::ng-deep .custom-dialog-container {
+    box-shadow: 0 0 30px white !important; // Adjust as needed
+    border-radius: 8px !important; // Optional for rounded corners
+}
+
+.parent{
+    height: 725px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    width: 100%;
+    height: 100vh;
+}
+
+.influencer-img {
+    height: 20px;
+    width: 20px;
+}
+
+.clients-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    padding: 5px 10px;
+    height: 30px;
+}
+
+.client-selected {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    padding: 0 10px;
+    height: 21px;
+    width: 100%;
+}
+
+.client-name {
+    font-size: 16px !important;
+}
+
+.clients-container:hover {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+    padding: 5px 10px;
+    height: 30px;
+    background-color: #12e19f;
+    cursor: pointer;
+}
+
+img{
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 40px;
+}
+
+.green-banner-text {
+    color: #12e19f !important;
+    font-weight: bolder;
+}
+
+.intro-container{
+    width: 100vw;
+    height: 100vh;
+    display: block !important;
+    align-items: flex-center !important;
+    justify-content: flex-start !important;
+    color: fff;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 19rem;
+    background: #000;
+    color: white;
+}
+
+h2 {
+    font-weight: 600;
+    color: #12e19f !important;
+}
+
+.intro {
+    width: 100%;
+}
+
+.logo {
+    height: 100px !important;
+    width: 150px !important;
+}
+
+.header-title {
+    margin-bottom: 15px;
+    font-size: 32px !important
+}
+
+.header-sub-title {
+    font-size: 17px !important
+}
+
+.header-sub-title-container {
+    margin-top: 100px;
+}
+
+.login-container{
+    width: 60%;
+    display: block !important;
+    align-items: start !important;
+    justify-content: flex-start !important;
+    color: 000f;
+    padding: 30px 40px;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    margin-top: -70px;
+    border-radius: 15px;
+    border: 2px solid #12e19f !important;
+    box-shadow: #12e19f 0px 10px 120px 10px;
+    background: #000;
+    color: white;
+}
+
+.column-1 {
+    width: 48%;
+    display: flex;
+}
+
+.column-3 {
+    width: 48%;
+    margin: 12px 6px 0;
+}
+
+.input-box{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    margin: 20px 0 10px;
+}
+
+.input-box-1{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 10px;
+}
+
+.input-box-1 input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white !important;
+    border: 2px solid #12e19f !important;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: white !important;
+    border: 2px solid #12e19f !important;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.client-icon {
+    position: absolute;
+    left: 30px;
+    top: 25%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    padding: 2px;
+}
+
+.compensation-icon {
+    position: absolute;
+    left: 45px;
+    top: 42%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    padding: 2px;
+}
+
+.compensation-field {
+    display: flex;
+}
+
+.compensation-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.register{
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register p a{
+    font-weight: 600;
+    color: #fff;
+    font-size: 18px;
+}
+
+.register p a:hover{
+    color: #12e19f !important;
+}
+
+.remember{
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    margin: -10px 0 15px;
+}
+
+.remember a{
+    border-bottom: 2px solid transparent;
+    color: #fff;
+}
+
+.remember a:hover{
+    /* border-bottom: 2px solid #fff; */
+    color: #12e19f
+}
+
+.input-error {
+    margin-top: -20px;
+    color: red;
+}
+
+.user-exists-error {
+    justify-self: center;
+    margin-top: 10px;
+    color: red;
+}
+
+.input-success {
+    justify-self: center;
+    margin-top: 10px;
+    color: green;
+}
+
+.input-field-container {
+    display: block;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    padding-left: 10px;
+}
+
+input {
+    color: white !important;
+    border-color: white !important;
+}
+
+.loading-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.form {
+    width: 100%;
+    padding: 10px 30px 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.form-title-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin-bottom: -20px !important;
+    margin-left: 10px;
+    padding: 10px 30px;
+    cursor: grab;
+}
+
+.form-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #12e19f;
+}
+
+::ng-deep .close-btn {
+    margin: -15px 0 0 10px !important;
+    color: white !important;
+    z-index: 100 !important;
+}
+
+.save-btn {
+    margin-top: -20px;
+}
+
+hr {
+    width: 150%;
+    margin-top: 10px;
+    margin-left: -50px;
+    font-size: 1px;
+    color: lightgray;
+}
+
+.checkmark {
+    color: #12e19f !important;
+}
+
+.cross {
+    color: red !important;
+}
+
+.error-message {
+    color: red;
+}
+
+::ng-deep .close-btn .btn-close {
+    color: white !important;  /* Ensures the icon color is white */
+    background-color: transparent !important;  /* Removes default background */
+    filter: invert(1); /* Inverts colors (useful for Bootstrap btn-close) */
+    z-index: 9999; /* Ensures it is on top */
+    position: relative; /* Ensures z-index takes effect */
+}
+  
+
+.radio-buttons {
+    margin-top: 10px;
+}
+
+::ng-deep .mdc-form-field>label  {
+    color: white !important;
+}
+
+::ng-deep .mdc-radio__native-control {
+    color: white !important;
+}
+
+.radio-buttons-2 {
+    margin-top: 10px;
+    margin-left: -20px;
+    padding-left: 20px;
+}
+
+.description-field {
+    padding: 10px;
+    margin-left: -10px;
+}
+
+.form-control {
+    border: solid 2px #12e19f !important;
+    border-color: #12e19f !important;
+    padding-top: 10px !important;
+    resize: none !important;
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+::ng-deep .form-control:focus {
+    border: solid 2px #12e19f !important;
+    border-color: #12e19f !important;
+    box-shadow: 0 0 12px #12e19f !important;
+}
+
+::ng-deep .form-control::placeholder {
+  color: #757575 !important;
+}
+
+::ng-deep input > .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control {
+    border-color: #12e19f !important;
+    color: #12e19f !important;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 15px;
+    margin-right: 25px;
+}
+
+.cancel-button {
+    background-color: black !important;
+    border-color: red !important;
+    margin-right: 8px !important;
+    padding: 12px 16px !important;
+    border: 1px solid red !important;
+    color: white !important;
+    transition: 1s !important;
+    
+    &:hover {
+        background-color: black !important;
+        border-color: red !important;
+        box-shadow: 0 0 15px red !important;
+        border: 1px solid red !important;
+        color: red !important;
+        transform: scale(1.1) !important;
+    }
+  }
+
+  .send-button {
+    background-color: black !important;
+    color: white !important;
+    padding: 12px 16px !important;
+    border: 1px solid #12e19f !important;
+    transition: 1s;
+    
+    &:hover {
+        background-color: black !important;
+        color: #12e19f !important;
+        box-shadow: 0 0 15px #12e19f !important;
+        border: 1px solid #12e19f !important;
+        transform: scale(1.1) !important;
+    }
+  }
+
+  ::ng-deep angular-editor .angular-editor-textarea {
+    color: white !important; /* Set your desired default font color */
+    resize: none !important;
+    margin-top: 0 !important;
+    border-top: solid 1px #dcdcdc !important;
+    padding: 15px !important;
+    background-color: black !important;
+
+    &:focus {
+        border-color: #12e19f !important;
+        box-shadow: 0 0 15px #12e19f !important;
+    }
+  }
+
+  .date-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.date {
+    width: 100%;
+}
+
+.start-date {
+    margin-bottom: -15px;
+}
+
+.end-date {
+    margin-top: 5px;
+}
+
+.time {
+    width: 100%;
+}
+
+::ng-deep mat-label {
+    color: #757575 !important;
+}
+
+::ng-deep .mdc-text-field {
+    color: white !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+    background-color: black !important;
+    color: white !important;
+    border: solid 2px #12e19f;
+    border-radius: 6px;
+    width: 100%;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
+    border: none !important;
+    width: 100%;
+    color: white;
+}
+
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
+    border: none !important;
+    width: 100%;
+    color: white;
+}
+
+::ng-deep .time-field {
+    width: 100% !important; /* Adjust to your preferred width */
+}
+
+::ng-deep .mat-input-element:focus {
+    background-color: transparent !important; /* Remove background color */
+}
+
+::ng-deep .spinner-color {
+    color: white !important
+}
+
+
+::ng-deep .mdc-radio__inner-circle {
+    border-color: #12e19f !important;
+    background-color: #12e19f !important;
+}
+
+::ng-deep .mdc-radio__outer-circle {
+    color: white !important;
+    border-color: white !important;
+}
+
+::ng-deep .mat-datepicker-toggle {
+    color: #12e19f !important;
+}

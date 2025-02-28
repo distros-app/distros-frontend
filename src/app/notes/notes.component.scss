@@ -1,0 +1,591 @@
+/* Webpixels CSS */
+/* Utility and component-centric Design System based on Bootstrap for fast, responsive UI development */
+/* URL: https://github.com/webpixels/css */
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #12e19f !important;
+    border-color: #12e19f !important;
+}
+
+header {
+    background-color: black !important;
+}
+
+.h-screen {
+    background-color: black !important;
+}
+
+h1 {
+    color: #12e19f;
+}
+
+main {
+    background-color: #000 !important;
+}
+
+.dark-banner-text {
+    color: black;
+}
+
+::ng-deep .spinner-color {
+    color: white !important
+}
+
+.banner-container {
+    width: 99.5%;
+    margin-left: 0.6rem;
+}
+
+.empty-title {
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+}
+
+.empty-list-container {
+    margin-top: 12vh;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.influencer-list-img {
+    height: 125px;
+    width: 125px;
+    margin-bottom: 3vh;
+}
+
+.new-task-button {
+    color: black;
+    border-color: #12e19f !important;
+    background-color: black !important;
+    margin-left: 20px;
+    
+    &:hover {
+      box-shadow: 0 0 15px #12e19f !important;
+      background-color: white !important;
+    }
+}
+
+.empty-list-btn {
+    color: white;
+    border-color: #12e19f !important;
+    background-color: #12e19f  !important;
+    margin-left: 20px;
+    
+    &:hover {
+      box-shadow: 0 0 15px #12e19f !important;
+    }
+}
+
+.delete-button {
+    color: white;
+    background-color: black !important;
+    border: 1px solid red !important;
+    transition: 1s !important;
+    margin-left: 20px;
+    margin-right: 15px;
+    width: 160px;
+    
+    &:hover {
+      box-shadow: 0 0 15px red !important;
+      border: 1px solid red !important;
+      color: red !important;
+      transform: scale(1.1) !important;
+    }
+}
+
+.table-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.dropdown-item {
+    cursor: pointer;
+}
+
+button.dropdown-item {
+    cursor: pointer;
+}
+
+.dropdown-menu{
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.empty-list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+}
+
+h5 {
+    margin-left: 0.5rem;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.empty-list {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-list-title {
+   margin-left: 2rem;
+   color: #12e19f;
+}
+
+.empty-list-img {
+    margin-left: 3.25rem;
+    color: #12e19f !important;
+ }
+
+.empty-list-btn {
+    margin-top: 2.5rem;
+    margin-left: 5rem;
+}
+
+.empty-influencers {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-influencers-img {
+    margin-left: 8rem;
+ }
+
+.empty-influencers-btn {
+    margin-top: 1rem;
+    margin-left: 8rem;
+}
+
+.dropdown-menu > a:hover {
+    background-image: none;
+    background-color: #12e19f !important;
+    color: #fff;
+}
+  
+.dropdown-menu > div > a:hover {
+    background-image: none;
+    background-color: #12e19f !important;
+    color: #fff;
+}
+
+::ng-deep .btn-check:checked+.btn-secondary, .btn-check:active+.btn-secondary, .btn-secondary:active, .btn-secondary.active, .show>.btn-secondary.dropdown-toggle {
+    color: #000 !important;
+    background-color: #fff !important;
+    border-color: #12e19f !important;
+}
+
+::ng-deep .dropdown-toggle {
+    width: 160px !important;
+}
+
+.influencer-img {
+    height: 30px;
+    width: 30px;
+}
+
+.empty-list-img-container {
+  margin-left: 1rem;
+  margin-bottom: -2rem;
+}
+
+.dropdown {
+    margin-right: 20px;
+  
+    :last-child {
+      margin-right: 0;
+    }
+}
+
+.results-button {
+    background-color: #12e19f !important;
+    color: black !important;
+    
+    &:hover {
+      box-shadow: 0 0 15px #12e19f !important;
+      color: white !important;
+    }
+}
+
+.table-container {
+    height:82vh;
+    width: 100%;
+    display: flex;
+    border-radius: 12px;
+    background-color: black !important;
+    color: white !important;
+}
+
+.table-responsive {
+    height: 82vh;
+    width: 100%;
+    display: flex;
+    border-radius: 12px;
+    background-color: black;
+    color: white;
+    overflow-y: hidden;
+}
+
+.all-notes-container {
+    width: 30%;
+    height: 95%;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+}
+
+.all-notes-title {
+    margin: 15px 30px;
+}
+
+.all-notes-subheader {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 30px;
+}
+
+.icons-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.first-icon {
+    color: white !important;
+}
+
+.first-icon-clicked {
+    color: #12e19f !important;
+}
+
+.first-icon:hover {
+    cursor: pointer;
+    color: #12e19f !important;
+}
+
+.new-note-container {
+    width: 70%;
+    height: 92%;
+    color: white;
+    background-color: black;
+    border-radius: 12px;
+    margin: 20px;
+    box-shadow: 0 0 15px #12e19f !important;
+}
+
+.email-editor {
+    margin: 20px;
+}
+
+::ng-deep angular-editor .angular-editor-textarea {
+    color: black !important; /* Set your desired default font color */
+    resize: none !important;
+    margin-top: 0 !important;
+    border-top: solid 1px #dcdcdc !important;
+
+    &:focus {
+        border-color: #12e19f !important;
+        box-shadow: 0 0 7px #12e19f !important;
+    }
+  }
+
+  ::ng-deep input:focus { 
+    border-color: #12e19f !important;
+    box-shadow: 0 0 7px #12e19f !important;
+  }
+
+.subject-line-container {
+    margin: 20px 0 -10px 20px;
+}
+
+.subject-line {
+    width: 97.6%;
+    border: solid 1px #12e19f !important;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.parent {
+    background-color: black !important;
+}
+
+.notes-container {
+    margin-left: 25px;
+    margin-top: 10px;
+    height: 500px;
+}
+
+.notes-display {
+    padding: 5px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.note {
+    height: 150px;
+    width: 300px;
+    border: 1px solid #12e19f !important;
+    border-color: #12e19f !important;
+    border-radius: 7px !important;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.note-title {
+    font-weight: bold;
+    color: #12e19f;
+    margin-bottom: 5px;
+}
+
+.note-date {
+    font-size: 12px;
+}
+
+.active-note {
+    height: 150px;
+    width: 300px;
+    border: 1px solid #12e19f !important;
+    border-radius: 7px !important;
+    border-color: #12e19f  !important;
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px #12e19f !important;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.action-button {
+    background-color: black !important;
+    color: white !important;
+}
+
+.action-button:hover {
+    border-color: #12e19f !important;
+    color: #12e19f !important;
+}
+
+.note:hover {
+    cursor: pointer;
+}
+
+.notes-filter:hover {
+    cursor: pointer;
+    color: #12e19f !important;
+}
+
+.cancel-button {
+    background-color: white !important;
+    border-color: #12e19f !important;
+    margin-right: 8px;
+    width: 160px;
+    
+    &:hover {
+        background-color: white !important;
+        border-color: #12e19f !important;
+        box-shadow: 0 0 15px #12e19f !important;
+    }
+  }
+
+  .update-button {
+    background-color: black !important;
+    color: white;
+    width: 160px;
+    border: 1px solid #12e19f;
+    transition: 1s !important;
+    
+    &:hover {
+        background-color: black !important;
+        color: #12e19f !important;
+        box-shadow: 0 0 15px #12e19f !important;
+        transform: scale(1.1) !important;
+    }
+  }
+
+  .buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 17px;
+  }
+
+  ::ng-deep .NgxEditor__Content {
+    height: 48vh !important;
+  }
+
+  ::ng-deep .NgxEditor__Content:focus {
+    border: 2px solid #12e19f !important;
+    box-shadow: 0 0 7px #12e19f !important;
+    background-color: black !important;
+    color: white !important
+  }
+
+  ::ng-deep div.NgxEditor__Content {
+    border: 1px solid #12e19f !important;
+    background-color: #000 !important;
+    color: white !important;
+  }
+
+  ::ng-deep .NgxEditor__Wrapper .NgxEditor__MenuBar {
+    border: 1px solid #12e19f !important;
+    background-color: #000 !important;
+    color: white !important;
+  }
+
+  ::ng-deep .NgxEditor__MenuItem .NgxEditor__MenuItem--Icon:hover {
+    color: black !important;
+    cursor: pointer !important;
+  }
+
+  ::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Text:hover {
+    color: black !important;
+    cursor: pointer !important;
+  }
+
+  input {
+    border: 1px solid #12e19f !important;
+    background-color: #000 !important;
+    color: white !important
+  }
+
+  h5 {
+    color: #12e19f;
+  }
+
+  ::ng-deep div.NgxEditor__Content {
+    height: 42vh !important;
+    background-color: black !important;
+    color: white !important;
+    border: 1px solid #12e19f !important;
+}
+
+::ng-deep div.NgxEditor__Content:focus {
+    background-color: black !important;
+    color: white !important;
+    border: 2px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+}
+
+::ng-deep .NgxEditor__Wrapper .NgxEditor__MenuBar {
+    background-color: black !important;
+    color: white !important;
+    border: 1px solid #12e19f !important;
+}
+
+::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Item {
+    color: black !important;
+    background-color: white!important;
+}
+
+::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Item:hover {
+    color: white !important;
+    background-color: #12e19f !important;
+    box-shadow: 0 0 7.5px #12e19f !important;
+    cursor: pointer !important;
+}
+
+::ng-deep .spinner-color {
+    color: white !important
+}
+
+::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup label {
+    color: black !important;
+}
+
+::ng-deep .NgxEditor__Popup .NgxEditor__Popup--Label {
+    color: black !important;
+}
+
+::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup input {
+    color: black !important;
+    background-color: white !important;
+}
+
+::ng-deep button[type=submit] {
+    color: white !important;
+    background-color: black !important;
+    border-color: #12e19f !important;
+    border: 1px solid #12e19f !important;
+    padding: 6px 18px !important;
+    border-radius: 5px;
+    transition: 1s;
+}
+
+::ng-deep button[type=submit]:not(:disabled):hover {
+    padding: 6px 18px !important;
+    border-radius: 5px !important;
+    color: #12e19f !important;
+    background-color: black !important;
+    border: 1px solid #12e19f !important;
+    border-color: #12e19f !important;
+    box-shadow: 0 0 15px !important;
+    transform: scale(1.1) !important;
+    cursor: pointer !important;
+}
+
+::ng-deep button[type=submit]:disabled {
+    padding: 6px 18px !important;
+    border-radius: 5px !important;
+    color: white !important;
+    background-color: #757575 !important;
+    border-color: #757575 !important;
+    cursor: not-allowed !important;
+}
+
+::ng-deep angular-editor .angular-editor-textarea {
+    color: white !important; /* Set your desired default font color */
+    resize: none !important;
+    margin-top: 0 !important;
+    border-top: solid 1px #dcdcdc !important;
+
+    &:focus {
+        border-color: #12e19f !important;
+        box-shadow: 0 0 15px #12e19f !important;
+    }
+  }
+
+  ::ng-deep input { 
+    background-color: black !important;
+    color: white !important;
+    border: 1px solid #12e19f !important;
+  }
+
+  ::ng-deep .NgxEditor__MenuItem .NgxEditor__MenuItem--Icon:hover {
+    color: black !important;
+    background-color: #12e19f !important;
+    cursor: pointer !important;
+}
+
+::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Text {
+    color: white !important;
+    background-color: black !important;
+}
+
+::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Text:hover {
+    color: black !important;
+    background-color: #12e19f !important;
+    cursor: pointer !important;
+}

@@ -1,0 +1,146 @@
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1 main-container">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight">Influencer lists</h1>
+                        </div>
+                        <!-- Actions -->
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="mx-n1 download-title">
+                                <a href="#" class="btn d-inline-flex btn-sm btn-secondary mx-1 action-button">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-box-arrow-up"></i>
+                                    </span>
+                                    <span>Download Lists</span>
+                                </a>
+                                <!--
+                                <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-box-arrow-down"></i>
+                                    </span>
+                                    <span>Upload Notes</span>
+                                </a>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <!--
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link active">All files</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">Shared</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">File requests</a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <hr class="hr">
+        <!-- Main -->
+        <main class="my-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="row g-6 mb-6">
+                    <div class="container-fluid">
+                        <div class="card shadow border-0">
+                            <div class="card-body card-containers">
+                            <div class="dropdown show">
+                                <div class="dropdown show">
+                                    <div class="dropdown show right-container new-list-button">
+                                        <button (click)="openCreateNewListModal()" [disabled]="isLoading" class="btn btn-secondary results-button" type="button" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-folder-plus icon-button"></i> New List
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="(!isLoading && !isListSelected && influencerListsData.length && totalInfluencers) || (!isLoading && isListSelected && influencerListsData.length && totalInfluencers)" class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0 table-title">Lists</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-black">
+                                <tr>
+                                    <th scope="col">Created Date</th>
+                                    <th scope="col">Name of List</th>
+                                    <th scope="col">Influencers in this List</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let list of influencerLists">
+                                    <td>
+                                        <span class="text-heading font-semibold">
+                                            {{ list.createdDate | date: 'M/d/yyyy' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{ list.name }}
+                                    </td>
+                                    <td>
+                                        {{ list.influencers.length }}
+                                    </td>
+                                    <td class="text-start">
+                                        <a class="btn btn-sm btn-neutral open-list-button" (click)="openInfluencerListDetailsModal(list)" title="View profile">View</a>
+                                        <span>
+                                            <button type="button" (click)="openDeleteListModal(list)" class="btn btn-sm btn-square btn-neutral text-danger-hover trash-button" title="Remove from list">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5 d-flex justify-content-center">
+                        <span *ngIf="!isLoading" class="text-muted text-sm">{{ tableDataMessage }}</span>
+                        <div *ngIf="isLoading" class="spinner-border spinner-border-md text-success" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>  
+                    </div>
+                </div>
+                <div *ngIf="(!isLoading && !isListSelected && influencerListsData.length && !totalInfluencers)" class="empty-list-container">
+                    <div class="empty-list">
+                        <img class="empty-influencers-img" src="../../assets/images/influencer-list-img.png" />
+                        <h5>It looks like there are no creators in any of your lists yet</h5>
+                        <span class="empty-influencers-title">You can add creators to your lists from the Find Influencers page</span>
+                    </div>
+                </div>
+                <div *ngIf="(!isLoading && isListSelected && influencerListsData.length && !totalInfluencers)" class="empty-list-container">
+                    <div class="empty-list">
+                        <img class="empty-influencers-img" src="../../assets/images/influencer-list-img.png" />
+                        <h5>It looks like there are no creators in this list yet</h5>
+                        <span class="empty-influencers-title">You can add creators to your list from the Find Influencers page</span>
+                    </div>
+                </div>
+                <div *ngIf="(!isLoading && !isListSelected && !influencerListsData.length)" class="empty-list-container">
+                    <div class="empty-list">
+                        <img class="empty-list-img" src="../../assets/images/list.png" />
+                        <h5>You haven't created any lists yet</h5>
+                        <span class="empty-list-title">Create a New List to get started</span>
+                        <div>
+                            <button (click)="openCreateNewListModal()" [disabled]="isLoading" class="btn btn-secondary results-button empty-list-btn" type="button" role="button">
+                                New List
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+

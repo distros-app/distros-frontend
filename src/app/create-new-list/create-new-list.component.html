@@ -1,0 +1,38 @@
+<div class="parent">
+    <div *ngIf="listForm">
+        <form [formGroup]="listForm" action="#" class="form">
+            <div class="form-wrapper" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+                <div>
+                    <h1 class="form-title">Create New List</h1>
+                </div>
+                <div class="close-btn">
+                    <button (click)="dialog.close(false)" type="button" class="btn-close" aria-label="Close"></button>
+                </div>
+            </div>
+            <hr class="hr" />
+            <div class="input-box name-field">
+                <input formControlName="name" type="text" placeholder="Name of new list">
+                <i *ngIf="listForm.controls['name'].dirty && listForm.controls['name'].value.trim() !== '' && !listAlreadyExists" class="bi bi-check-circle-fill checkmark"></i>
+                <i *ngIf="listForm.controls['name'].dirty && listForm.controls['name'].value && listAlreadyExists" class="bi bi-x-circle-fill cross"></i>
+            </div>
+            <div class="error-message" *ngIf="listForm.controls['name'].dirty && listAlreadyExists">
+                List already exists
+            </div>
+            <div class="buttons-container">
+                <button (click)="dialog.close(false)" class="btn btn-secondary cancel-button" type="button" role="button">
+                    Cancel
+                </button>
+                <button (click)="onSave()" [disabled]="listForm.invalid || listForm.controls['name'].value.trim() === ''" class="btn btn-secondary send-button" type="button" role="button">
+                    <div>
+                        <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>  
+                        Create List
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+

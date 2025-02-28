@@ -1,0 +1,201 @@
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1 main-container">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight">Clients / Campaigns</h1>
+                        </div>
+                        <!-- Actions -->
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="mx-n1 download-title">
+                                <a href="#" class="btn d-inline-flex btn-sm btn-secondary mx-1 action-button">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-box-arrow-up"></i>
+                                    </span>
+                                    <span>Download Campaigns</span>
+                                </a>
+                                <!--
+                                <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-box-arrow-down"></i>
+                                    </span>
+                                    <span>Upload Notes</span>
+                                </a>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <!--
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link active">All files</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">Shared</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">File requests</a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div class="row g-6 mb-6">
+                    <div class="container-fluid">
+                        <div class="card shadow border-0">
+                            <div class="card-body card-containers">
+                                <div class="dropdown show left-container">
+                                    <div class="dropdown show">
+                                        <button 
+                                            class="btn btn-secondary dropdown-toggle" 
+                                            role="button" id="dropdownMenuLink1" 
+                                            data-bs-toggle="dropdown" 
+                                            aria-haspopup="true" 
+                                            aria-expanded="false" 
+                                            [disabled]="isLoading"
+                                            [ngClass]="{ 'option-selected': query.paymentType ? 'option-selected': '' }">
+                                          Payment Type
+                                        </button>
+                                      
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
+                                            <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink1', 'Per Month')">
+                                                Per Month
+                                            </a>
+                                            <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink1', 'One-Time')">
+                                                One-Time Payment
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="dropdown show">
+                                        <button 
+                                            class="btn btn-secondary 
+                                            dropdown-toggle" 
+                                            role="button" 
+                                            id="dropdownMenuLink2" 
+                                            data-bs-toggle="dropdown" 
+                                            aria-haspopup="true" 
+                                            aria-expanded="false" 
+                                            [disabled]="isLoading"
+                                            [ngClass]="{ 'option-selected': query.status ? 'option-selected': '' }">
+                                           Campaign Status
+                                          </button>
+
+                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink2">
+                                            <div *ngFor="let status of campaignStatuses; let index = index">
+                                                <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink2', status.name)">{{ status.name }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="dropdown show clear-filters">
+                                        <button (click)="onClearFilters()" class="btn btn-danger delete-button" title="Clear filters" type="button" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="reset-title">Reset</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-repeat clear-icon" viewBox="0 0 16 16">
+                                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/>
+                                                <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="dropdown show right-container new-campaign-button">
+                                        <div class="dropdown show">
+                                            <button (click)="openCreateNewCampaignModal()" [disabled]="isLoading" class="btn btn-secondary results-button" type="button" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="bi bi-pen icon-button"></i> New Campaign
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="(!isLoading && !isListSelected && campaignsExist)" class="card shadow border-0 mb-7">
+                    <div class="card-header">
+                        <h5 class="mb-0 table-title">Campaigns</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Client</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+                                    <th scope="col">Compensation</th>
+                                    <th scope="col">Payment Type</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let campaign of campaigns">
+                                    <td>
+                                        <img crossorigin='anonymous' [src]="campaign.profilePic?.secure_url" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img">
+                                        <span class="text-heading font-semibold">
+                                            {{ campaign.clientName }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{ campaign.startDate | date: 'M/d/yyyy' }}
+                                    </td>
+                                    <td>
+                                        {{ (campaign.endDate | date: 'M/d/yyyy') || 'Ongoing' }}
+                                    </td>
+                                    <td>
+                                        {{campaign.compensation | currency:'USD':'symbol':'1.0-0' }}
+                                    </td>
+                                    <td>
+                                        {{campaign.compensationDuration}}
+                                    </td>
+                                    <td>
+                                        {{ campaign.status || 'Active' }}
+                                    </td>
+                                    <!--
+                                    <td>
+                                        <span class="badge badge-lg badge-dot">
+                                            <i class="bg-success"></i>{{campaign.location}}
+                                        </span>
+                                    </td>
+                                    -->
+                                    <td class="text-start">
+                                        <a (click)="openUpdateCampaignModal(campaign)" class="btn btn-sm btn-neutral action-button" title="View profile">View</a>
+                                        <span>
+                                            <button type="button" (click)="openDeleteCampaignModal(campaign)" class="btn btn-sm btn-square btn-neutral text-danger-hover action-button" title="Remove from list">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer border-0 py-5 d-flex justify-content-center">
+                        <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>  
+                    </div>
+                </div>
+                <div *ngIf="(!isLoading && !campaignsExist)" class="empty-list-container">
+                    <div class="empty-list">
+                        <img class="empty-list-img" src="../../assets/images/contract.png" />
+                        <h5>You don't have any active Campaigns</h5>
+                        <span class="empty-list-title">Create a new Campaign to get started</span>
+                        <div>
+                            <button (click)="openCreateNewCampaignModal()" [disabled]="isLoading" class="btn btn-secondary results-button empty-list-btn" type="button" role="button">
+                                New Campaign
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+

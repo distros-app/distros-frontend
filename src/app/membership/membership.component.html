@@ -1,0 +1,101 @@
+<!-- remove if needed -->
+<div *ngIf="!isLoading" class="parent">
+    <div class="container">
+      <h1 class="text-center pricing-table-title">Let's Scale Your Copywriting Biz To The Moon! 🚀</h1>
+      <h5 class="text-center pricing-table-subtitle mb-5 sub-title">Choose a plan that suits your needs</h5>
+      <div class="current-plan-container">
+        <div class="current-plan">
+          Current plan: <span class="current-plan-name">{{currentPlan}}</span>
+        </div>
+      </div>
+        <div class="row body-container">
+          <div class="col-md-4">
+            <div class="card pricing-card pricing-plan-community">
+              <div class="card-body">
+                <i class="fas fa-lock pricing-plan-icon icon"></i>
+                <p class="pricing-plan-title">Free</p>
+                <h3 *ngIf="isDisplayYearly" class="pricing-plan-cost ml-auto">$0/month*</h3>
+                <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$0/month</h3>
+                <ul class="pricing-plan-features">
+                  <!--<li>Analyze unlimited influencer profiles</li>-->
+                  <li>Collect 25 influencer emails</li>
+                  <li>Client/Campaign tracker</li>
+                  <li>Unlimited notes</li>
+                  <li>Task tracker</li>
+                  <li>AI Calendar</li>
+                  <li>Analytics</li>
+                </ul>
+                <button [disabled]="user.subscription === 'FREE'" (click)="openMembershipModal('Starter')" class="btn pricing-plan-purchase-btn">
+                  <div *ngIf="isOpeningStarter" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>  
+                  <span class="get-started">
+                    Get started
+                  </span>
+                </button>
+                <span *ngIf="isDisplayYearly">Billed annually*</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card pricing-card pricing-card-highlighted pricing-plan-pro">
+              <div class="most-popular-container">
+                Most Popular 🔥
+              </div>
+              <div class="card-body">
+                  <i class="fas fa-unlock-alt pricing-plan-icon icon"></i>
+                <p class="pricing-plan-title">Pro</p>
+                <h3 *ngIf="isDisplayYearly" class="pricing-plan-cost ml-auto">$20/month*</h3>
+                <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$20/month</h3>
+                <ul class="pricing-plan-features">
+                  <!--<li>Analyze unlimited influencer profiles</li>-->
+                  <li>Collect 1,000 influencer emails</li>
+                  <li>Client/Campaign tracker</li>
+                  <li>Unlimited notes</li>
+                  <li>Task tracker</li>
+                  <li>AI Calendar</li>
+                  <li>Analytics</li>
+                </ul>
+                <button [disabled]="user.subscription === 'PRO'" (click)="openMembershipModal('Pro')" class="btn pricing-plan-purchase-btn">
+                  <div *ngIf="isOpeningPro" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div> 
+                  <span class="get-started">
+                    Get started
+                  </span>
+                </button>
+                <span *ngIf="isDisplayYearly">Billed annually*</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card pricing-card pricing-plan-ultimate">
+              <div class="card-body">
+                <i class="fas fa-rocket pricing-plan-icon icon"></i>
+                <p class="pricing-plan-title">Scale</p>
+                <h3 *ngIf="isDisplayYearly" class="pricing-plan-cost ml-auto">$50/month*</h3>
+                <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$50/month</h3>
+                <ul class="pricing-plan-features">
+                  <!--<li>Analyze unlimited influencer profiles</li>-->
+                  <li>Collect 3,000 influencer emails</li>
+                  <li>Client/Campaign tracker</li>
+                  <li>Unlimited notes</li>
+                  <li>Task tracker</li>
+                  <li>AI Calendar</li>
+                  <li>Analytics</li>
+                </ul>
+                <button [disabled]="user.subscription === 'SCALE'" (click)="openMembershipModal('Advanced')" class="btn pricing-plan-purchase-btn">
+                  <div *ngIf="isOpeningAdvanced" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div> 
+                  <span class="get-started">
+                    Get started
+                  </span>
+                </button>
+                <span *ngIf="isDisplayYearly">Billed annually*</span>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,95 @@
+<div class="container" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+    <div *ngIf="eventForm" class="parent">
+            <div class="form-wrapper">
+                <div>
+                    <h1 class="form-title">{{ !isUpdate ? 'Create Event' : 'Update Event' }}</h1>
+                </div>
+                <div class="close-btn">
+                    <button (click)="dialog.close(false)" type="button" class="btn-close" aria-label="Close"></button>
+                </div>
+            </div>
+            <hr class="hr" />
+            <form [formGroup]="eventForm" action="#" class="form">
+                    <div class="input-box name-field">
+                        <input formControlName="name" type="text" placeholder="Event name*">
+                    </div>
+                    <div class="error-message" *ngIf="eventForm.controls['name'].dirty && listAlreadyExists">
+                        List already exists
+                    </div>
+            </form>
+        <div>
+            <form [formGroup]="eventForm">
+                <div class="date-container">
+                    <div class="start-date-container">
+                        <div class="date">
+                            <mat-form-field>
+                                <mat-label>Start Date*</mat-label>
+                                <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" />
+                                <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #startDatePicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="date">
+                            <mat-form-field>
+                                <mat-label>End Date</mat-label>
+                                <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" />
+                                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #endDatePicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="end-date-container">
+                        <div class="time">
+                            <mat-form-field class="time-field">
+                                <mat-label>Start Time*</mat-label>
+                                <input matInput placeholder="HH:mm" formControlName="startTime" type="time" (ngModelChange)="onStartTimeChange($event)" />
+                            </mat-form-field>
+                        </div>
+                        <div class="time">
+                            <mat-form-field class="time-field">
+                                <mat-label>End Time</mat-label>
+                                <input matInput placeholder="HH:mm" formControlName="endTime" type="time" (ngModelChange)="onEndTimeChange($event)"/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--<button mat-raised-button color="primary" (click)="submit()">Submit</button>-->
+            </form>
+        </div>
+        <div class="buttons-container">
+            <button *ngIf="isUpdate" (click)="onDelete()" class="btn btn-secondary delete-button" type="button" role="button">
+                <div *ngIf="isDeleting" class="spinner-border spinner-border-sm text-success deleting-spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div> 
+                Delete Event
+            </button>
+            <button *ngIf="!isUpdate" (click)="dialog.close(false)" class="btn btn-secondary cancel-button" type="button" role="button">
+                Cancel
+            </button>
+            <button *ngIf="!isUpdate" (click)="onSave()" [disabled]="!eventForm.valid" class="btn btn-secondary send-button" type="button" role="button">
+                <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>  
+                Add to Calendar
+            </button>
+            <button *ngIf="isUpdate && event.isComplete" (click)="onComplete()" [disabled]="!eventForm.valid" class="btn btn-secondary complete-button" type="button" role="button">
+                <div *ngIf="isCompleting" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>  
+                Mark Incomplete
+            </button>
+            <button *ngIf="isUpdate && !event.isComplete" (click)="onComplete()" [disabled]="!eventForm.valid" class="btn btn-secondary complete-button" type="button" role="button">
+                <div *ngIf="isCompleting" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>  
+                Mark Complete
+            </button>
+            <button *ngIf="isUpdate" (click)="onUpdate()" [disabled]="!eventForm.valid" class="btn btn-secondary update-button" type="button" role="button">
+                <div *ngIf="isUpdating" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>  
+                Update Event
+            </button>
+        </div>
+    </div>
+</div>

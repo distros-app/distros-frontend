@@ -1,0 +1,329 @@
+/* Webpixels CSS */
+/* Utility and component-centric Design System based on Bootstrap for fast, responsive UI development */
+/* URL: https://github.com/webpixels/css */
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #12e19f !important;
+    border-color: #12e19f !important;
+}
+
+.main-container {
+    overflow-y: auto !important;
+}
+
+.clear-filters {
+    margin-left: -1rem !important;
+}
+
+::ng-deep .custom-dialog-container {
+    box-shadow: 0 0 15px #12e19f !important; // Adjust as needed
+    border-radius: 8px !important; // Optional for rounded corners
+}
+
+.action-button {
+    background-color: black !important;
+    color: white !important;
+}
+
+.action-button:hover {
+    border-color: #12e19f !important;
+    color: #12e19f !important;
+}
+
+.download-title:hover {
+    color: #12e19f !important;
+
+    i {
+        color: #12e19f !important;
+    }
+
+    span {
+        color: #12e19f !important;
+    }
+}
+
+header {
+    background-color: black !important;
+}
+
+.h-screen {
+    background-color: black !important;
+}
+
+h1 {
+    color: #12e19f;
+}
+
+main {
+    background-color: #000 !important;
+}
+
+.dark-banner-text {
+    color: black;
+}
+
+.banner-container {
+    width: 99.5%;
+    margin-left: 0.6rem;
+}
+
+.empty-title {
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+}
+
+.empty-list-container {
+    margin-top: 12vh;
+}
+
+.influencer-list-img {
+    height: 125px;
+    width: 125px;
+    margin-bottom: 3vh;
+}
+
+.results-button {
+    background-color: #12e19f !important;
+    color: black !important;
+    margin-left: 2em !important;
+    border: 1px solid black !important;
+    transition: 1s !important;
+    
+    &:hover {
+      border: 1px solid #12e19f !important;
+      box-shadow: 0 0 15px #12e19f !important;
+      background-color: #000 !important;
+      color: white !important;
+      transform: scale(1.1) !important;
+    }
+}
+
+.icon-button {
+    margin-right: 5px;
+}
+
+th {
+    color: white !important;
+    background-color: black !important;
+}
+
+td {
+    color: white !important;
+    background-color: black !important;
+}
+
+.card {
+    box-shadow: 0 0 15px #12e19f !important;
+    border: 2px solid #12e19f !important;
+}
+
+.card-header {
+    color: white !important;
+    background-color: black !important;
+}
+
+.delete-button {
+    color: red;
+    border-color: red;
+    background-color: black !important;
+    margin-left: 20px !important;
+    
+    &:hover {
+      box-shadow: 0 0 15px red !important;
+    }
+}
+
+.table-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #12e19f !important
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.dropdown-item {
+    cursor: pointer;
+    background-color: black !important;
+    color: white !important;
+}
+
+button.dropdown-item {
+    cursor: pointer;
+    background-color: black !important;
+    color: white !important;
+
+}
+
+dropdown-icon {
+    margin-left: 3px;
+}
+
+
+.dropdown-menu{
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: black !important;
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+}
+
+.dropdown {
+    margin-right: 20px;
+    background-color: black !important;
+    color: white !important;
+  
+    :last-child {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+.empty-list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+}
+
+h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px !important;
+}
+
+.empty-list {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-list-title {
+   margin-left: 2rem;
+}
+
+.empty-list-img {
+    margin-left: 6.5rem;
+ }
+
+.empty-list-btn {
+    margin-top: 2.5rem !important;
+    margin-left: 5.5rem !important;
+}
+
+.empty-influencers {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-influencers-title {
+   margin-left: 4.5rem;
+}
+
+.empty-influencers-img {
+    margin-left: 7.5rem;
+ }
+
+.empty-influencers-btn {
+    margin-top: 1rem;
+    margin-left: 8rem;
+}
+
+.dropdown-menu > a {
+    color: white !important;
+}
+
+.dropdown-menu > a:hover {
+    background-image: none;
+    background-color: #12e19f !important;
+    color: #fff !important;
+}
+  
+.dropdown-menu > div > a:hover {
+    background-image: none;
+    background-color: #12e19f !important;
+    color: #fff !important;
+}
+
+::ng-deep .btn-check:checked+.btn-secondary, .btn-check:active+.btn-secondary, .btn-secondary:active, .btn-secondary.active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff !important;
+    background-color: #000  !important;
+    border-color: #12e19f !important;
+
+    &.option-selected {
+        color: #12e19f !important;
+    }
+}
+
+.influencer-img {
+    height: 30px;
+    width: 30px;
+  }
+
+::ng-deep .dropdown-toggle {
+    width: 175px !important;
+}
+
+.influencer-img {
+    height: 30px;
+    width: 30px;
+}
+
+.card-footer {
+    background-color: black;
+    color: white;
+}
+
+span {
+    color: #12e19f !important;
+}
+
+.card-containers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+    color: white;
+    border: 2px solid #12e19f !important;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #12e19f !important;
+}
+
+.new-campaign-button {
+    margin-left: 5em !important;
+}
+
+.action-button {
+    background-color: black !important;
+    color: white !important;
+}
+
+.action-button:hover {
+    border-color: #12e19f !important;
+    color: #12e19f !important;
+}
+
+h5 {
+    color: #12e19f;
+    margin-top: 40px !important;
+}
+
+.reset-title {
+    margin-right: 8px !important;
+    margin-top: 5px !important;
+    color: red !important;
+}

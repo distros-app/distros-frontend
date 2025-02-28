@@ -1,0 +1,169 @@
+/* Webpixels CSS */
+/* Utility and component-centric Design System based on Bootstrap for fast, responsive UI development */
+/* URL: https://github.com/webpixels/css */
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+nav {
+    background-color: black !important;
+    color: white !important;
+}
+
+img.logo {
+    margin-left: 5px;
+    height: 130px;
+    width: 190px;
+}
+
+.hr {
+    margin: 15px;
+    color: #12e19f;
+}
+
+.top-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-button {
+    padding: 0.5rem 5.2rem;
+    margin-bottom: 10px;
+    background-color: black !important;
+    border-color: #12e19f !important;
+    font-size: 14px;
+    color: white !important;
+    transition: 1s !important;
+
+    &:hover {
+      box-shadow: 0 0 15px #12e19f !important;
+      color: #12e19f !important;
+      transform: scale(1.1);
+    }
+}
+
+.bottom-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.task-button {
+    padding: 0.5rem 1.5rem;
+    margin-right: 12px;
+    background-color: black !important;
+    border-color: #12e19f !important;
+    font-size: 14px;
+    color: white !important;
+    transition: 1s !important;
+
+    &:hover {
+      box-shadow: 0 0 15px #12e19f !important;
+      color: #12e19f !important;
+      transform: scale(1.1);
+    }
+}
+
+.event-button {
+    padding: 0.5rem 1.5rem;
+    background-color: black !important;
+    border-color: #12e19f !important;
+    font-size: 14px;
+    color: white !important;
+    transition: 1s !important;
+
+    &:hover {
+      box-shadow: 0 0 15px #12e19f !important;
+      color: #12e19f !important;
+      transform: scale(1.1);
+    }
+}
+
+a.nav-link {
+    color: white !important;
+}
+
+a.nav-link:hover {
+    color: black !important;
+}
+
+.button-icon {
+    margin-right: 3px;
+}
+
+small.beta {
+    font-weight: bold !important;
+    color: black !important;
+    font-size: 10px !important;
+    margin-top: -6px !important;
+    padding-left: 13px;
+}
+
+.beta-container {
+    align-self: center !important;
+    margin: -3.2em 0 4em!important;
+    width: 50px;
+    background-color: #12e19f;
+    padding-bottom: 3px;
+    border-radius: 30px;
+    color: black
+}
+
+.nav-link.active {
+    font-weight: bold; /* Make the text bold */
+    background-color: #f8f9fa; /* Highlight with a light background */
+    color: black !important; /* Ensure the text color changes */
+}
+
+li:hover {
+    cursor: pointer;
+}
+
+mat-menu:hover {
+    cursor: pointer;
+    color: white;
+}
+
+::ng-deep .custom-menu-item {
+    background-color: black !important;
+    color: white !important;
+}
+
+::ng-deep .custom-menu-item:hover {
+    color: white !important;
+    background-color: #12e19f !important;
+    font-weight: bold;
+}
+
+::ng-deep .contact-support:hover {
+    color: white !important;
+    background-color: #12e19f !important;
+}
+
+::ng-deep .mat-mdc-menu-item-text {
+    font-size: 15px !important;
+    font-weight: normal !important;
+    color: white !important;
+
+    &:hover {
+        color: white !important;
+        background-color: #12e19f !important;
+    }
+}
+
+::ng-deep .mat-mdc-menu-panel {
+    background-color: black !important;
+    color: white !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    border: 1px solid #12e19f !important;
+}
+
+::ng-deep .mat-mdc-menu-content .mat-mdc-menu-item .mdc-list-item__primary-text {
+    color: white !important;
+}

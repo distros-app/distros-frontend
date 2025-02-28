@@ -1,0 +1,246 @@
+.form-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin-bottom: -20px !important;
+}
+
+::ng-deep .custom-dialog-container {
+    box-shadow: 0 0 30px white !important; // Adjust as needed
+    border-radius: 8px !important; // Optional for rounded corners
+}
+
+.form {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px 40px 30px; 
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    width: 100%;
+    height: 100vh;
+}
+
+.form-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #12e19f;
+}
+
+.close-btn {
+    margin: -15px 0 0 10px;
+}
+
+hr {
+    width: 150%;
+    margin-top: 10px;
+    margin-left: -50px;
+    margin-bottom: 30px;
+    font-size: 1px;
+    color: lightgray;
+}
+
+.checkmark {
+    color: #12e19f !important;
+}
+
+.cross {
+    color: red !important;
+}
+
+.error-message {
+    color: red;
+}
+
+.drag {
+    cursor: grab;
+}
+
+::ng-deep div.dropdown-menu.show {
+    background-image: none;
+    background-color: black !important;
+    border: 1px solid #12e19f !important; 
+    color: #fff !important;
+}
+
+::ng-deep div.dropdown-menu.show:hover {
+    cursor: pointer !important;
+    background-image: none !important;
+    background-color: black !important;
+    color: #fff !important;
+}
+
+::ng-deep a.dropdown-item {
+    color: white !important;
+}
+
+::ng-deep a.dropdown-item:hover {
+    background-color: #12e19f !important;
+    color: white !important;
+    box-shadow: 0 0 7.5px #12e19f !important;
+}
+
+::ng-deep .option-selected {
+    color: #12e19f !important;
+}
+
+::ng-deep .list-button {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #12e19f !important;
+    min-width: 165px !important;
+    width: 165px !important;
+}
+
+::ng-deep .list-button-2 {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #12e19f !important;
+    min-width: 165px !important;
+    width: 165px !important;
+    margin-left: 25px !important;
+}
+
+::ng-deep .list-button-container {
+    margin: 3
+    0px 0;
+}
+
+::ng-deep .close-btn .btn-close {
+    color: white !important;  /* Ensures the icon color is white */
+    background-color: transparent !important;  /* Removes default background */
+    filter: invert(1); /* Inverts colors (useful for Bootstrap btn-close) */
+    z-index: 9999; /* Ensures it is on top */
+    position: relative; /* Ensures z-index takes effect */
+}
+
+::ng-deep .btn-close {
+    margin-right: 5px !important;
+}
+
+.form-control {
+    border: 1px solid #12e19f !important;
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.form-control:focus {
+    border-color: #12e19f !important;
+    box-shadow: 0 0 6px #12e19f !important;
+}
+
+.more-details {
+    margin: 40px 0 50px;
+}
+
+.chevron-logo {
+    cursor: pointer;
+    color: #12e19f !important;
+}
+
+.hide-details {
+    margin-left: 5px;
+}
+
+.description-field {
+    margin-top: 10px;
+}
+
+.save-button-container {
+    margin-top: 20px;
+}
+
+.save-button{
+    width: 100%;
+    height: 40px;
+    background: #12e19f !important;
+    color: #000;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #12e19f !important;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 1s;
+    margin-top: 20px;
+}
+
+.save-button:hover{
+    background: transparent;
+    border: 2px solid #12e19f !important;
+    color: #000 !important;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #12e19f !important;
+}
+
+.loading-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.cancel-button {
+    background-color: black !important;
+    color: white !important;
+    border-color: red !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    margin-right: 15px;
+    transition: 1s;
+    
+    &:hover {
+        background-color: black !important;
+        border-color: red !important;
+        box-shadow: 0 0 15px red !important;
+        transform: scale(1.1);
+        color: red !important;
+    }
+  }
+
+  .send-button {
+    background-color: black !important;
+    color: white;
+    border-color: #12e19f !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    transition: 1s;
+    
+    &:hover {
+        background-color: black !important;
+        color: #12e19f !important;
+        transform: scale(1.1);
+        box-shadow: 0 0 15px #12e19f !important;
+        cursor: pointer;
+    }
+  }
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+::ng-deep .spinner-color {
+    color: white !important
+}
+
+::ng-deep .list-container {
+    display: flex !important;
+    align-items: center;
+}
+
+::ng-deep .btn-check:checked+.btn-secondary, .btn-check:active+.btn-secondary, .btn-secondary:active, .btn-secondary.active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #12e19f !important;
+    min-width: 165px !important;
+    width: 165px !important;
+
+    &.option-selected {
+        color: #12e19f !important;
+    }
+}

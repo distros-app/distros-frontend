@@ -1,0 +1,56 @@
+<div class="parent">
+    <div class="intro-container">
+        <div class="intro">
+            <img class="logo" src="../../assets/images/distros-dark-logo.png" alt="...">
+            <h2 class="header-title">Ready to sign more copywriting clients?</h2>
+            <span>Distros helps you find & connect with your dream clients in just seconds. You no longer have to scour social media all day & night. We list influencers with 10k+ followers on Instagram, TikTok & YouTube.</span>
+        </div>
+        <div class="header-sub-title-container">
+            <span class="header-sub-title">The <span class="green-banner-text">#1 Client Aquisition tool</span> for Freelance Copywriters</span>
+        </div>
+    </div>
+    <div class="login-container">
+        <form [formGroup]="form" action="#">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input formControlName="email" type="email" placeholder="Email">
+                <i class='bx bx-envelope'></i>
+            </div>
+            <div class="input-error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['required']">
+                Email is required
+            </div>
+            <div class="input-error" *ngIf="form.controls['email'].dirty && form.controls['email'].errors?.['email']">
+                Please enter a valid email
+            </div>
+    
+            <div class="input-box">
+                <input formControlName="password" type="password" placeholder="Password">
+                <i class='bx bx-lock-alt' ></i>
+            </div>
+            <div class="password-input-error" *ngIf="form.controls['password'].dirty && !form.controls['password'].value">
+                Password is required
+            </div>
+
+            <div class="remember">
+                <label for="#">
+                    <input class="remember-me" type="checkbox"> Remember me
+                </label>
+                <a href="/forgot-password">Forgot password?</a>
+            </div>
+            <button [disabled]="form.invalid" class="btn" (click)="onLogin()">
+                <div>
+                    <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div> 
+                    Login
+                </div>
+            </button>
+            <div class="invalid-credentials-error" *ngIf="!isLoading && isUserNotFound">
+                User not found
+            </div>
+            <div class="register">
+                <p>Don't have an account? <br> <a href="/register">Sign Up</a></p>
+            </div>
+        </form>
+    </div>
+</div>

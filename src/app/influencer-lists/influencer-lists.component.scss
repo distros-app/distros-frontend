@@ -1,0 +1,365 @@
+/* Webpixels CSS */
+/* Utility and component-centric Design System based on Bootstrap for fast, responsive UI development */
+/* URL: https://github.com/webpixels/css */
+
+@import url(https://unpkg.com/@webpixels/css@1.1.5/dist/index.css);
+
+/* Bootstrap Icons */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.4.0/font/bootstrap-icons.min.css");
+
+.main-container {
+    overflow-y: auto !important;
+}
+
+.icon-button {
+    margin-right: 5px !important;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #12e19f !important;
+    border-color: #12e19f !important;
+}
+
+.dark-banner-text {
+    color: black;
+}
+
+.banner-container {
+    width: 99.5%;
+    margin-left: 0.6rem;
+}
+
+.empty-title {
+    font-weight: bold;
+    font-size: 20px;
+    color: #000;
+}
+
+.empty-list-container {
+    margin-top: 12vh;
+}
+
+.results-button {
+    background-color: #12e19f !important;
+    color: black !important;
+    margin-left: 2em !important;
+    border: 1px solid black !important;
+    transition: 1s !important;
+    width: 140px !important;
+    min-width: 140px !important;
+    
+    &:hover {
+      border: 1px solid #12e19f !important;
+      box-shadow: 0 0 15px #12e19f !important;
+      background-color: black !important;
+      color: white !important;
+      transform: scale(1.1) !important;
+    }
+}
+
+.influencer-list-img {
+    height: 125px;
+    width: 125px;
+    margin-bottom: 3vh;
+}
+
+.results-button {
+    color: black !important;
+    background-color: #12e19f !important;
+    
+    &:hover {
+      box-shadow: 0 0 15px #12e19f !important;
+      color: #fff !important;
+    }
+  }
+
+.delete-button {
+    color: red;
+    border-color: red;
+    background-color: black !important;
+    
+    &:hover {
+      box-shadow: 0 0 15px red !important;
+    }
+}
+
+.table-title {
+    color: #12e19f !important;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a.dropdown-item {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
+
+a.dropdown-item:hover {
+    cursor: pointer;
+    color: white;
+    background-color: #12e19f !important;
+}
+
+button.dropdown-item {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
+
+.dropdown-menu{
+    max-height: 200px;
+    overflow-y: auto;
+    color: white;
+    background-color: black;
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+}
+
+.empty-list-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+}
+
+h5 {
+    color: #12e19f;
+    margin: 20px 0 10px 8px !important;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.empty-list {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-list-title {
+   margin-left: 2.5rem !important;
+   color: #12e19f !important
+}
+
+.empty-list-img {
+    margin-left: 5.25em;
+    margin-bottom: 15px;
+ }
+
+.empty-list-btn {
+    margin-top: 2.5rem !important;
+    margin-left: 5rem !important;
+    width: 140px !important;
+    min-width: 140px !important;
+}
+
+.empty-influencers-title {
+    margin-left: 2.5em !important;
+}
+
+.empty-influencers {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.empty-influencers-img {
+    margin-left: 10rem;
+ }
+
+.empty-influencers-btn {
+    margin-top: 1rem;
+    margin-left: 8rem;
+}
+
+.dropdown-menu > div > div > a {
+    background-image: none;
+    background-color: black !important;
+    color: #fff;
+}
+  
+.dropdown-menu > div > div > a:hover {
+    background-image: none;
+    background-color: #12e19f !important;
+    color: #fff;
+}
+
+.dropdown {
+    color: white;
+    background-color: #000;
+    margin-right: 20px;
+  
+    :last-child {
+      margin-right: 0;
+    }
+}
+
+::ng-deep .btn-check:checked+.btn-secondary, .btn-check:active+.btn-secondary, .btn-secondary:active, .btn-secondary.active, .show>.btn-secondary.dropdown-toggle {
+    color: #fff !important;
+    background-color: #000 !important;
+    border-color: #12e19f !important;
+
+    &.option-selected {
+        color: #12e19f !important;
+    }
+}
+
+::ng-deep .dropdown-toggle {
+    width: 160px !important;
+  }
+
+  ::ng-deep .dropdown-toggle:hover {
+    width: 160px !important;
+  }
+
+.influencer-img {
+    height: 30px;
+    width: 30px;
+}
+
+.card {
+    border: 2px solid #12e19f !important;
+    border-radius: 10px;
+    box-shadow: 0 0 15px #12e19f !important;
+}
+
+div.card-header {
+    background-color: #000 !important;
+}
+
+.card-containers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.new-list-button {
+    width: 100px !important;
+    margin-left: -22px !important;
+}
+
+header {
+    background-color: #000 !important;
+}
+
+.card-title {
+    font-size: 12px !important;
+}
+
+.hr {
+    margin-top: -3px !important;
+}
+
+.card-row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.card-body {
+    background-color: black !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    border-radius: 12px !important;
+}
+
+main {
+    background-color: black !important;
+}
+
+.main-background {
+    background-color: black !important;
+}
+
+h1 {
+    color: #12e19f !important;
+}
+
+span.h3 {
+    color: white !important;
+}
+
+.container-fluid{
+    background-color: black !important;
+}
+
+.parent{
+    background-color: black !important;
+}
+
+th {
+    background-color: black !important;
+    color: white !important;
+}
+
+td {
+    background-color: black !important;
+    color: white !important;
+}
+
+div.card-footer {
+    background-color: black !important;
+}
+
+.h-screen {
+    background-color: black !important;
+}
+
+.open-list-button {
+    background-color: black !important;
+    color: white !important;
+}
+
+.open-list-button:hover {
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    color: #12e19f !important;
+}
+
+.trash-button {
+    background-color: black !important;
+    color: white !important;
+}
+
+.trash-button:hover {
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    color: #12e19f !important;
+}
+
+span {
+    color: #fff !important;
+}
+
+.action-button {
+    background-color: black !important;
+    color: white !important;
+}
+
+.action-button:hover {
+    border-color: #12e19f !important;
+    color: #12e19f !important;
+}
+
+.download-title:hover {
+    color: #12e19f !important;
+
+    i {
+        color: #12e19f !important;
+    }
+
+    span {
+        color: #12e19f !important;
+    }
+}

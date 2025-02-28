@@ -1,0 +1,123 @@
+<div class="parent">
+    <div *ngIf="campaignForm" class="form-title-container" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+        <div>
+            <h1 class="form-title">{{ isUpdate ? 'Update Campaign' : 'Create New Campaign' }}</h1>
+        </div>
+        <div class="close-btn">
+            <button (click)="dialog.close(false)" type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+    </div>
+    <hr class="hr" />
+    <div *ngIf="campaignForm" class="input-field-container">
+      <form [formGroup]="campaignForm" action="#" class="form">
+        <div class="row-1">
+            <div class="column-1">
+                  <a class="btn btn-secondary dropdown-toggle client-button" role="button" id="client" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <ng-container *ngIf="selectedClient">
+                        <div class="client-selected">
+                            <div>
+                                <img crossorigin="anonymous" [src]="selectedClient.profilePic.secure_url" alt="Profile" class="avatar avatar-sm rounded-circle me-2 influencer-img">
+                            </div>
+                            <div class="client-name">
+                                {{ selectedClient.name }}
+                            </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="!selectedClient">
+                        Select client from a list
+                      </ng-container>
+                  </a>
+
+                  <div class="dropdown-menu" aria-labelledby="list">
+                      <div *ngFor="let client of clients" class="clients-container" (click)="dropdownSelected('client', client)">
+                        <div>
+                            <img crossorigin='anonymous' [src]="client.profilePic.secure_url" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img"> 
+                        </div>
+                        <div>
+                            <a class="dropdown-item client-name">{{ client.name }}</a>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+            <div class="or">
+                or
+            </div>
+            <div class="column-3">
+                <div class="input-box-1">
+                    <input formControlName="clientName" (keyup)="onEnterClientManually()" type="text" placeholder="Enter a client not in Distros">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="input-box">
+                <input formControlName="compensation" type="number" placeholder="Compensation ($)">
+            </div>
+        </div>
+        <div class="radio-buttons">
+            <mat-radio-group aria-label="Select an option">
+                <mat-radio-button #oneTimePaymentRadioButton (click)="oneTimePaymentRadioChange()" value="1">One-Time Payment</mat-radio-button>
+                <mat-radio-button #perMonthRadioButton (click)="perMonthRadioChange()" value="2">Per Month</mat-radio-button>
+              </mat-radio-group>
+        </div>
+        <div>
+            <form [formGroup]="campaignForm">
+                <div class="date-container">
+                    <div class="start-date-container">
+                        <div class="date start-date">
+                            <mat-form-field>
+                                <mat-label>Start Date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="startDate" (dateChange)="updateStartDate($event)"/>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class="radio-buttons-2">
+                            <mat-radio-group aria-label="Select an option">
+                                <mat-radio-button value="1" #endDateRadioButton (click)="endDateRadioChange()">Does this contract have a set end date?</mat-radio-button>
+                              </mat-radio-group>
+                        </div>
+                        <div *ngIf="isEndDateRadioChecked" class="date end-date">
+                            <mat-form-field>
+                                <mat-label>End Date</mat-label>
+                                <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" (dateChange)="updateEndDate($event)" />
+                                <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                                <mat-datepicker #endDatePicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!--<button mat-raised-button color="primary" (click)="submit()">Submit</button>-->
+            </form>
+        </div>
+        <div data-mdb-input-init class="form-outline mb-1 description-field">
+            <textarea formControlName="details" rows="3" #details type="text" class="form-control ps-5" placeholder="Campaign Details/SOW"></textarea>
+        </div>
+      </form>
+    </div>
+    <!--
+    <div class="error-message" *ngIf="campaignForm.controls['name'].dirty && listAlreadyExists">
+        List already exists
+    </div>
+    -->
+    <div *ngIf="campaignForm"   class="buttons-container">
+        <button (click)="dialog.close(false)" class="btn btn-secondary cancel-button" type="button" role="button">
+            Cancel
+        </button>
+        <button *ngIf="!isUpdate" (click)="onSave()" [disabled]="campaignForm.invalid" class="btn btn-secondary send-button" type="button" role="button">
+            <div>
+                <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>  
+                Create Campaign
+            </div>
+        </button>
+        <button *ngIf="isUpdate" (click)="onUpdate()" [disabled]="campaignForm.invalid" class="btn btn-secondary send-button" type="button" role="button">
+            <div>
+                <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>  
+                Update Campaign
+            </div>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,362 @@
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary parent">
+    <!-- Main content -->
+    <div class="h-screen flex-grow-1" *ngIf="notesForm">
+        <!-- Header -->
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <!-- Title -->
+                            <h1 class="h2 mb-0 ls-tight">Notes list</h1>
+                        </div>
+                        <!-- Actions -->
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="mx-n1">
+                                <a href="#" class="btn d-inline-flex btn-sm btn-secondary mx-1 action-button">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-box-arrow-up"></i>
+                                    </span>
+                                    <span>Download Notes</span>
+                                </a>
+                                <!--
+                                <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                    <span class=" pe-2">
+                                        <i class="bi bi-box-arrow-down"></i>
+                                    </span>
+                                    <span>Upload Notes</span>
+                                </a>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nav -->
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <!--
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link active">All files</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">Shared</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">File requests</a>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <!-- Main -->
+        <main class="py-6 bg-surface-secondary">
+            <div class="container-fluid">
+                <div *ngIf="(!isLoading && notes.length)" class="table-container shadow">
+                    <div class="table-responsive">
+                        <div class="all-notes-container">
+                            <div class="all-notes-title">
+                                <h1>Notes</h1>
+                            </div>
+                            <div class="all-notes-subheader">
+                                <div *ngIf="notes.length == 1" class="notes-count">
+                                    1 note
+                                </div>
+                                <div *ngIf="notes.length > 1" class="notes-count">
+                                    {{ notes.length}} notes
+                                </div>
+                                <div class="icons-container">
+                                    <div [ngClass]="{'first-icon': !isIconClicked, 'first-icon-clicked': isIconClicked}" title="Create new note" (click)="onCreateNewNote()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16">
+                                            <path d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"/>
+                                            <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                                            <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                                        </svg>
+                                    </div>
+                                    <!--
+                                    <div class="notes-filter" title="Sort options" (click)="openSortModal()">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-filter-square" viewBox="0 0 16 16">
+                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                            <path d="M6 11.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                                          </svg>
+                                    </div>
+                                    -->
+                                </div>
+                            </div>
+                            <div class="notes-container">
+                                <div class="notes-display">
+                                    <div *ngFor="let note of notes; let index = index" [ngClass]="{
+                                        'active-note': note.isActive,
+                                        'note': !note.isActive}" (click)="activateNote(index)">
+                                        <div>
+                                            <div *ngIf="note.title" class="note-title">
+                                                {{ note.title }}
+                                            </div>
+                                            <div *ngIf="note.description">
+                                                {{ note.convertedDescription }}
+                                            </div>
+                                        </div>
+                                        <div class="note-date">
+                                            {{ note.createdDate }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="new-note-container">
+                          <form [formGroup]="notesForm">
+                            <div data-mdb-input-init class="subject-line-container">
+                                <input name="keywords" #keywordSearch formControlName="noteTitle" type="text" class="subject-line" placeholder="Note title" />
+                            </div>
+                            <div class="email-editor">
+                                <div class="NgxEditor__Wrapper">
+                                    <ngx-editor-menu [editor]="editor"> </ngx-editor-menu>
+                                    <ngx-editor [editor]="editor" formControlName="editorContent" [disabled]="false" [placeholder]="'Note description*'"></ngx-editor>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                <div class="buttons-container">
+                                    <!--
+                                    <button class="btn btn-secondary cancel-button" type="button" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Cancel
+                                    </button>
+                                    -->
+                                    <button *ngIf="!isUpdateNote" [disabled]="notesForm.controls['editorContent'].value == '<p></p>'" (click)="onCreateNote()" class="btn btn-secondary update-button" type="button" role="button">
+                                        <div>
+                                            <div *ngIf="isSaving" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>  
+                                            Create Note
+                                        </div>
+                                    </button>
+                                    <button *ngIf="isUpdateNote" (click)="onDeleteNote()" class="btn btn-secondary delete-button" type="button" role="button">
+                                        <div>
+                                            <div *ngIf="isDeleting" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>  
+                                            Delete Note
+                                        </div>
+                                    </button>
+                                    <button *ngIf="isUpdateNote" (click)="onUpdateNote()" class="btn btn-secondary update-button" type="button" role="button">
+                                        <div>
+                                            <div *ngIf="isSaving" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>  
+                                            Update Note
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                          </form>
+                        </div>
+                        <!--
+                        <table class="table table-hover table-nowrap">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Platform</th>
+                                    <th scope="col">Followers</th>
+                                    <th scope="col">Engagement</th>
+                                    <th scope="col">Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let influencer of notes">
+                                    <td>
+                                        <img alt="..." src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=3&w=256&h=256&q=80" class="avatar avatar-sm rounded-circle me-2 influencer-img">
+                                        <span class="text-heading font-semibold">
+                                            {{ influencer.name }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {{ influencer.category }}
+                                    </td>
+                                    <td *ngIf="influencer.platform === 'Instagram'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>
+                                    </td>
+                                    <td *ngIf="influencer.platform === 'Tik Tok'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tiktok" viewBox="0 0 16 16">
+                                        <path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3z"/></svg>
+                                    </td>
+                                    <td *ngIf="influencer.platform === 'YouTube'">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                                        <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/></svg>
+                                    </td>
+                                    <td>
+                                        {{ influencer.followers }}
+                                    </td>
+                                    <td>
+                                        {{influencer.engagement}}
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-lg badge-dot">
+                                            <i class="bg-success"></i>{{influencer.location}}
+                                        </span>
+                                    </td>
+                                    <td class="text-start">
+                                        <span>
+                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" title="Update task">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </button>
+                                        </span>
+                                        <span>
+                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" title="Delete task">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        -->
+                    </div>
+                </div>
+                <div *ngIf="(!isLoading && !notes.length)" class="empty-list-container">
+                    <div class="empty-list">
+                        <div class="empty-list-img-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="250" fill="currentColor" class="bi bi-journal-plus empty-list-img" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"/>
+                                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                            </svg>
+                        </div>
+                        <h5>You haven't created any Notes yet</h5>
+                        <span class="empty-list-title">Create a New Note to get started</span>
+                        <div>
+                            <button (click)="openCreateNote()" [disabled]="isLoading" class="btn btn-secondary empty-list-btn" type="button" role="button">
+                                + New Note
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+</div>
+
+<!--
+<div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
+    <div class="h-screen flex-grow-1">
+        <header class="bg-surface-primary border-bottom pt-6">
+            <div class="container-fluid">
+                <div class="mb-npx">
+                    <div class="row align-items-center">
+                        <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                            <h1 class="h2 mb-0 ls-tight">Tasks</h1>
+                        </div>
+                        <div class="col-sm-6 col-12 text-sm-end">
+                            <div class="mx-n1">
+                                <button (click)="openCreateNewTaskModal()" class="btn btn-secondary new-task-button empty-list-btn" type="button" role="button">
+                                    + New Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                        <li class="nav-item ">
+                            <a href="#" class="nav-link active">All files</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">Shared</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link font-regular">File requests</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <main class="py-6 bg-surface-secondary">
+            <div class="tasks-container">
+                <div class="row">
+                    <div style="height: 93vh" class="col-md-12">
+                        <div cdkDropListGroup>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="example-container">
+                                        <h2 class="header-title">TO DO <span *ngIf="tasks.length > 0">({{tasks.length}})</span></h2>
+                                        <div
+                                            cdkDropList
+                                            [cdkDropListData]="tasks"
+                                            class="example-list"
+                                            (cdkDropListDropped)="drop($event)">
+                                            <div *ngFor="let task of tasks; let i = index">
+                                                <div class="example-box" cdkDrag>
+                                                    {{task.name}}
+                                                    <div class="box">
+                                                        <span>
+                                                            <button (click)="editTask(task, i)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" title="Edit task">
+                                                                <i class="bi bi-pencil"></i>
+                                                            </button>
+                                                        </span>
+                                                        <span>
+                                                            <button (click)="deleteTask(task)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" title="Delete task">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="example-container">
+                                        <h2 class="header-title">IN PROGRESS <span *ngIf="inProgress.length > 0">({{inProgress.length}})</span></h2>
+                                        <div
+                                        cdkDropList
+                                        [cdkDropListData]="inProgress"
+                                        class="example-list"
+                                        (cdkDropListDropped)="drop($event)">
+                                            <div *ngFor="let task of inProgress; let i = index">
+                                                <div class="example-box" cdkDrag>
+                                                    {{task.name}}
+                                                    <div class="box">
+                                                        <span>
+                                                            <button (click)="deleteTask(task)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" title="Delete task">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="example-container">
+                                    <h2 class="header-title">DONE <span *ngIf="done.length > 0">({{done.length}})</span></h2>
+                                        <div
+                                            cdkDropList
+                                            [cdkDropListData]="done"
+                                            class="example-list"
+                                            (cdkDropListDropped)="drop($event)">
+                                            <div *ngFor="let task of done; let i = index">
+                                                <div class="example-box" cdkDrag>
+                                                    {{task.name}}
+                                                    <div class="box">
+                                                        <span>
+                                                            <button (click)="deleteTask(task)" type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover" title="Delete task">
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </span>
+                                                        <span>
+                                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover">
+                                                                <i class="bi bi-check-circle"></i>
+                                                            </button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+-->
+

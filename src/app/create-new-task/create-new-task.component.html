@@ -1,0 +1,136 @@
+<div class="container">
+    <div class="form-wrapper" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
+        <div>
+            <h1 class="form-title">{{ isUpdate ? 'Update Task' : 'Create Task' }}</h1>
+        </div>
+        <div class="close-btn">
+            <button (click)="dialog.close(false)" type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+    </div>
+    <hr class="hr" />
+    <div class="email-editor">
+        <form [formGroup]="toDoForm">
+            <div>
+                <div class="input-box">
+                    <input class="form-control" formControlName="name" type="text" placeholder="Title*">
+                </div>
+            </div>
+            <div data-mdb-input-init class="form-outline mb-1 description-field">
+                <textarea rows="3" name="description" formControlName="description" #description type="text" class="form-control ps-5" placeholder="Description*"></textarea>
+            </div>
+        </form>
+        <!--
+        <email-editor
+            #emailEditor
+            [minHeight]="'400px'"
+            (editorLoaded)="onEditorLoaded($event)"
+            (designUpdated)="onDesignUpdated($event)">
+        </email-editor>
+        -->
+    </div>
+    <div class="section-2">
+        <div>
+            <form [formGroup]="toDoForm">
+                <div class="date-container">
+                    <div class="date">
+                        <mat-form-field>
+                            <mat-label>Due Date*</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dueDate" (dateChange)="updateDueDate($event)" />
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="time">
+                        <mat-form-field class="time-field">
+                            <mat-label>Time</mat-label>
+                            <input matInput placeholder="HH:mm" formControlName="time" type="time" (ngModelChange)="onTimeChange($event)"/>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!--<button mat-raised-button color="primary" (click)="submit()">Submit</button>-->
+            </form>
+        </div>
+        <div class="dropdown-section">
+            <div class="dropdown-container">
+                <div class="dropdown show form">
+                    <a class="btn btn-secondary dropdown-toggle" 
+                        role="button" id="dropdownMenuLink8" 
+                        data-bs-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                        [ngClass]="{ 'option-selected': toDoForm.controls['status'].value ? 'option-selected': '' }">
+                        {{ toDoForm.controls['status']?.value || 'Status*' }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink8">
+                        <div *ngFor="let option of statusOptions">
+                            <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink8', option.name)">{{ option.name }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown show form">
+                    <a class="btn btn-secondary dropdown-toggle" 
+                        role="button" id="dropdownMenuLink6" 
+                        data-bs-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                        [ngClass]="{ 'option-selected': toDoForm.controls['reminder'].value ? 'option-selected': '' }">
+                        {{ toDoForm.controls['reminder']?.value || 'Set Reminder' }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink6">
+                        <div *ngFor="let option of reminderOptions">
+                            <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink6', option.name)">{{ option.name }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="dropdown show form">
+                    <a class="btn btn-secondary dropdown-toggle" 
+                        role="button" id="dropdownMenuLink7" 
+                        data-bs-toggle="dropdown" 
+                        aria-haspopup="true" 
+                        aria-expanded="false"
+                        [ngClass]="{ 'option-selected': toDoForm.controls['priority'].value ? 'option-selected': '' }">
+                        {{ toDoForm.controls['priority']?.value || 'Priority Level' }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink7">
+                        <div *ngFor="let option of priorityLevels">
+                            <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink7', option.name)">{{ option.name }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flag-section">
+            <div class="flag" (click)="onFlagTask()">
+                <p class="flag-title"><mat-slide-toggle (change)="onToggleChange($event)"labelPosition="before">Flag Task</mat-slide-toggle></p>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="buttons-container">
+            <button (click)="dialog.close(false)" class="btn btn-secondary cancel-button" type="button" role="button">
+                Cancel
+            </button>
+            <button *ngIf="!isUpdate" (click)="onSave()" [disabled]="toDoForm.invalid" class="btn btn-secondary send-button" type="button" role="button">
+                <div>
+                    <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>  
+                    Create Task
+                </div>
+            </button>
+            <button *ngIf="isUpdate" (click)="onUpdate()" [disabled]="toDoForm.invalid" class="btn btn-secondary send-button" type="button" role="button">
+                <div>
+                    <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>  
+                    Update Task
+                </div>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
