@@ -19,19 +19,13 @@ import { MembershipComponent } from './membership/membership.component';
 import { ContactSupportComponent } from './contact-support/contact-support.component';
 import { AdminComponent } from './admin/admin.component';
 
-/*
 const routes: Routes = [
-    { path: '', component: HomeComponent }, // Default route
-    { path: 'about', component: AboutComponent } // /about path
-  ];
-*/
-
-const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch: 'full'}, //may need to change redirectTo dashboard
   {path: 'login', canActivate: [guestGuard], component: LoginComponent},
   {path: 'register', component: SignupComponent},
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password/:token', component: ResetPasswordComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Default route
+  { path: '**', redirectTo: '/login' }, // Wildcard for unmatched routes
   {
       path: '', 
       component: LayoutComponent,

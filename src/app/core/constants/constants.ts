@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api';
+const apiUrl = 'https://distros-8f63ee867795.herokuapp.com/api';
 
 export const ApiEndpoint = {
     Auth: {
