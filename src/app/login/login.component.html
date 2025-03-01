@@ -35,7 +35,7 @@
                 <label for="#">
                     <input class="remember-me" type="checkbox"> Remember me
                 </label>
-                <a href="/forgot-password">Forgot password?</a>
+                <a routerLink="forgot-password">Forgot password?</a>
             </div>
             <button [disabled]="form.invalid" class="btn" (click)="onLogin()">
                 <div>
@@ -49,7 +49,7 @@
                 User not found
             </div>
             <div class="register">
-                <p>Don't have an account? <br> <a href="/register">Sign Up</a></p>
+                <p>Don't have an account? <br> <a routerLink="register">Sign Up</a></p>
             </div>
         </form>
     </div>
