@@ -7,7 +7,8 @@ import { ApiEndpoint } from '../core/constants/constants';
   providedIn: 'root'
 })
 export class NotesService {
-  baseURL: string = "http://localhost:3000/api/notes";
+  //baseURL: string = "http://localhost:3000/api/notes";
+  baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/notes";
 
   constructor(private _http: HttpClient) { }
 

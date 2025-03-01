@@ -7,7 +7,8 @@ import { ApiEndpoint } from '../core/constants/constants';
   providedIn: 'root'
 })
 export class FindInfluencersService {
-  baseURL: string = "http://localhost:3000/api/influencers";
+  //baseURL: string = "http://localhost:3000/api/influencers";
+  baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/influencers";
 
   constructor(
     private HttpClient: HttpClient

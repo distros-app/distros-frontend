@@ -27,7 +27,7 @@ const routes: Routes = [
 */
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'}, //may need to change redirectTo dashboard
+  {path: '', redirectTo: '/login', pathMatch: 'full'}, //may need to change redirectTo dashboard
   {path: 'login', canActivate: [guestGuard], component: LoginComponent},
   {path: 'register', component: SignupComponent},
   { path: 'forgot-password', component: ForgotPasswordComponent },

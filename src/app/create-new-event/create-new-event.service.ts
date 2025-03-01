@@ -7,7 +7,8 @@ import { ApiEndpoint } from '../core/constants/constants';
   providedIn: 'root'
 })
 export class EventsService {
-  baseURL: string = "http://localhost:3000/api/events";
+  //baseURL: string = "http://localhost:3000/api/events";
+  baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/events";
 
   constructor(private _http: HttpClient) { }
 
