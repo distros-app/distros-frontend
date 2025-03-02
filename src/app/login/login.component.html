@@ -2,12 +2,14 @@
     <div class="intro-container">
         <div class="intro">
             <img class="logo" src="../../assets/images/distros-dark-logo.png" alt="...">
-            <h2 class="header-title">Ready to sign more copywriting clients?</h2>
-            <span>Distros helps you find & connect with your dream clients in just seconds. You no longer have to scour social media all day & night. We list influencers with 10k+ followers on Instagram, TikTok & YouTube.</span>
+            <h2 class="header-title">Find Influencers. Get Emails. Grow Fast</h2>
+            <span>Distros helps you find & connect with your dream clients in just seconds. Spending hours looking for new infopreneurs & their email is a thing of the past. Leverage our powerful database of vetted influencers & personal emails to sign clients faster!</span>
         </div>
+        <!--
         <div class="header-sub-title-container">
-            <span class="header-sub-title">The <span class="green-banner-text">#1 Client Aquisition tool</span> for Freelance Copywriters</span>
+            <span class="header-sub-title">Your <span class="green-banner-text">Shortcut</span> to Influencer Outreach</span>
         </div>
+        -->
     </div>
     <div class="login-container">
         <form [formGroup]="form" action="#">
@@ -35,7 +37,7 @@
                 <label for="#">
                     <input class="remember-me" type="checkbox"> Remember me
                 </label>
-                <a routerLink="forgot-password">Forgot password?</a>
+                <a routerLink="/forgot-password">Forgot password?</a>
             </div>
             <button [disabled]="form.invalid" class="btn" (click)="onLogin()">
                 <div>
@@ -49,7 +51,7 @@
                 User not found
             </div>
             <div class="register">
-                <p>Don't have an account? <br> <a routerLink="register">Sign Up</a></p>
+                <p>Don't have an account? <br> <a routerLink="/register">Sign Up</a></p>
             </div>
         </form>
     </div>
