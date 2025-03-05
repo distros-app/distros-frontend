@@ -27,6 +27,7 @@ let self: any;
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
+  private eventChannel = new BroadcastChannel('task_updates');
   userId!: string;
   dialog!: MatDialogRef<any>;
   tasksForm!: FormGroup;
@@ -62,6 +63,13 @@ export class TasksComponent implements OnInit {
   ngOnInit() {
     this.me();
     this.buildForm();
+
+     // Listen for event updates
+     this.eventChannel.onmessage = (message) => {
+      if (message.data.taskAdded) {
+        this.fetchMyTasks();
+      }
+    };
   }
 
   fetchMyTasks(reset: boolean = false) {

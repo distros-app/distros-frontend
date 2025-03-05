@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { NgIf } from '@angular/common';
@@ -108,15 +108,64 @@ export class CreateNewEventComponent implements OnInit {
 
   onUpdate() {
     this.isUpdating = true;
-    this.eventChannel.postMessage({ eventAdded: true });
+    this.eventForm.controls['startTime'].setValue(this.startTimeSelected);
+    this.eventForm.controls['endTime'].setValue(this.endTimeSelected)
+    this.eventForm.addControl('_id', new FormControl(this.isUpdate ? this.event._id : '', []));
+    this._EventsService.updateEvent(this.eventForm.value).subscribe((response: any) => {
+      setTimeout(() => {
+        if(response) {
+          this.isUpdating = false;
+          this.dialog.close(true);
+        } else {
+          this.isUpdating = false;
+        }
+      }, 500);
+    });
   }
 
   onDelete() {
     this.isDeleting = true;
+    this._EventsService.deleteEvent({userId: this.userId, _id: this.event._id}).subscribe((response: any) => {
+      setTimeout(() => {
+        if(response) {
+          this.isDeleting = false;
+          this.dialog.close(true);
+        } else {
+          this.isDeleting = false;
+        }
+      }, 500);
+    });
   }
 
   onComplete() {
     this.isCompleting = true;
+    this.eventForm.addControl('_id', new FormControl(this.isUpdate ? this.event._id : '', []));
+    this._EventsService.completeEvent(this.eventForm.value).subscribe((response: any) => {
+      setTimeout(() => {
+        if(response) {
+          this.isCompleting = false;
+          this.dialog.close(true);
+        } else {
+          this.isCompleting = false;
+        }
+      }, 500);
+    });
+  }
+
+  onIncomplete() {
+    this.isCompleting = true;
+    this.eventForm.addControl('_id', new FormControl(this.isUpdate ? this.event._id : '', []));
+    
+    this._EventsService.incompleteEvent(this.eventForm.value).subscribe((response: any) => {
+      setTimeout(() => {
+        if(response) {
+          this.isCompleting = false;
+          this.dialog.close(true);
+        } else {
+          this.isCompleting = false;
+        }
+      }, 500);
+    });
   }
 
   onSave() {

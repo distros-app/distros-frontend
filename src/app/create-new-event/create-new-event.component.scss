@@ -31,7 +31,7 @@
     background-color: black;
     color: white;
     width: 100%;
-    height: 100vh;
+    height: 58vh;
 }
 
 .parent{
@@ -366,10 +366,22 @@ input {
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::after {
     border: none !important;
     width: 100%;
+    border: none !important;
+
+    &:focus {
+      border: none !important;
+      box-shadow: none !important;
+    }
 }
 
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
     color: white !important;
+    border: none !important;
+
+    &:focus {
+      border: none !important;
+      box-shadow: none !important;
+    }
 }
 
 ::ng-deep .time-field {

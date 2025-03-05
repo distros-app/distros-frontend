@@ -30,6 +30,7 @@ let self: any;
 })
 
 export class NotesComponent implements OnInit{
+  private eventChannel = new BroadcastChannel('note_updates');
   userId!: string;
   dialog!: MatDialogRef<any>;
   notesForm!: FormGroup;
@@ -102,6 +103,13 @@ export class NotesComponent implements OnInit{
   ngOnInit() {
     this.me();
     this.editor = new Editor();
+
+    // Listen for event updates
+    this.eventChannel.onmessage = (message) => {
+      if (message.data.noteAdded) {
+        this.fetchMyNotes();
+      }
+    };
   }
 
   fetchMyNotes(reset: boolean = false) {
@@ -204,15 +212,15 @@ export class NotesComponent implements OnInit{
         .afterClosed()
         .subscribe((response: any) => {
           self.dialogRef = null;
-          this.isDeleting = true;
           if (response) {
+            this.isDeleting = true;
             this.deleteQuery.noteId = this.activeNoteId;
               this._NotesService.deleteNote(this.deleteQuery).subscribe({
                 next: (response: any) => {
                   if(response) {
                     setTimeout(() => {
                       this.fetchMyNotes();
-                      this.isDeleting = false;
+                      this.isDeleting = false;  
                     }, 500)
                   }
                 },
@@ -222,6 +230,8 @@ export class NotesComponent implements OnInit{
                   }, 500);
                 }
               });
+          } else {
+            this.isDeleting = false;
           }
         });
     }

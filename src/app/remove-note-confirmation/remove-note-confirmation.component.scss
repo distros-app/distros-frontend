@@ -23,6 +23,7 @@
     background-color: #000;
     color: #fff;
     border: 1px solid white;
+    height: 30vh;
 }
 
 ::ng-deep .close-btn .btn-close {
@@ -47,7 +48,7 @@ img{
 
 .intro-container{
     width: 100vw;
-    height: 100vh;
+    height: 30vh;
     display: block !important;
     align-items: flex-center !important;
     justify-content: flex-start !important;

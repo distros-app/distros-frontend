@@ -34,6 +34,8 @@ export class InfluencerListsComponent implements OnInit {
   influencerListsData: Array<any> = [];
   influencersInSelectedList: Array<any> = [];
   query: any = {
+    page: 1,
+    limit: 25,
     userId: ''
   }
 
@@ -136,8 +138,14 @@ export class InfluencerListsComponent implements OnInit {
         });
   }
 
-  fetchMyInfluencerLists() {
+  fetchMyInfluencerLists(reset: boolean = false) {
     this.isLoading = true;
+    if(reset) {
+      this.query.page = 1;
+      this.influencerLists = [];
+      this.influencerListsData = [];
+    }
+
     this._ListsService.fetchMyInfluencerLists(this.query).subscribe((response: any) => {
       if(response) {
         this.influencerLists = response.data;
@@ -208,7 +216,8 @@ export class InfluencerListsComponent implements OnInit {
       .subscribe((result: any) => {
         self.dialogRef = null;
         if (result) {
-          this.fetchMyInfluencerLists();
+          //this.fetchMyInfluencerLists();
+          this.influencerLists.push(result);  
         }
       });
   }

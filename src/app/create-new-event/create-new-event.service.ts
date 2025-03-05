@@ -36,6 +36,18 @@ export class EventsService {
     );
   }
 
+  completeEvent(query: any) {
+    return this._http.patch<ApiResponse<any>>(`${ApiEndpoint.Events.CompleteEvent}`,
+        query
+    );
+  }
+
+  incompleteEvent(query: any) {
+    return this._http.patch<ApiResponse<any>>(`${ApiEndpoint.Events.IncompleteEvent}`,
+        query
+    );
+  }
+
   toQueryString(paramsObject: any): string {
     let result: string = '';
 

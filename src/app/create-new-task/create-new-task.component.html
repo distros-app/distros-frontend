@@ -34,7 +34,7 @@
                 <div class="date-container">
                     <div class="date">
                         <mat-form-field>
-                            <mat-label>Due Date*</mat-label>
+                            <mat-label>Due Date</mat-label>
                             <input matInput [matDatepicker]="picker" formControlName="dueDate" (dateChange)="updateDueDate($event)" />
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
@@ -111,7 +111,7 @@
                 Cancel
             </button>
             <button *ngIf="!isUpdate" (click)="onSave()" [disabled]="toDoForm.invalid" class="btn btn-secondary send-button" type="button" role="button">
-                <div>
+                <div class="create-task">
                     <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>  

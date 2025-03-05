@@ -53,12 +53,12 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tooltip = document.querySelector('#tooltip'); // Ensure this ID matches your tooltip element in HTML
     this.fetchUserAndEvents();
 
     // Listen for event updates
     this.eventChannel.onmessage = (message) => {
       if (message.data.eventAdded) {
-        console.log("Received event update, fetching latest events...");
         this.fetchEvents();
       }
     };
@@ -102,10 +102,8 @@ export class CalendarComponent implements OnInit {
 
       // ✅ Update the events dynamically instead of reinitializing
       if (this.calendarOptions) {
-        console.log('BANNNNNNNNNNNNNNG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         this.calendarOptions.events = formattedEvents;
       } else {
-        console.log('BOOOOOOOMMMMMMMMMMMMM!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         this.initializeCalendar(formattedEvents);
       }
 
@@ -163,13 +161,11 @@ export class CalendarComponent implements OnInit {
       //select: this.handleDateSelect.bind(this),
       eventClick: this.handleEventClick.bind(this),
       eventMouseEnter: (el: any) => {
-        /*
         this.tooltipMessage = el.event.title;
         this.tooltip.setAttribute('data-show', '');
         this.popperInstance = createPopper(el.el, this.tooltip, {
           placement: 'top',
         });
-        */
       },
       eventMouseLeave: (el: any) => {
         if (this.popperInstance) {
@@ -182,7 +178,6 @@ export class CalendarComponent implements OnInit {
       eventsSet: this.handleEvents.bind(this)
     };
     this.calendarVisible.next(true);
-
   }
 
   handleCalendarToggle() {

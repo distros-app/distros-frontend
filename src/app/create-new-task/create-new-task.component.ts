@@ -25,6 +25,7 @@ import { map, Observable } from 'rxjs';
   styleUrls: ['./create-new-task.component.scss']
 })
 export class CreateNewTaskComponent  implements OnInit{
+  private eventChannel = new BroadcastChannel('task_updates');
   form!: FormGroup;
   authService = inject(AuthService);
   router = inject(Router);
@@ -163,6 +164,7 @@ export class CreateNewTaskComponent  implements OnInit{
       setTimeout(() => {
         if(response) {
           this.isLoading = false;
+          this.eventChannel.postMessage({ taskAdded: true });
           this.dialog.close(true);
         } else {
           this.isLoading = false;

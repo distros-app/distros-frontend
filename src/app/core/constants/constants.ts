@@ -1,4 +1,5 @@
 const apiUrl = 'https://distros-8f63ee867795.herokuapp.com/api';
+//const apiUrl = 'http://localhost:3000/api';
 
 export const ApiEndpoint = {
     Auth: {
@@ -31,6 +32,8 @@ export const ApiEndpoint = {
         CreateEvent: `${apiUrl}/events/create-event`,
         DeleteEvent: `${apiUrl}/events/delete-event`,
         UpdateEvent: `${apiUrl}/events/update-event`,
+        CompleteEvent: `${apiUrl}/events/complete-event`,
+        IncompleteEvent: `${apiUrl}/events/incomplete-event`
     },
     Lists: {
         CreateList: `${apiUrl}/lists/create-list`,

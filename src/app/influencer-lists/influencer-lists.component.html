@@ -68,7 +68,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && !isListSelected && influencerListsData.length && totalInfluencers) || (!isLoading && isListSelected && influencerListsData.length && totalInfluencers)" class="card shadow border-0 mb-7">
+                <div *ngIf="(!isLoading && !isListSelected && influencerListsData?.length && totalInfluencers) || (!isLoading && isListSelected && influencerListsData?.length && totalInfluencers)" class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <h5 class="mb-0 table-title">Lists</h5>
                     </div>
@@ -93,7 +93,7 @@
                                         {{ list.name }}
                                     </td>
                                     <td>
-                                        {{ list.influencers.length }}
+                                        {{ list.influencers?.length || 0 }}
                                     </td>
                                     <td class="text-start">
                                         <a class="btn btn-sm btn-neutral open-list-button" (click)="openInfluencerListDetailsModal(list)" title="View profile">View</a>
@@ -114,21 +114,21 @@
                         </div>  
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && !isListSelected && influencerListsData.length && !totalInfluencers)" class="empty-list-container">
+                <div *ngIf="(!isLoading && !isListSelected && influencerListsData?.length && !totalInfluencers)" class="empty-list-container">
                     <div class="empty-list">
                         <img class="empty-influencers-img" src="../../assets/images/influencer-list-img.png" />
                         <h5>It looks like there are no creators in any of your lists yet</h5>
                         <span class="empty-influencers-title">You can add creators to your lists from the Find Influencers page</span>
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && isListSelected && influencerListsData.length && !totalInfluencers)" class="empty-list-container">
+                <div *ngIf="(!isLoading && isListSelected && influencerListsData?.length && !totalInfluencers)" class="empty-list-container">
                     <div class="empty-list">
                         <img class="empty-influencers-img" src="../../assets/images/influencer-list-img.png" />
                         <h5>It looks like there are no creators in this list yet</h5>
                         <span class="empty-influencers-title">You can add creators to your list from the Find Influencers page</span>
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && !isListSelected && !influencerListsData.length)" class="empty-list-container">
+                <div *ngIf="(!isLoading && !isListSelected && !influencerListsData?.length)" class="empty-list-container">
                     <div class="empty-list">
                         <img class="empty-list-img" src="../../assets/images/list.png" />
                         <h5>You haven't created any lists yet</h5>

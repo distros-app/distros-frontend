@@ -84,7 +84,7 @@ export class CreateNewListComponent implements OnInit {
     this._CreateListService.createNewList(this.listForm.value).subscribe((response: any) => {
       setTimeout(() => {
         if(response) {
-          this.dialog.close(true);
+          this.dialog.close(response.data);
         } else {
           this.isLoading = false;
         }

@@ -27,6 +27,7 @@ interface UploadResponse {
 })
 
 export class CreateNoteComponent implements OnInit {
+  private eventChannel = new BroadcastChannel('note_updates');
   dialog!: MatDialogRef<any>;
   formControl = new FormControl(['angular']);
   html = '';
@@ -192,6 +193,7 @@ export class CreateNoteComponent implements OnInit {
         next: (response: any) => {
           setTimeout(() => {
             if(response) {
+              this.eventChannel.postMessage({ noteAdded: true });
               this.dialog.close(true);
             }
             this.isLoading = false;

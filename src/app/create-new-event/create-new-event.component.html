@@ -72,7 +72,7 @@
                 </div>  
                 Add to Calendar
             </button>
-            <button *ngIf="isUpdate && event.isComplete" (click)="onComplete()" [disabled]="!eventForm.valid" class="btn btn-secondary complete-button" type="button" role="button">
+            <button *ngIf="isUpdate && event.isComplete" (click)="onIncomplete()" [disabled]="!eventForm.valid" class="btn btn-secondary complete-button" type="button" role="button">
                 <div *ngIf="isCompleting" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>  

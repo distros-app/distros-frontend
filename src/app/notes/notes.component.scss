@@ -33,7 +33,7 @@ main {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important
+    color: #12e19f !important
 }
 
 .banner-container {
@@ -508,7 +508,7 @@ h5 {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important
+    color: #12e19f !important
 }
 
 ::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup label {
@@ -588,4 +588,8 @@ h5 {
     color: black !important;
     background-color: #12e19f !important;
     cursor: pointer !important;
+}
+
+::ng-deep .delete-spinner-color {
+    color: red !important
 }

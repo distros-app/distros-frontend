@@ -38,9 +38,8 @@ h1 {
     background-color: black;
     color: white;
     border: 1px solid white;
-    padding-bottom: 3em;
+    height: 80vh;
     width: 100%;
-    height: 100vh;
 }
 
 .subject-line-container {
@@ -246,7 +245,7 @@ hr {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important
+    color: #12e19f !important
 }
 
 ::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup label {

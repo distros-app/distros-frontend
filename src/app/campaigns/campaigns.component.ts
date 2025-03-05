@@ -38,7 +38,9 @@ export class CampaignsComponent implements OnInit {
   query: any = {
     userId: '',
     paymentType: '',
-    status: ''
+    status: '',
+    page: 1,
+    limit: 25
   }
 
   constructor(private _findInfluencersService: FindInfluencersService,
