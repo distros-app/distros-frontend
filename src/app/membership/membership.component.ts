@@ -55,8 +55,8 @@ export class MembershipComponent implements OnInit {
   subscribeToPro() {
     this.isOpeningPro = true;
     setTimeout(() => {
-      //const baseURL: string = "http://localhost:3000/api/subscribe/pro";
-      const baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/subscribe/pro";
+      //const baseURL: string = "http://localhost:3000/api/subscribe-stripe-pro";
+      const baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro";
 
       const plan = _.find(this.stripeProductIds, { plan: 'Pro' });
       this.HttpClient.post<{ sessionUrl: string }>(baseURL, { priceId: plan.stripePriceId })
@@ -71,8 +71,8 @@ export class MembershipComponent implements OnInit {
   subscribeToScale() {
     this.isOpeningAdvanced = true;
     setTimeout(() => {
-      //const baseURL: string = "http://localhost:3000/api/subscribe/scale";
-      const baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/subscribe/scale";
+      //const baseURL: string = "http://localhost:3000/api/subscribe-stripe-scale";
+      const baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-scale";
 
       const plan = _.find(this.stripeProductIds, {plan: 'Scale'});
       this.HttpClient.post<{ sessionUrl: string }>(baseURL, { priceId: plan.stripePriceId })
