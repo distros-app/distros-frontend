@@ -18,6 +18,7 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MembershipComponent } from './membership/membership.component';
 import { ContactSupportComponent } from './contact-support/contact-support.component';
 import { AdminComponent } from './admin/admin.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full'}, //may need to change redirectTo dashboard
@@ -91,6 +92,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy }  // Use HashLocationStrategy here
+  ]
 })
 export class AppRoutingModule { }

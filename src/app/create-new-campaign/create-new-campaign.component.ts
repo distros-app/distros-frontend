@@ -2,7 +2,7 @@ import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
-import { NgFor, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import confetti from 'canvas-confetti';
@@ -13,6 +13,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { CampaignsService } from '../campaigns/campaigns.service';
 import { CreateListService } from '../create-new-list/create-new-list.service';
+import { TruncatePipe } from '../find-influencers/truncate.pipe';
 import * as _ from 'lodash';
 
 
@@ -20,7 +21,7 @@ import * as _ from 'lodash';
   selector: 'app-create-new-campaign',
   standalone: true,
   imports: [NgIf, FormsModule, ReactiveFormsModule, DragDropModule, NgFor, MatRadioModule, MatFormFieldModule, 
-            MatNativeDateModule, MatDatepickerModule, MatInputModule, NgStyle],
+            MatNativeDateModule, MatDatepickerModule, MatInputModule, NgStyle, TruncatePipe, NgClass],
   templateUrl: './create-new-campaign.component.html',
   styleUrls: ['./create-new-campaign.component.scss']
 })
@@ -29,6 +30,7 @@ export class CreateNewCampaignComponent implements OnInit {
   @ViewChild('perMonthRadioButton') perMonthRadioButton!: MatRadioButton;
   @ViewChild('endDateRadioButton') endDateRadioButton!: MatRadioButton;
   form!: FormGroup;
+  statusDropdownSelected: string = '';
   authService = inject(AuthService);
   router = inject(Router);
   selectedClient: any = null;
@@ -39,6 +41,7 @@ export class CreateNewCampaignComponent implements OnInit {
   isEndDateRadioChecked: boolean = false;
   isPerMonthRadioButton: boolean = false;
   isOneTimePaymentRadioButton: boolean = false;
+  statuses: Array<any> = [{name: 'Pending'}, {name: 'Active'}, {name: 'Paused'}, {name: 'Cancelled'}]
   fb = inject(FormBuilder);
   userId!: string;
   campaign: any;
@@ -63,6 +66,19 @@ export class CreateNewCampaignComponent implements OnInit {
   ngOnInit() {
     this.isUpdate = (this.campaign && this.campaign._id);
     if(!this.isUpdate) this.triggerConfetti();
+    if(this.isUpdate) {
+      const clientInDistros = this.campaign.clientName && this.campaign.profilePic;
+      if(clientInDistros) {
+        for(let client of this.clients) {
+          if(client.name === this.campaign.clientName) {
+            this.selectedClient = client;
+          }
+        }
+      } else {
+        this.selectedClient = false;
+      }
+      this.statusDropdownSelected = this.campaign.status;
+    }
     this.dialog = this.dialogRef;
     this.me();
   }
@@ -79,14 +95,15 @@ export class CreateNewCampaignComponent implements OnInit {
     this.campaignForm = this.fb.group({
       _id: [!this.isUpdate ? '' : this.campaign._id, []],
       userId: [this.userId, [Validators.required]],
-      clientName: [!this.isUpdate ? '' : this.campaign.clientName, [Validators.required]],
-      profilePic: [!this.isUpdate ? '' : this.campaign.profilePic, [Validators.required]],
+      clientName: [!this.isUpdate || (this.isUpdate && this.campaign.profilePic) ? '' : this.campaign.clientName, []], //fix the manual user field logic on update campaign screen
+      profilePic: [!this.isUpdate ? '' : this.campaign.profilePic, []],
       compensation: [!this.isUpdate ? '' : this.campaign.compensation, [Validators.required]],
       duration: [!this.isUpdate ? '' : this.campaign.compensationDuration, [Validators.required]],
       isEndDate: [!this.isUpdate ? false : this.campaign.isEndDate, [Validators.required]],
       startDate: [!this.isUpdate ? '' : this.campaign.startDate, [Validators.required]],
       endDate: [!this.isUpdate ? '' : this.campaign.endDate, []],
-      details: [!this.isUpdate ? '' : this.campaign.details, []]
+      details: [!this.isUpdate ? '' : this.campaign.details, []],
+      status: [!this.isUpdate ? '' : this.campaign.status, [Validators.required]]
     });
   }
 
@@ -100,6 +117,10 @@ export class CreateNewCampaignComponent implements OnInit {
           this.query.platform = item;
           this.selectedClient = item;
           this.campaignForm.controls['clientName'].setValue(null);
+          break;
+        case 'status':
+          this.statusDropdownSelected = item.name;
+          this.campaignForm.controls['status'].setValue(this.statusDropdownSelected);
           break;
         default:
           break;

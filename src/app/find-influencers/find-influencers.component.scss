@@ -65,6 +65,8 @@ h1 {
 .parent {
   height: 100vh !important;
   overflow-x: hidden;
+  height: 100vh; /* Full viewport height */
+  overflow-y: auto; /* Enables scrolling */
   background-color: #000 !important;
 }
 
@@ -290,9 +292,16 @@ button:hover {
   color: #fff !important;
   background-color: #000 !important;
   border-color: #12e19f !important;
+  width: 175px !important;
+  max-width: 175px !important;
 
   &.option-selected {
     color: #12e19f !important;
+  }
+
+  &:hover {
+    width: 175px !important;
+    max-width: 175px !important;
   }
 }
 

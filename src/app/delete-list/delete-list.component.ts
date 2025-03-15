@@ -57,7 +57,6 @@ export class DeleteListComponent implements OnInit {
       } else {
         this.listMatchFound = false;
       }
-      console.log(this.listMatchFound)
     });
   }
 
@@ -72,7 +71,7 @@ export class DeleteListComponent implements OnInit {
   }
 
   onCancel() {
-
+    this.dialog.close(false);
   }
 
   onRemoveList() {
@@ -86,8 +85,7 @@ export class DeleteListComponent implements OnInit {
   }
 
   dropdownSelected(val: any, val2: any) {
-    console.log(val)
-    console.log(val2)
+
   }
 
   onDelete() {

@@ -191,7 +191,12 @@ body {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important;
+    color: #12e19f !important;
+	margin-right: 4px;
+}
+
+::ng-deep .deleting-spinner-color {
+	color: red !important;
 	margin-right: 4px;
 }
 
@@ -280,4 +285,31 @@ body {
 
 .strike {
 	text-decoration: line-through;
+}
+
+.pricing-plan-cancel-btn {
+	background-color: black;
+	border: 2px solid red;
+	transition: 1s;
+	color: white;
+}
+
+.pricing-plan-cancel-btn:hover {
+	background-color: black;
+	border: 2px solid red;
+	box-shadow: 0 0 15px red !important;
+	transform: scale(1.1);
+	color: red;
+}
+
+.pricing-plan-cancel-btn:active {
+	background-color: black;
+	-webkit-transform: translateY(3px);
+	transform: translateY(3px);
+	box-shadow: none;
+}
+
+.cancel-note {
+	margin-top: 5px;
+	font-size: 12px;
 }

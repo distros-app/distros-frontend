@@ -27,11 +27,13 @@ let self: any;
 export class CampaignsComponent implements OnInit {
   authService = inject(AuthService);
   userId!: string;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
+  isPageLoading: boolean = true;
+  hasMoreData: boolean = true;
   isListSelected: boolean = false;
   campaignsExist!: boolean;
   campaigns: Array<any> = [];
-  campaignStatuses: Array<any> = [{name: 'Active'}, {name: 'Paused'}, {name: 'Cancelled'}];
+  campaignStatuses: Array<any> = [{name: 'Pending'}, {name: 'Active'}, {name: 'Paused'}, {name: 'Cancelled'}];
   startDateFilter: Array<any> = [{name: 'A-Z'}, {name: 'Z-A'}];
   endDateFilter: Array<any> = [{name: 'A-Z'}, {name: 'Z-A'}];
   influencersInSelectedList: Array<any> = [];
@@ -50,6 +52,7 @@ export class CampaignsComponent implements OnInit {
               public _viewContainerRef: ViewContainerRef,
               public _dialog: MatDialog) {
                 self = this;
+                this.onScroll = _.debounce(this.onScroll.bind(this), 200); // Debounce to 200ms
               }
 
   ngOnInit() {
@@ -66,6 +69,15 @@ export class CampaignsComponent implements OnInit {
     })
   }
 
+  onScroll(event: any): void {
+    const { scrollTop, scrollHeight, clientHeight } = event.target;
+
+    // Check if the user has scrolled to the bottom
+    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && this.hasMoreData) {
+      this.fetchMyCampaigns();
+    }
+  }
+
   fetchMyCampaigns(reset: boolean = false) {
     this.isLoading = true;
     if(reset) {
@@ -75,11 +87,14 @@ export class CampaignsComponent implements OnInit {
     this._CampaignsService.fetchMyCampaigns(this.query).subscribe((response: any) => {
       if(response) {
         this.campaigns = _.concat(response.data, this.campaigns);
-        console.log(this.campaigns)
-        this.campaignsExist = this.campaigns.length ? true : false;
+        this.campaignsExist = (this.campaigns.length || !this.isPageLoading) ? true : false;
         this.isLoading = false;
+        this.isPageLoading = false;
+        this.hasMoreData = (response.data.length == this.query.limit);
       } else {
         this.isLoading = false;
+        this.isPageLoading = false;
+        this.hasMoreData = false;
       }
     });
   }
@@ -109,7 +124,7 @@ export class CampaignsComponent implements OnInit {
       .subscribe((response: any) => {
         self.dialogRef = null;
         if(response) {
-          this.fetchMyCampaigns();
+          this.fetchMyCampaigns(true);
         } else {
           this.isLoading = false;
         }
@@ -137,7 +152,7 @@ export class CampaignsComponent implements OnInit {
       .subscribe((response: any) => {
         self.dialogRef = null;
         if(response) {
-          this.fetchMyCampaigns();
+          this.fetchMyCampaigns(true);
         } else {
           this.isLoading = false;
         }
@@ -171,14 +186,17 @@ export class CampaignsComponent implements OnInit {
   }
 
   onClearFilters() {
+    this.isLoading = true;
     this.query.paymentType = '';
     this.query.status = '';
     document.getElementById('dropdownMenuLink1')!.innerHTML = 'Payment Type';
     document.getElementById('dropdownMenuLink2')!.innerHTML = 'Campaign Status'; 
+    setTimeout(() => {
+      this.fetchMyCampaigns(true);
+    }, 500);
   }
 
   dropdownSelected(menu: string, item: any) {
-    console.log(menu)
     document.getElementById(menu)!.innerHTML = item;
 
     switch(menu) {
@@ -191,9 +209,11 @@ export class CampaignsComponent implements OnInit {
       default:
         break;
     }
+
+    this.isLoading = true;
     setTimeout(() => {
       this.fetchMyCampaigns(true);
-    });
+    }, 500);
   }
 }
 

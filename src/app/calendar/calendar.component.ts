@@ -36,6 +36,7 @@ export class CalendarComponent implements OnInit {
   // Use BehaviorSubject to manage the visibility state
   calendarVisible = new BehaviorSubject<boolean>(false);
   calendarOptions: any;
+  isPageLoading: boolean = true;
   userId: any;
   query: any = {
     userId: ''
@@ -107,8 +108,10 @@ export class CalendarComponent implements OnInit {
         this.initializeCalendar(formattedEvents);
       }
 
+      this.isPageLoading = false;
       this.cdr.detectChanges(); // Ensure Angular detects the update
     } catch (error) {
+      this.isPageLoading = false;
       this.initializeCalendar([]); // Initialize with empty events if there's an error
     }
   }

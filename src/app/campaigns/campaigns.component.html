@@ -1,6 +1,6 @@
 <div class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary">
     <!-- Main content -->
-    <div class="h-screen flex-grow-1 main-container">
+    <div class="h-screen flex-grow-1 main-container" (scroll)="onScroll($event)">
         <!-- Header -->
         <header class="bg-surface-primary border-bottom pt-6">
             <div class="container-fluid">
@@ -13,12 +13,14 @@
                         <!-- Actions -->
                         <div class="col-sm-6 col-12 text-sm-end">
                             <div class="mx-n1 download-title">
+                                <!--
                                 <a href="#" class="btn d-inline-flex btn-sm btn-secondary mx-1 action-button">
                                     <span class=" pe-2">
                                         <i class="bi bi-box-arrow-up"></i>
                                     </span>
                                     <span>Download Campaigns</span>
                                 </a>
+                                -->
                                 <!--
                                 <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                     <span class=" pe-2">
@@ -62,7 +64,7 @@
                                             data-bs-toggle="dropdown" 
                                             aria-haspopup="true" 
                                             aria-expanded="false" 
-                                            [disabled]="isLoading"
+                                            [disabled]="isPageLoading"
                                             [ngClass]="{ 'option-selected': query.paymentType ? 'option-selected': '' }">
                                           Payment Type
                                         </button>
@@ -85,7 +87,7 @@
                                             data-bs-toggle="dropdown" 
                                             aria-haspopup="true" 
                                             aria-expanded="false" 
-                                            [disabled]="isLoading"
+                                            [disabled]="isPageLoading"
                                             [ngClass]="{ 'option-selected': query.status ? 'option-selected': '' }">
                                            Campaign Status
                                           </button>
@@ -108,7 +110,7 @@
                                     </div>
                                     <div class="dropdown show right-container new-campaign-button">
                                         <div class="dropdown show">
-                                            <button (click)="openCreateNewCampaignModal()" [disabled]="isLoading" class="btn btn-secondary results-button" type="button" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button (click)="openCreateNewCampaignModal()" [disabled]="isPageLoading" class="btn btn-secondary results-button" type="button" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="bi bi-pen icon-button"></i> New Campaign
                                             </button>
                                         </div>
@@ -118,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && !isListSelected && campaignsExist)" class="card shadow border-0 mb-7">
+                <div *ngIf="(!isPageLoading && !isListSelected && campaignsExist)" class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <h5 class="mb-0 table-title">Campaigns</h5>
                     </div>
@@ -138,7 +140,7 @@
                             <tbody>
                                 <tr *ngFor="let campaign of campaigns">
                                     <td>
-                                        <img crossorigin='anonymous' [src]="campaign.profilePic?.secure_url" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img">
+                                        <img crossorigin='anonymous' [src]="campaign.profilePic?.secure_url ||'../../assets/images/profile-user.png'" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img">
                                         <span class="text-heading font-semibold">
                                             {{ campaign.clientName }}
                                         </span>
@@ -166,7 +168,11 @@
                                     </td>
                                     -->
                                     <td class="text-start">
-                                        <a (click)="openUpdateCampaignModal(campaign)" class="btn btn-sm btn-neutral action-button" title="View profile">View</a>
+                                        <span>
+                                            <a type="button" (click)="openUpdateCampaignModal(campaign)" class="btn btn-sm btn-neutral action-button" title="Edit Campaign">
+                                                <i class="bi bi-pencil-square i"></i>
+                                            </a>
+                                        </span>
                                         <span>
                                             <button type="button" (click)="openDeleteCampaignModal(campaign)" class="btn btn-sm btn-square btn-neutral text-danger-hover action-button" title="Remove from list">
                                                 <i class="bi bi-trash"></i>
@@ -178,18 +184,19 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5 d-flex justify-content-center">
+                        <span *ngIf="!isLoading && !hasMoreData && campaignsExist" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
                         <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>  
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && !campaignsExist)" class="empty-list-container">
+                <div *ngIf="(!isPageLoading && !campaignsExist)" class="empty-list-container">
                     <div class="empty-list">
                         <img class="empty-list-img" src="../../assets/images/contract.png" />
                         <h5>You don't have any active Campaigns</h5>
                         <span class="empty-list-title">Create a new Campaign to get started</span>
                         <div>
-                            <button (click)="openCreateNewCampaignModal()" [disabled]="isLoading" class="btn btn-secondary results-button empty-list-btn" type="button" role="button">
+                            <button (click)="openCreateNewCampaignModal()" [disabled]="isPageLoading" class="btn btn-secondary results-button empty-list-btn" type="button" role="button">
                                 New Campaign
                             </button>
                         </div>
@@ -197,5 +204,10 @@
                 </div>
             </div>
         </main>
+        <div class="card-footer border-0 py-5 d-flex justify-content-center">
+            <div *ngIf="isPageLoading" class="spinner-border spinner-border-md text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>  
+        </div>
     </div>
 

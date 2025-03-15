@@ -13,9 +13,19 @@
     color: black !important;
 }
 
+.end-of-list {
+    color: #12e19f !important;
+}
+
+.title-field {
+    width: 25em !important;
+    max-width: 25em !important;
+}
+
 .main-container {
     overflow-y: auto !important;
     overflow-x: hidden !important;
+    height: 100vh; /* Full viewport height */
 }
 
 .dark-banner-text {
@@ -84,6 +94,10 @@
     font-size: 14px;
     font-weight: 600;
     margin-left: -0.5px;
+}
+
+.table-responsive {
+    overflow-x: hidden !important;
 }
 
 .spinner {

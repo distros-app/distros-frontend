@@ -261,7 +261,7 @@
                                         {{ influencer.followersTotal }}
                                     </td>
                                     <td>
-                                        {{ influencer.engagement?.$numberDecimal + '%' || '3.1%'}}
+                                        {{ influencer.engagement ?  influencer.engagement.toFixed(1) + '%' : '3.1%' }}
                                     </td>
                                     <!--<td>
                                         <span *ngIf="influencer.country" class="badge badge-lg badge-dot">

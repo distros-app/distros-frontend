@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewContainerRef } from '@angular/core';
 import { MatCommonModule, MatOptionModule, MatOptionSelectionChange } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -30,7 +30,7 @@ let self: any;
   templateUrl: './find-influencers.component.html',
   styleUrls: ['./find-influencers.component.scss']
 })
-export class FindInfluencersComponent implements OnInit  {
+export class FindInfluencersComponent implements OnInit, AfterViewInit {
   toastrService = inject(ToastrService);
   authService = inject(AuthService);
   keywordSearch: string = '';
@@ -92,23 +92,28 @@ export class FindInfluencersComponent implements OnInit  {
 
         this.emailsViewed = Number(this.user.influencersEmailViewedCount);
         if(this.canResetEmailViews()) {
-          this.isLoading = false;
-          this.isPageLoaded = true;
+         
         } else {
           if(this.user.subscription === 'FREE') this.emailViewLimit = 25;
           if(this.user.subscription === 'PRO') this.emailViewLimit = 1000;
           if(this.user.subscription === 'SCALE') this.emailViewLimit = 3000;
-          this.isPageLoaded = true;
         }
-        this.nextPeriod = this.user.nextPaymentDate.split(',')[0];
+        this.isLoading = false;
       }
     })
+  }
+
+  ngAfterViewInit() {
+    this.nextPeriod = this.user?.nextPaymentDate?.split(',')[0];
+    setTimeout(() => {
+      this.isPageLoaded = true;
+    }, 500);
   }
 
   canResetEmailViews() {
     const today = new Date().toLocaleString(); // Get current date in local time
     const todaysDate = today.split(',')[0];
-    const nextPaymentDate = this.user.nextPaymentDate.split(',')[0];
+    const nextPaymentDate = this.user?.nextPaymentDate?.split(',')[0];
     if(todaysDate == nextPaymentDate || todaysDate > nextPaymentDate) {
       let resetCountQuery = {
         user: this.user
@@ -125,6 +130,7 @@ export class FindInfluencersComponent implements OnInit  {
   }
 
   onScroll(event: any): void {
+    console.log('scrolling......................')
     if(this.emailsViewed != this.emailViewLimit) {
       const { scrollTop, scrollHeight, clientHeight } = event.target;
 
@@ -325,6 +331,7 @@ export class FindInfluencersComponent implements OnInit  {
       if(response.data?.length) {
         setTimeout(() => {
           this.allInfluencers = _.concat(this.allInfluencers, response.data);
+          console.log(this.allInfluencers)
           this.query.page++;
           this.isLoading = false;
           this.hasMoreData = true;

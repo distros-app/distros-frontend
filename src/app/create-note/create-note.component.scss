@@ -32,6 +32,12 @@ h1 {
     cursor: pointer !important;
 }
 
+::ng-deep .NgxEditor__MenuItem .NgxEditor__MenuItem--IconContainer:hover {
+    color: black !important;
+    background-color: #12e19f !important;
+    cursor: pointer !important;
+}
+
 .container {
     overflow-x: hidden;
     overflow-y: auto;
@@ -232,9 +238,25 @@ hr {
     border: 1px solid #12e19f !important;
 }
 
+::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--DropdownMenu {
+   border: 2px solid #12e19f !important;
+   border-radius: 8px !important;
+   box-shadow: 0 0 15px #12e19f !important;
+}
+
 ::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Item {
-    color: black !important;
-    background-color: white!important;
+    color: white !important;
+    background-color: black !important;
+}
+
+::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Item:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Item:last-child {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 ::ng-deep .NgxEditor__Dropdown .NgxEditor__Dropdown--Item:hover {
@@ -248,17 +270,32 @@ hr {
     color: #12e19f !important
 }
 
+::ng-deep .NgxEditor__Popup {
+    background-color: black !important;
+    border: 2px solid #12e19f !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 15px #12e19f !important;
+}
+
 ::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup label {
-    color: black !important;
+    color: white !important;
+    background-color: black !important;
 }
 
 ::ng-deep .NgxEditor__Popup .NgxEditor__Popup--Label {
-    color: black !important;
+    color: white !important;
+    background-color: black !important;
 }
 
 ::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup input {
-    color: black !important;
-    background-color: white !important;
+    color: white !important;
+    background-color: black !important;
+}
+
+::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup input:focus {
+    color: white !important;
+    background-color: black !important;
+    box-shadow: 0 0 15px #12e19f !important;
 }
 
 ::ng-deep button[type=submit] {
@@ -290,4 +327,10 @@ hr {
     background-color: #757575 !important;
     border-color: #757575 !important;
     cursor: not-allowed !important;
+}
+
+::ng-deep .NgxEditor__MenuItem .NgxEditor__MenuItem--IconContainer:hover {
+    color: black !important;
+    background-color: #12e19f !important;
+    cursor: pointer !important;
 }

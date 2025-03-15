@@ -13,12 +13,14 @@
                         <!-- Actions -->
                         <div class="col-sm-6 col-12 text-sm-end">
                             <div class="mx-n1">
+                                <!--
                                 <a href="#" class="btn d-inline-flex btn-sm btn-secondary mx-1 action-button">
                                     <span class=" pe-2">
                                         <i class="bi bi-box-arrow-up"></i>
                                     </span>
                                     <span>Download Notes</span>
                                 </a>
+                                -->
                                 <!--
                                 <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                     <span class=" pe-2">
@@ -231,6 +233,11 @@
                 </div>
             </div>
         </main>
+        <div class="card-footer border-0 py-5 d-flex justify-content-center">
+            <div *ngIf="isPageLoading" class="spinner-border spinner-border-md text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>  
+        </div>
 </div>
 
 <!--

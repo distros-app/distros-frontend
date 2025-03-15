@@ -11,6 +11,10 @@
     color: white !important;
     background-color: #000 !important;
     border-color: #12e19f !important;
+
+    &.option-selected {
+        color: #12e19f !important;
+      }
 }
 
 ::ng-deep .dropdown-menu {
@@ -103,15 +107,17 @@
 
 .client-selected {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: start;
     padding: 0 10px;
     height: 21px;
     width: 100%;
+    color: #12e19f !important;
 }
 
 .client-name {
     font-size: 16px !important;
+    align-self: center !important;
 }
 
 .clients-container:hover {
@@ -462,7 +468,7 @@ hr {
 .cancel-button {
     background-color: black !important;
     border-color: red !important;
-    margin-right: 8px !important;
+    margin-right: 15px !important;
     padding: 12px 16px !important;
     border: 1px solid red !important;
     color: white !important;
@@ -568,7 +574,7 @@ hr {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important
+    color: #12e19f !important;
 }
 
 
@@ -606,3 +612,24 @@ hr {
       box-shadow: none !important;
     }
 }
+
+::ng-deep .option-selected {
+    color: #12e19f !important;
+}
+
+::ng-deep .status-button {
+    padding: 10px 20px !important;
+    width: 170px !important;
+    max-width: 170px !important;
+    margin-bottom: 2em !important;
+    z-index: 1000 !important;
+}
+
+::ng-deep .status-btn-container {
+    margin-top: -1.5em !important;
+    margin-bottom: 1.5em !important;
+}
+
+::ng-deep .item-selected .dropdown-toggle::after {
+    color: #12e19f !important; /* New color when an item is selected */
+  }

@@ -16,12 +16,16 @@ import { CreateTaskService } from '../create-new-task/create-new-task.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { RemoveTaskConfirmationComponent } from '../remove-task-confirmation/remove-task-confirmation.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { debounce } from 'lodash';
+import * as _ from 'lodash';
+import { TruncatePipe } from '../find-influencers/truncate.pipe';
 
 let self: any;
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [MatCardModule, MatFormFieldModule, MatInputModule, 
+  imports: [MatCardModule, MatFormFieldModule, MatInputModule, InfiniteScrollModule,TruncatePipe,
             MatButtonModule, DragDropModule, NgFor, NgIf, RouterOutlet, RouterLink, RouterLinkActive, NgClass, DatePipe],
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
@@ -37,13 +41,17 @@ export class TasksComponent implements OnInit {
   inProgress: any[] = [];
   done: any[] = [];
   updateId!: any;
+  pageSize = 10; // Number of items to load per scroll
+  hasMoreData: boolean = true;
+  
   isEditEnabled: boolean = false;
   authService = inject(AuthService);
-  isLoading: boolean = true;
+  isLoading: boolean = false;
+  isPageLoading: boolean = true;
   isDeleting: boolean = false;
   query = {
     page: 1,
-    limit: 25,
+    limit: 10,
     userId: '',
     task: '',
     reminder: '',
@@ -57,7 +65,8 @@ export class TasksComponent implements OnInit {
   };
 
   constructor(public _viewContainerRef: ViewContainerRef, public _dialog: MatDialog, public _TasksService: CreateTaskService) {
-    self = this;
+     self = this;
+     this.onScroll = debounce(this.onScroll.bind(this), 200); // Debounce to 200ms
   }
 
   ngOnInit() {
@@ -72,22 +81,38 @@ export class TasksComponent implements OnInit {
     };
   }
 
+  onScroll(event: any): void {
+    const { scrollTop, scrollHeight, clientHeight } = event.target;
+
+    // Check if the user has scrolled to the bottom
+    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && this.hasMoreData) {
+      this.fetchMyTasks();
+    }
+  }
+
   fetchMyTasks(reset: boolean = false) {
     if(reset) {
       this.query.page = 1;
       this.tasks = [];
     }
 
+    this.isLoading = true;
     this._TasksService.fetchMyTasks(this.query).subscribe((response: any) => {
       if(response) {
-        console.log(response.data[0])
-        this.tasks = response.data;
-        console.log('tasks', this.tasks);
-        this.isLoading = false;
-        this.convertTaskData();
-        this.sortTasks();
+        setTimeout(() => {
+          this.tasks = _.concat(this.tasks, response.data);
+          this.isLoading = false;
+          this.isPageLoading = false;
+          //this.convertTaskData();
+          //this.sortTasks();
+          this.hasMoreData = (response.data.length == this.query.limit);
+          this.isLoading = false;
+          this.query.page++;
+        }, 500);
       } else {
         this.isLoading = false;
+        this.hasMoreData = false;
+        this.isPageLoading = false;
       }
     });
   }
@@ -243,7 +268,6 @@ export class TasksComponent implements OnInit {
         .subscribe((result: any) => {
           self.dialogRef = null;
           if (result) {
-            console.log(result)
             this.fetchMyTasks();
           }
         });
@@ -323,7 +347,6 @@ export class TasksComponent implements OnInit {
         .afterClosed()
         .subscribe((result: any) => {
           self.dialogRef = null;
-          console.log(result)
           if (result) {
           
           }

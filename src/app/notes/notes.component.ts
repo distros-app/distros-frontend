@@ -37,6 +37,7 @@ export class NotesComponent implements OnInit{
   deleteNoteForm!: FormGroup;
   isUpdateNote: boolean = true;
   isIconClicked: boolean = false;
+  isPageLoading: boolean = true;
   notes: any[] = [];
   allNotes: any[] = [];
   fb = inject(FormBuilder);
@@ -118,9 +119,11 @@ export class NotesComponent implements OnInit{
         this.notes = response.data;
         this.convertDataOnInit(reset);
         this.isLoading = false;
+        this.isPageLoading = false;
         //this.sortNotes();
       } else {
         this.isLoading = false;
+        this.isPageLoading = false;
       }
     });
   }

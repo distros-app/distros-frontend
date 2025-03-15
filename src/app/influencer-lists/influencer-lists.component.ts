@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, ViewContainerRef } from '@angular/core';
 import { FindInfluencersService } from '../find-influencers/find-influencers.service';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { AuthService } from '../core/services/auth.service';
@@ -12,12 +12,14 @@ import { AddInfluencerToListComponent } from '../add-influencer-to-list/add-infl
 import { ToastrService } from 'ngx-toastr';
 import * as _ from "lodash";
 import { InfluencerListDetailsComponent } from '../influencer-list-details/influencer-list-details.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { TruncatePipe } from '../find-influencers/truncate.pipe';
 
 let self: any;
 @Component({
   selector: 'app-influencer-lists',
   standalone: true,
-  imports: [NgIf, NgFor, CommonModule],
+  imports: [NgIf, NgFor, CommonModule, InfiniteScrollModule, TruncatePipe],
   templateUrl: './influencer-lists.component.html',
   styleUrls: ['./influencer-lists.component.scss']
 })
@@ -26,16 +28,18 @@ export class InfluencerListsComponent implements OnInit {
   authService = inject(AuthService);
   userId!: string;
   totalInfluencers: number = 0;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   tableDataMessage: string = 'Please select a Current List';
   isListSelected: boolean = false;
   influencerListCreators: Array<any> = [];
   influencerLists: Array<any> = [];
   influencerListsData: Array<any> = [];
   influencersInSelectedList: Array<any> = [];
+  hasMoreData: boolean = true;
+  isPageLoading: boolean = true;
   query: any = {
     page: 1,
-    limit: 25,
+    limit: 10,
     userId: ''
   }
 
@@ -45,6 +49,7 @@ export class InfluencerListsComponent implements OnInit {
               public _dialog: MatDialog,
               private _toastr: ToastrService) {
                 self = this;
+                this.onScroll = _.debounce(this.onScroll.bind(this), 200); // Debounce to 200ms
               }
 
   ngOnInit() {
@@ -88,6 +93,15 @@ export class InfluencerListsComponent implements OnInit {
           
         }
       });
+  }
+
+  onScroll(event: any): void {
+    const { scrollTop, scrollHeight, clientHeight } = event.target;
+
+    // Check if the user has scrolled to the bottom
+    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && this.hasMoreData) {
+      this.fetchMyInfluencerLists();
+    }
   }
 
   onRemove(influencer: any) {
@@ -148,13 +162,19 @@ export class InfluencerListsComponent implements OnInit {
 
     this._ListsService.fetchMyInfluencerLists(this.query).subscribe((response: any) => {
       if(response) {
-        this.influencerLists = response.data;
-        this.influencerListsData = _.cloneDeep(this.influencerLists);
-        this.calculateTotalInfluencers();
-        console.log(this.influencerListsData);
-        this.isLoading = false;
+        setTimeout(() => {
+          this.influencerLists = _.concat(this.influencerLists, response.data);
+          this.influencerListsData = _.cloneDeep(this.influencerLists);
+          this.calculateTotalInfluencers();
+          this.isLoading = false;
+          this.hasMoreData = (response.data.length == this.query.limit);
+          this.query.page++;
+          this.isPageLoading = false;
+        }, 500);
       } else {
         this.isLoading = false;
+        this.hasMoreData = false;
+        this.isPageLoading = false;
       }
     });
   }
@@ -233,6 +253,7 @@ export class InfluencerListsComponent implements OnInit {
     config.maxWidth = '40vw';
     config.minHeight = '35vh';
     config.maxHeight = '35vh';
+    config.panelClass = 'custom-dialog-container';
     self.dialogRef = this._dialog.open(DeleteListComponent, config);
     self.dialogRef.componentInstance.data = [];
     self.dialogRef.componentInstance.userId = this.userId;

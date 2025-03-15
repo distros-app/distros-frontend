@@ -29,7 +29,6 @@ export class AuthService {
     }
 
     updateViewCount(payload: any) {
-        console.log('updating.......................')
         return this._http.patch<ApiResponse<User>>(`${ApiEndpoint.Auth.UpdateViewCount}`,
             payload
         );
@@ -55,12 +54,10 @@ export class AuthService {
 
     getUserToken() {
         const token = localStorage.getItem(LocalStorage.token);
-        console.log('token:', token)
         return token ? token : '';
     }
 
     login(payload: LoginPayLoad) {
-        console.log(payload)
         return this._http
         .post<ApiResponse<User>>(`${ApiEndpoint.Auth.Login}`, payload)
             .pipe(
@@ -93,12 +90,10 @@ export class AuthService {
     }
 
     resetPassword(payload: Object) {
-        console.log('payload', payload)
         return this._http
         .post<ApiResponse<User>>(`${ApiEndpoint.Auth.ResetPassword}`, payload)
             .pipe(
                 map((response: any) => {
-                    console.log(response)
                     return response;
                 })
             );

@@ -79,14 +79,18 @@ h2 {
     display: block !important;
     align-items: center !important;
     justify-content: start !important;
-    color: #fff;
-    padding: 30px 40px;
-    margin-left: 10rem;
-    margin-right: 10rem;
-    border-radius: 15px;
+    color: #fff !important;
+    padding: 30px 40px !important;
+    margin-left: 10rem !important;
+    margin-right: 10rem !important;
+    border-radius: 15px !important;
     border: 2px solid #12e19f !important;
     box-shadow: 0 0 120px #12e19f !important;
-    background: #000;
+    background: #000 !important;
+}
+
+h1 {
+    color: white !important;
 }
 
 .green-banner-text {

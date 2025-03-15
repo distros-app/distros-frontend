@@ -9,6 +9,22 @@
 
 .main-container {
     overflow-y: auto !important;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Enables scrolling */
+}
+
+.name-field {
+    width: 30em !important;
+    max-width: 30em !important;
+}
+
+.end-of-list {
+    color: #12e19f !important;
+}
+
+.actions-field {
+    width: 15em !important;
+    max-width: 15em !important;
 }
 
 .icon-button {

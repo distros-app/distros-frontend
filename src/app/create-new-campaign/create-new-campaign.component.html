@@ -16,10 +16,10 @@
                     <ng-container *ngIf="selectedClient">
                         <div class="client-selected">
                             <div>
-                                <img crossorigin="anonymous" [src]="selectedClient.profilePic.secure_url" alt="Profile" class="avatar avatar-sm rounded-circle me-2 influencer-img">
+                                <img crossorigin="anonymous" [src]="selectedClient?.profilePic?.secure_url" alt="Profile" class="avatar avatar-sm rounded-circle me-2 influencer-img">
                             </div>
                             <div class="client-name">
-                                {{ selectedClient.name }}
+                                {{ selectedClient.name | truncate: 13 }}
                             </div>
                         </div>
                       </ng-container>
@@ -90,6 +90,28 @@
             </form>
         </div>
         <div data-mdb-input-init class="form-outline mb-1 description-field">
+            <div class="status-btn-container" [class.item-selected]="statusDropdownSelected">
+                <a class="btn btn-secondary dropdown-toggle client-button" role="button" id="status" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <ng-container *ngIf="statusDropdownSelected">
+                        <div class="client-selected">
+                            <div class="client-name">
+                                {{ statusDropdownSelected | truncate: 13 }}
+                            </div>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="!statusDropdownSelected">
+                        Status*
+                      </ng-container>
+                  </a>
+
+                  <div class="dropdown-menu" aria-labelledby="status">
+                      <div *ngFor="let status of statuses" class="clients-container" (click)="dropdownSelected('status', status)">
+                        <div>
+                            <a class="dropdown-item client-name">{{ status.name }}</a>
+                        </div>
+                      </div>
+                  </div>
+            </div>
             <textarea formControlName="details" rows="3" #details type="text" class="form-control ps-5" placeholder="Campaign Details/SOW"></textarea>
         </div>
       </form>
@@ -103,7 +125,7 @@
         <button (click)="dialog.close(false)" class="btn btn-secondary cancel-button" type="button" role="button">
             Cancel
         </button>
-        <button *ngIf="!isUpdate" (click)="onSave()" [disabled]="campaignForm.invalid" class="btn btn-secondary send-button" type="button" role="button">
+        <button *ngIf="!isUpdate" (click)="onSave()" [disabled]="campaignForm.invalid || (!campaignForm.controls['clientName'].value && !this.selectedClient)" class="btn btn-secondary send-button" type="button" role="button">
             <div>
                 <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
                     <span class="sr-only">Loading...</span>

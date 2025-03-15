@@ -1,6 +1,6 @@
 <div *ngIf="tasksForm" class="d-flex flex-column flex-lg-row h-lg-full bg-surface-secondary parent">
     <!-- Main content -->
-    <div class="h-screen flex-grow-1 main-container">
+    <div class="h-screen flex-grow-1 main-container" (scroll)="onScroll($event)">
         <!-- Header -->
         <header class="bg-surface-primary border-bottom pt-6">
             <div class="container-fluid">
@@ -13,12 +13,14 @@
                         <!-- Actions -->
                         <div class="col-sm-6 col-12 text-sm-end">
                             <div class="mx-n1 download-title">
+                                <!--
                                 <a href="#" class="btn d-inline-flex btn-sm btn-secondary mx-1 action-button">
                                     <span class="pe-2">
                                         <i class="bi bi-box-arrow-up"></i>
                                     </span>
                                     <span>Download Tasks</span>
                                 </a>
+                                -->
                                 <!--
                                 <a href="#" class="btn d-inline-flex btn-sm btn-primary mx-1">
                                     <span class=" pe-2">
@@ -167,7 +169,7 @@
                     </div>
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && tasks.length)" class="card shadow border-0 mb-7">
+                <div *ngIf="!isPageLoading && tasks.length" class="card shadow border-0 mb-7">
                     <div class="card-header">
                         <h5 class="mb-0 table-title">Tasks</h5>
                     </div>
@@ -191,8 +193,8 @@
                                     <td class="text-start">
                                         {{ task.createdDate | date: 'MM/dd/yyyy' }}
                                     </td>
-                                    <td class="text-start">
-                                        {{ task.title}}
+                                    <td class="text-start title-field">
+                                        {{ task.title | truncate:45 }}
                                     </td>
                                     <td class="text-start">
                                         {{ (task.dueDate | date: 'MM/dd/yyyy') || 'n/a' }}
@@ -221,7 +223,7 @@
                                     </td>
                                     <td class="text-start">
                                         <span>
-                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover action-button" title="Update task" (click)="onUpdateTask(task)">
+                                            <button type="button" class="btn btn-sm btn-square btn-neutral text-danger-hover action-button" title="Edit task" (click)="onUpdateTask(task)">
                                                 <i class="bi bi-pencil-square"></i>
                                             </button>
                                         </span>
@@ -236,13 +238,13 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5 d-flex justify-content-center">
-                        <span *ngIf="!isLoading" class="text-muted text-sm">{{ '' }}</span>
-                        <div *ngIf="isLoading" class="spinner-border spinner-border-md text-success" role="status">
+                        <span *ngIf="!isLoading && !this.hasMoreData" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
+                        <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>  
                     </div>
                 </div>
-                <div *ngIf="(!isLoading && !tasks.length)" class="empty-list-container">
+                <div *ngIf="!isPageLoading && !tasks.length" class="empty-list-container">
                     <div class="empty-list">
                         <div class="empty-list-img-container">
                             <svg xmlns="http://www.w3.org/2000/svg" width="150" height="250" fill="currentColor" class="bi bi-journal-check empty-list-img" viewBox="0 0 16 16">
@@ -254,7 +256,7 @@
                         <h5>You haven't created any Tasks yet</h5>
                         <span class="empty-list-title">Create a New Task to get started</span>
                         <div>
-                            <button (click)="openCreateNewTaskModal()" [disabled]="isLoading" class="btn btn-secondary empty-list-btn" type="button" role="button">
+                            <button (click)="openCreateNewTaskModal()" [disabled]="isPageLoading" class="btn btn-secondary empty-list-btn" type="button" role="button">
                                 <i class="bi bi-journal-check button-icon"></i> New Task
                             </button>
                         </div>
@@ -262,6 +264,11 @@
                 </div>
             </div>
         </main>
+        <div class="card-footer border-0 py-5 d-flex justify-content-center">
+            <div *ngIf="isPageLoading" class="spinner-border spinner-border-md text-success" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>  
+        </div>
 </div>
 
 <!--
