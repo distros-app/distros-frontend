@@ -16,17 +16,28 @@ export class ResetPasswordComponent implements OnInit {
   fb = inject(FormBuilder);
   activatedRoute = inject(ActivatedRoute);
   router = inject(Router);
-  token!: string;
+  token: string | null = null;
 
-  constructor(private _authService: AuthService) {
+  constructor(private _authService: AuthService, private route: ActivatedRoute) {
 
   }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(val => {
-      this.token = val['token'];
-      console.log(this.token)
+  ngOnInit(): void {
+    // Capture token from URL fragment (Hash) using the ActivatedRoute
+    this.route.fragment.subscribe(fragment => {
+      // Check for a token in the URL fragment
+      if (fragment) {
+        const params = new URLSearchParams(fragment);
+        this.token = params.get('token');
+      }
     });
+
+    if (this.token) {
+      console.log('Password reset token:', this.token);
+    } else {
+      console.error('No token found!');
+    }
+
     this.buildForm();
   }
 
