@@ -13,7 +13,10 @@ export interface User {
     totalClients: number, 
     newClients: number,
     admin: boolean,
-    avatar: string
+    avatar: string,
+    stripeSessionId: string;
+    stripeSubscriptionId: string;
+    tempViewLimit: number;
 }
 export interface LoginPayLoad {
     email: string,

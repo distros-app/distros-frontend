@@ -30,7 +30,7 @@ let self: any;
   templateUrl: './find-influencers.component.html',
   styleUrls: ['./find-influencers.component.scss']
 })
-export class FindInfluencersComponent implements OnInit, AfterViewInit {
+export class FindInfluencersComponent implements OnInit {
   toastrService = inject(ToastrService);
   authService = inject(AuthService);
   keywordSearch: string = '';
@@ -45,8 +45,8 @@ export class FindInfluencersComponent implements OnInit, AfterViewInit {
   displayedInfluencers: any = []; // Data to be shown on the table
   pageSize = 10; // Number of items to load per scroll
   currentPage = 0;
-  emailsViewed: number = 5000;
-  emailViewLimit: number = 5000;
+  emailsViewed!: number;
+  emailViewLimit!: number;
   user!: User;
   platformDropdownSelected: string = 'Platform';
   followersDropdownSelected: string = 'Followers';
@@ -91,23 +91,18 @@ export class FindInfluencersComponent implements OnInit, AfterViewInit {
         this.query.userId = this.user?._id;
 
         this.emailsViewed = Number(this.user.influencersEmailViewedCount);
-        if(this.canResetEmailViews()) {
-         
+        if(this.user.tempViewLimit) {
+          this.emailViewLimit = this.user.tempViewLimit;
         } else {
-          if(this.user.subscription === 'FREE') this.emailViewLimit = 25;
-          if(this.user.subscription === 'PRO') this.emailViewLimit = 1000;
-          if(this.user.subscription === 'SCALE') this.emailViewLimit = 3000;
+          if(this.user.subscription.type === 'FREE') this.emailViewLimit = 25;
+          if(this.user.subscription.type === 'PRO') this.emailViewLimit = 1000;
+          if(this.user.subscription.type === 'SCALE') this.emailViewLimit = 3000;
         }
+        this.nextPeriod = this.user?.nextPaymentDate?.split(',')[0];
+        this.isPageLoaded = true;
         this.isLoading = false;
       }
     })
-  }
-
-  ngAfterViewInit() {
-    this.nextPeriod = this.user?.nextPaymentDate?.split(',')[0];
-    setTimeout(() => {
-      this.isPageLoaded = true;
-    }, 500);
   }
 
   canResetEmailViews() {
@@ -130,7 +125,6 @@ export class FindInfluencersComponent implements OnInit, AfterViewInit {
   }
 
   onScroll(event: any): void {
-    console.log('scrolling......................')
     if(this.emailsViewed != this.emailViewLimit) {
       const { scrollTop, scrollHeight, clientHeight } = event.target;
 
@@ -303,7 +297,6 @@ export class FindInfluencersComponent implements OnInit, AfterViewInit {
 
     switch(menu) {
       case 'dropdownMenuLink':
-        console.log(item)
         this.platformDropdownSelected = item;
         this.query.platform = item;
         break;
@@ -331,7 +324,6 @@ export class FindInfluencersComponent implements OnInit, AfterViewInit {
       if(response.data?.length) {
         setTimeout(() => {
           this.allInfluencers = _.concat(this.allInfluencers, response.data);
-          console.log(this.allInfluencers)
           this.query.page++;
           this.isLoading = false;
           this.hasMoreData = true;

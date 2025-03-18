@@ -3,6 +3,7 @@ import { AuthService } from '../core/services/auth.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { User } from '../core/model/common.model';
 import { NgIf } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -48,7 +49,7 @@ export class DashboardComponent implements OnInit {
     totalClients: null,
   };
 
-  constructor() {
+  constructor(private HttpClient: HttpClient) {
     this.authService.me().subscribe({
       next: (response: any) => {
         this.user = response.data;
@@ -66,6 +67,31 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+   
+  }
+
+  fetchSubscriptionDetails() {
+    if(this.user.stripeSessionId && !this.user.stripeSubscriptionId) {
+      let baseURL: string = '';
+
+      if(this.user.subscription.type === 'PRO') {
+        //baseURL = "http://localhost:3000/api/subscribe-stripe-pro/details";
+        baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro/details";
+      } else if(this.user.subscription.type === 'SCALE') {
+        //baseURL = "http://localhost:3000/api/subscribe-stripe-scale/details";
+        baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro/details";
+      }
+
+      this.HttpClient.post<{ status: string }>(baseURL, { sessionId: this.user.stripeSessionId, user: this.user })
+        .subscribe(response => {
+          if(response) {
+            const subscriptionStatus = response.status;
+            if(subscriptionStatus != 'active') {
+              //reset status to FREE Plant
+            }
+          }
+        });
+    }
   }
 
   startMonthlyRevenueCounter() {

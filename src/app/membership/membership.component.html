@@ -64,8 +64,8 @@
                     Get started
                   </span>
                 </button>
-                <div class="cancel-btn-container">
-                  <button *ngIf="user.subscription?.type === 'PRO'" (click)="cancelPro()" class="btn pricing-plan-cancel-btn">
+                <div class="cancel-btn-container" *ngIf="user.subscription?.type === 'PRO'">
+                  <button (click)="cancelPro()" class="btn pricing-plan-cancel-btn">
                     <div *ngIf="isCancelingPro" class="spinner-border spinner-border-sm text-success deleting-spinner-color" role="status">
                       <span class="sr-only">Loading...</span>
                     </div> 
@@ -104,8 +104,8 @@
                     Get started
                   </span>
                 </button>
-                <div>
-                  <button *ngIf="user.subscription?.type === 'SCALE'" (click)="cancelScale()" class="btn pricing-plan-cancel-btn">
+                <div class="cancel-btn-container" *ngIf="user.subscription?.type === 'SCALE'">
+                  <button (click)="cancelScale()" class="btn pricing-plan-cancel-btn">
                     <div *ngIf="isCancelingAdvanced" class="spinner-border spinner-border-sm text-success deleting-spinner-color" role="status">
                       <span class="sr-only">Loading...</span>
                     </div> 

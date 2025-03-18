@@ -57,8 +57,8 @@ export const ApiEndpoint = {
         UnhideInfluencer: `${apiUrl}/influencers/unhide`
     },
     Subscription: {
-        SubscribeToPro: `${apiUrl}/subscription/pro`,
-        SubscribeToScale: `${apiUrl}/subscription/scale`
+        SubscribeToPro: `${apiUrl}/subscribe-to-pro`,
+        SubscribeToScale: `${apiUrl}/subscribe-to-scale`
     },
     Uploads: {
         Image: `${apiUrl}/uploads/image`

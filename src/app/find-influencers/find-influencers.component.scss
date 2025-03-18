@@ -268,16 +268,6 @@ button:hover {
   }
 }
 
-.more-filter-button {
-  color: white;
-  border-color: gray;
-  background-color: black !important;
-  
-  &:hover {
-    box-shadow: 0 0 15px gray !important;
-  }
-}
-
 .toast-container { 
   opacity:1 ;
 };
@@ -513,4 +503,20 @@ th {
   margin-right: 8px !important;
   margin-top: 5px !important;
   color: red !important;
+}
+
+.more-filter-button {
+  color: white;
+  border-color: gray;
+  background-color: black !important;
+  min-width: 150 !important;
+  width: 150px !important;
+  max-width: 150px !important;
+  
+  &:hover {
+    min-width: 150 !important;
+    width: 150px !important;
+    max-width: 150px !important;
+    box-shadow: 0 0 15px gray !important;
+  }
 }
