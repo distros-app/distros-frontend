@@ -59,7 +59,7 @@
                                     <a></a>
                                     <div class="col">
                                         <span class="h6 font-semibold text-muted text-sm d-block mb-2 card-title">Total Revenue This Month</span>
-                                        <span class="h3 font-bold mb-0">{{ thisMonthRevenue }}</span>
+                                        <span class="h3 font-bold mb-0">{{ thisMonthRevenue ? thisMonthRevenue : '$0'  }}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-tertiary text-white text-lg rounded-circle">
@@ -83,7 +83,7 @@
                                     <a></a>
                                     <div class="col">
                                         <span class="h6 font-semibold text-muted text-sm d-block mb-2 card-title">Monthly Recurring Revenue</span>
-                                        <span class="h3 font-bold mb-0">{{ recurringRevenue }}</span>
+                                        <span class="h3 font-bold mb-0">{{ recurringRevenue ? recurringRevenue : '$0' }}</span>
                                     </div>
                                     <div class="col-auto">
                                         <div class="icon icon-shape bg-success text-white text-lg rounded-circle">

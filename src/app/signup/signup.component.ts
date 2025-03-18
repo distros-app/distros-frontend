@@ -4,6 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +20,9 @@ export class SignupComponent implements OnInit {
   router = inject(Router);
   isLoading: boolean = false;
   userAlreadyExists: boolean = false;
+  accountAlreadyExistsOnThisDevice: boolean = false;
   response: boolean = false;
+  deviceKey!: any;
     
   constructor(private fb: FormBuilder) {
       this.form = this.fb.group({
@@ -35,32 +39,67 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.fetchSubscriptionType();
+    this.fetchDeviceKey();
   }
 
   fetchSubscriptionType() {
     const type = 'FREE TRIAL'; //make dynamic later
     this.form.get('subscription.type')?.setValue(type);
   }
+
+  fetchDeviceKey() {
+    this.deviceKey = localStorage.getItem('device_key');
+  }
   
-  onSignUp() {
-    if(this.form.valid) {
+  async onSignUp() {
+    if (this.form.valid) {
       this.isLoading = true;
 
-      this.authService.register(this.form.value).subscribe({
-        next: (response: any) => {
-          this.userAlreadyExists = false;
+      if(!this.deviceKey) {
+        try {
+          // Load FingerprintJS and get device fingerprint
+          const fp = await FingerprintJS.load();
+          const result = await fp.get();
+          const fingerprint = result.visitorId;
+  
+          // Attach fingerprint to form data
+          const formData = { ...this.form.value, fingerprint };
+  
+          // Send registration requests
+          this.authService.register(formData).subscribe({
+            next: (response: any) => {
+              this.userAlreadyExists = false;
+              this.accountAlreadyExistsOnThisDevice = false;
+              const deviceKey = uuidv4();
+              localStorage.setItem('device_key', deviceKey);
+              this.isLoading = false;
+              this.response = true;
+              setTimeout(() => {
+                this.router.navigate(['/login']);
+              }, 1500);
+            },
+            error: (error: any) => {
+              if (error == 'Forbidden') { //Fingerprint error triggered (an account already exists on this device)
+                this.isLoading = false;
+                this.accountAlreadyExistsOnThisDevice = true;
+                this.userAlreadyExists = false;
+              } else {
+                this.isLoading = false;
+                this.response = true;
+                this.accountAlreadyExistsOnThisDevice = false;
+                this.userAlreadyExists = true;
+              }
+            }
+          });
+        } catch (error) {
           this.isLoading = false;
-          this.response = true;
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 1500)
-        },
-        error: (error: Error) => {
-          this.userAlreadyExists = true;
-          this.isLoading = false;
-          this.response = true;
         }
-      });
+      } else {
+        setTimeout(() => {
+          this.isLoading = false;
+          this.accountAlreadyExistsOnThisDevice = true;
+        }, 500)
+      }
     }
   }
 }

@@ -51,6 +51,9 @@
                 </div> 
                 Sign Up
             </button>
+            <div class="user-exists-error" *ngIf="!isLoading && accountAlreadyExistsOnThisDevice">
+                An account already exists on this device
+            </div>
             <div class="user-exists-error" *ngIf="!isLoading && response && userAlreadyExists">
                 Email is already being used
             </div>
