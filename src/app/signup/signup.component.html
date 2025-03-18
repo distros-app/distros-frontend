@@ -57,9 +57,6 @@
             <div class="user-exists-error" *ngIf="!isLoading && response && userAlreadyExists">
                 Email is already being used
             </div>
-            <div class="input-success" *ngIf="!isLoading && response && !userAlreadyExists">
-                User was created successfully!
-            </div>
 
             <div class="register">
                 <p>Already have an account? <br> <a routerLink="/login">Login</a></p>

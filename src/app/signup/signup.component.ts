@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { v4 as uuidv4 } from 'uuid';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -18,13 +19,14 @@ export class SignupComponent implements OnInit {
   form: FormGroup
   authService = inject(AuthService);
   router = inject(Router);
+  toastrService = inject(ToastrService);
   isLoading: boolean = false;
   userAlreadyExists: boolean = false;
   accountAlreadyExistsOnThisDevice: boolean = false;
   response: boolean = false;
   deviceKey!: any;
     
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private _toastr: ToastrService) {
       this.form = this.fb.group({
         name: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -70,8 +72,12 @@ export class SignupComponent implements OnInit {
             next: (response: any) => {
               this.userAlreadyExists = false;
               this.accountAlreadyExistsOnThisDevice = false;
+              this._toastr.success('Your account was created successfully. Welcome to Distros!', 'Success', {
+                toastClass: 'custom-toast',
+              });
               const deviceKey = uuidv4();
               localStorage.setItem('device_key', deviceKey);
+
               this.isLoading = false;
               this.response = true;
               setTimeout(() => {

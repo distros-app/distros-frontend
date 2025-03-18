@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forgot-password',
@@ -17,8 +18,9 @@ export class ForgotPasswordComponent implements OnInit {
   response: boolean = false;
   forgetForm!: FormGroup;
   fb = inject(FormBuilder);
+  toastrService = inject(ToastrService);
 
-  constructor(private _authService: AuthService) {
+  constructor(private _authService: AuthService, private _toastr: ToastrService) {
 
   }
 
@@ -35,12 +37,17 @@ export class ForgotPasswordComponent implements OnInit {
         this.response = true;
         this.isUserFound = true;
         this.isLoading = false;
+        this._toastr.success('Sent! Please check your email', 'Success', {
+          toastClass: 'custom-toast',
+        });
       },
       error: (error: Error) => {
         this.response = true;
         this.isUserFound = false;
         this.isLoading = false;
-        console.log('error:', error);
+        this._toastr.success('No user found with this email', 'Error', {
+          toastClass: 'custom-toast-error',
+        });
       }
     });
   }
