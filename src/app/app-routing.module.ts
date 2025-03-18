@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'login', canActivate: [guestGuard], component: LoginComponent},
   { path: 'register', component: SignupComponent},
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent }, 
+  { path: 'reset-password/:token', component: ResetPasswordComponent }, 
   {
       path: '', 
       component: LayoutComponent,

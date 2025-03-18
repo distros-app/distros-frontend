@@ -6,6 +6,11 @@ export const guestGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
+   // Extract the token from the query parameters
+   const urlParams = new URLSearchParams(window.location.search);
+   const token = urlParams.get('token');
+   console.log('token:', token)
+
   if (authService.isLoggedIn) {
     router.navigate(['/dashboard']);
     return false; // Block access to the guarded route
