@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
@@ -11,28 +11,56 @@ import { NgIf } from '@angular/common';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: FormGroup;
   authService = inject(AuthService);
   router = inject(Router);
   isUserNotFound: boolean = false;
   isLoading: boolean = false;
+  rememberMe: boolean = false;
+  
 
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required]),
+      rememberMe: new FormControl(false)
     });
+  }
+
+  ngOnInit() {
+    const savedCredentials = localStorage.getItem('savedCredentials');
+    if (savedCredentials) {
+      this.rememberMe = true;
+      const { email, password } = JSON.parse(savedCredentials);
+      this.form.patchValue({
+        email,
+        password,
+        rememberMe: true // Set 'rememberMe' to true if credentials are found
+      });
+    }
   }
   
   async onLogin() {
-    this.isLoading = true;
-
     if(this.form.valid) {
+      this.isLoading = true;
       this.authService.login(this.form.value).subscribe({
         next: (response: any) => {
           this.isUserNotFound = false;
+          this
           this.isLoading = false;
+
+          // Check if "Remember Me" is checked
+          this.form.controls['rememberMe'].setValue(this.rememberMe);
+          if (this.form.value.rememberMe) {
+            localStorage.setItem('savedCredentials', JSON.stringify({
+              email: this.form.value.email,
+              password: this.form.value.password
+            }));
+          } else {
+            localStorage.removeItem('savedCredentials');
+          }
+
           this.router.navigate(['/dashboard']);
         },
         error: (error: Error) => {
@@ -40,6 +68,12 @@ export class LoginComponent {
           this.isLoading = false;
         }
       });
+    } else {
+      
     }
+  }
+
+  clicked() {
+    this.rememberMe = !this.rememberMe;
   }
 }

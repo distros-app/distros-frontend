@@ -89,6 +89,12 @@ h2 {
     background: #000 !important;
 }
 
+.login-button-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
 h1 {
     color: white !important;
 }
@@ -211,5 +217,5 @@ h1 {
 
 ::ng-deep .spinner-color {
     color: #12e19f !important;
-    margin-right: 2px !important;
+    margin-right: 3px !important;
 }

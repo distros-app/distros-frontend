@@ -35,12 +35,18 @@
 
             <div class="remember">
                 <label for="#">
-                    <input class="remember-me" type="checkbox"> Remember me
+                    <input 
+                        class="remember-me" 
+                        type="checkbox" 
+                        [ngModelOptions]="{standalone: true}" 
+                        [(ngModel)]="rememberMe" 
+                        (click)="clicked()">
+                    Remember me
                 </label>
                 <a routerLink="/forgot-password">Forgot password?</a>
             </div>
             <button [disabled]="form.invalid" class="btn" (click)="onLogin()">
-                <div>
+                <div class="login-button-container">
                     <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
                         <span class="sr-only">Loading...</span>
                     </div> 

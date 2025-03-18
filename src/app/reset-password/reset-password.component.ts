@@ -56,7 +56,7 @@ export class ResetPasswordComponent implements OnInit {
         
         setTimeout(() => {
           this.router.navigate(['/login']);
-        }, 500)
+        }, 1500)
       }
     });
   }
