@@ -20,6 +20,7 @@ export class ResetPasswordComponent implements OnInit {
   token!: string;
   isLoading: boolean = false;
   toastrService = inject(ToastrService);
+  isPasswordsMatching: boolean = false;
 
   constructor(private _authService: AuthService, private _toastr: ToastrService) {
 
@@ -36,7 +37,28 @@ export class ResetPasswordComponent implements OnInit {
     this.resetForm = this.fb.group({
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]]
-    })
+    });
+
+    this.resetForm.controls['password'].valueChanges.subscribe(() => {
+      this.isBothPasswordsMatching();
+    });
+    this.resetForm.controls['confirmPassword'].valueChanges.subscribe(() => {
+      this.isBothPasswordsMatching();
+    });
+  }
+
+  canSubmit() {
+    return !(this.resetForm.invalid || !this.isPasswordsMatching);
+  }
+
+  isBothPasswordsMatching() {
+    if(this.resetForm.controls['password'].dirty && this.resetForm.controls['confirmPassword'].dirty && 
+      this.resetForm.controls['password'].value != this.resetForm.controls['confirmPassword'].value) {
+        this.isPasswordsMatching = false;
+    } else if(this.resetForm.controls['password'].dirty && this.resetForm.controls['confirmPassword'].dirty && 
+      this.resetForm.controls['password'].value == this.resetForm.controls['confirmPassword'].value) {
+      this.isPasswordsMatching = true;
+    }
   }
 
   onSubmit() {
@@ -48,7 +70,6 @@ export class ResetPasswordComponent implements OnInit {
 
     this._authService.resetPassword(resetObj).subscribe({
       next: (response: any) => {
-        console.log(response)
         this.isLoading = false;
         this._toastr.success('Password was reset successfully!', 'Success', {
           toastClass: 'custom-toast',
