@@ -104,17 +104,17 @@ export class CreateNewTaskComponent  implements OnInit{
 
   buildForm() {
     this.toDoForm = this.fb.group({
-      name: [!this.isUpdate ? '' : this.task.title, [Validators.required]],
+      _id: [!this.isUpdate ? '' : this.task._id, []],
+      title: [!this.isUpdate ? '' : this.task.title, [Validators.required]],
       userId: [this.userId, [Validators.required]],
       description: [!this.isUpdate ? '' : this.task.description, [Validators.required]],
       dueDate: [!this.isUpdate ? '' : this.task.dueDate, []],
-      time: [!this.isUpdate ? this.timeSelected : this.task.dueDateTime],
+      dueDateTime: [!this.isUpdate ? this.timeSelected : this.task.dueDateTime],
       reminder: [!this.isUpdate ? '' : this.task.reminder],
       priority: [!this.isUpdate ? '' : this.task.priority],
       flagged: [!this.isUpdate ? false : this.task.flagged],
       status: [!this.isUpdate ? '' : this.task.status, [Validators.required]]
     });
-    console.log(this.toDoForm.controls['status'].value)
     //this.setDropdowns();
   }
 
@@ -179,6 +179,7 @@ export class CreateNewTaskComponent  implements OnInit{
     this._CreateTaskService.updateTask(this.toDoForm.value).subscribe((response: any) => {
       setTimeout(() => {
         if(response) {
+          this.dialog.close(true);
           this.isLoading = false;
         } else {
           this.isLoading = false;

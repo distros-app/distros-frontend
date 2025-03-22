@@ -155,7 +155,6 @@ h2 {
 }
 
 .btn{
-    width: 100%;
     height: 45px;
     color: #fff !important;
     background-color: #000 !important;
@@ -165,8 +164,9 @@ h2 {
     font-weight: 600;
     transition: 1s;
     margin-top: 20px;
-    width: 160px;
-    min-width: 160px;
+    width: 175px;
+    min-width: 175px;
+    max-width: 175px;
     cursor: pointer;
 }
 
@@ -176,12 +176,18 @@ h2 {
     color: #12e19f !important;
     transform: scale(1.1);
     box-shadow: 0 0 20px #12e19f !important;
+    width: 175px;
+    min-width: 175px;
+    max-width: 175px;
     cursor: pointer;
 }
 
 .cancel-btn {
     margin-right: 20px;
     border-color: red !important;
+    width: 175px;
+    min-width: 175px;
+    max-width: 175px;
 }
 
 .cancel-btn:hover {
@@ -189,6 +195,9 @@ h2 {
     border-color: red !important;
     cursor: pointer !important;
     color: red !important;
+    width: 175px;
+    min-width: 175px;
+    max-width: 175px;
 }
 
 .register{
@@ -255,10 +264,27 @@ h2 {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important
+    color: #12e19f !important;
 }
 
 .container {
     display: flex;
     justify-content: space-between;
+}
+
+::ng-deep .input-error {
+    margin-top: -35px !important;
+    margin-bottom: 15px !important;
+    color: red !important;
+}
+
+::ng-deep .custom-toast {
+    background-color: black !important; /* Custom background */
+    color: #12e19f !important;             /* Custom text color */
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    height: 80px !important;
+    width: 360px !important;
+    padding: 12px 20px !important;
+    border-radius: 5px !important;
 }

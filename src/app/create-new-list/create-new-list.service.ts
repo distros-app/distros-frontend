@@ -24,7 +24,6 @@ export class CreateListService {
   }
 
   updateList(payload: RegisterPayLoad) {
-    console.log('payload:', payload)
     return this._http.patch<ApiResponse<any>>(`${ApiEndpoint.Lists.UpdateList}`,
         payload
     );

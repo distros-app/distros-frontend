@@ -117,30 +117,34 @@ h1 {
   .cancel-button {
     background-color: black !important;
     border-color: red!important;
-    margin-right: 15px;
-    transition: 1s;
-    color: white;
-    width: 160px;
-    height: 45px;
+    margin-right: 15px !important;
+    transition: 1s !important;
+    color: white !important;
+    width: 175px !important;
+    height: 45px !important;
     padding-bottom: 10px !important;
+    font-size: 15px !important;
     
     &:hover {
+        width: 175px !important;
         background-color: black !important;
         border-color: red !important;
         box-shadow: 0 0 15px red !important;
         transform: scale(1.1) !important;
         color: red !important;
+        font-size: 15px !important;
     }
   }
   
   .send-button {
     padding-top: -5px !important;
     background-color: black !important;
-    color: white;
-    transition: 1s;
+    color: white !important;
+    transition: 1s !important;
     border-color: #12e19f !important;
-    width: 160px;
-    height: 45px;
+    width: 175px !important;
+    height: 45px !important;
+    font-size: 15px !important;
     
     &:hover {
         background-color: black !important;
@@ -148,6 +152,8 @@ h1 {
         border-color: #12e19f !important;
         box-shadow: 0 0 15px #12e19f !important;
         transform: scale(1.1) !important;
+        width: 175px !important;
+        font-size: 15px !important;
     }
   }
   
@@ -243,10 +249,6 @@ h1 {
     background-color: #12e19f !important;
     box-shadow: 0 0 7.5px #12e19f !important;
     cursor: pointer !important;
-  }
-  
-  ::ng-deep .spinner-color {
-    color: white !important
   }
   
   ::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup label {
@@ -352,4 +354,37 @@ h1 {
     color: black !important;
     background-color: #12e19f !important;
     cursor: pointer !important;
+}
+
+::ng-deep .custom-toast {
+  background-color: black !important; /* Custom background */
+  color: #12e19f !important;             /* Custom text color */
+  border: 1px solid #12e19f !important;
+  box-shadow: 0 0 15px #12e19f !important;
+  height: 80px !important;
+  width: 360px !important;
+  padding: 12px 20px !important;
+  border-radius: 5px !important;
+}
+
+::ng-deep .custom-toast-error {
+  background-color: black !important; /* Custom background */
+  color: red !important;             /* Custom text color */
+  border: 1px solid red !important;
+  box-shadow: 0 0 15px red !important;
+  height: 80px !important;
+  width: 360px !important;
+  padding: 12px 20px !important;
+  border-radius: 5px !important;
+}
+
+.send-button-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+::ng-deep .spinner-color {
+  color: #12e19f !important;
+  margin-right: 5px !important;
 }

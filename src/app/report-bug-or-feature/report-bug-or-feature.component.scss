@@ -246,7 +246,8 @@ hr {
 }
 
 ::ng-deep .spinner-color {
-  color: white !important
+  color: #12e19f !important;
+  margin-right: 3px !important;
 }
 
 ::ng-deep .NgxEditor__Popup .NgxEditor__Popup--FormGroup label {

@@ -13,9 +13,10 @@ export class AdminService {
 
   constructor(private _http: HttpClient) { }
 
-  testImportFile(file: any) {
+  testImportFile(data: any) {
+    const obj = { data: data, category: data.category}
     return this._http.post<ApiResponse<any>>(`${ApiEndpoint.Admin.TestImportFile}`,
-      file
+      obj
     );
   }
 

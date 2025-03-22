@@ -3,6 +3,7 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { AuthService } from '../core/services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-profile',
@@ -18,6 +19,7 @@ export class MyProfileComponent implements OnInit {
   authService = inject(AuthService);
   router = inject(Router);
   isLoading: boolean = false;
+  isPageLoading: boolean = true;
   profileForm!: FormGroup;
   fb = inject(FormBuilder);
   imageUrl: string | ArrayBuffer | null = null;
@@ -25,10 +27,13 @@ export class MyProfileComponent implements OnInit {
   selectedFile: any;
   uploadedImageUrl: any;
   uploadedImagePublicId!: string;
-  isPasswordsMatching: boolean = true;
+  isPasswordsMatching: boolean = false;
+  isImageLoading: boolean = false;
+  toastrService = inject(ToastrService);
   cloudinaryPreset = 'avatar';
+  DEFAULT_PROFILE_IMAGE = '../../assets/images/profile-user.png';
   
-  constructor() {
+  constructor(private _toastr: ToastrService) {
 
   }
 
@@ -55,9 +60,13 @@ export class MyProfileComponent implements OnInit {
     this.authService.me().subscribe({
       next: (response: any) => {
         this.user = response.data;
-        if(this.user.avatar) this.uploadedImageUrl = this.user.avatar;
-        console.log(this.user)
+        if(this.user.avatar == 'false' || !this.user.avatar) {
+          this.uploadedImageUrl = this.DEFAULT_PROFILE_IMAGE;
+        } else {
+          this.uploadedImageUrl = this.user.avatar;
+        }
         this.buildForm();
+        this.isPageLoading = false;
       }, error: (error: any) => {
 
       }
@@ -70,7 +79,6 @@ export class MyProfileComponent implements OnInit {
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
-    console.log('selectedFile:', this.selectedFile)
     if(this.selectedFile) this.onUpload();
   }
 
@@ -88,10 +96,10 @@ export class MyProfileComponent implements OnInit {
     });
 
     const response = await res.json();
-    console.log('Delete Response:', response);
 }
 
   async onUpload() {
+    this.isImageLoading = true;
     const formData = new FormData();
     formData.append('file', this.selectedFile/*, this.selectedFile.name*/);
     formData.append('upload_preset', this.cloudinaryPreset);
@@ -103,28 +111,34 @@ export class MyProfileComponent implements OnInit {
 
     const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dza3ed8yw/image/upload';
      // Send the file to Cloudinary
-     console.log('formData:', formData)
      const res = await fetch(cloudinaryUrl, {method: 'POST', body: formData});
      const cloudinaryImageUrl = await res.json();
      this.uploadedImageUrl = cloudinaryImageUrl.secure_url.replace('/upload/', '/upload/w_125,h_125,c_fill/');
      this.uploadedImagePublicId = cloudinaryImageUrl.public_id;
-     console.log('uploadedImageURL:', this.uploadedImageUrl);
+     this.isPasswordsMatching = true;
+     this.isImageLoading = false;
   }
 
   isBothPasswordsMatching() {
     if(this.profileForm.controls['password'].dirty && this.profileForm.controls['confirmPassword'].dirty && 
       this.profileForm.controls['password'].value != this.profileForm.controls['confirmPassword'].value) {
         this.isPasswordsMatching = false;
-   } else {
-     this.isPasswordsMatching = true;
-   }
+    } else if(this.profileForm.controls['password'].dirty && this.profileForm.controls['confirmPassword'].dirty && 
+      this.profileForm.controls['password'].value == this.profileForm.controls['confirmPassword'].value) {
+      this.isPasswordsMatching = true;
+    }
   }
 
   onUpdate() {
-    let query: Object = { userId: this.user._id, avatar: this.uploadedImageUrl };
+    this.isLoading = true;
+    let query: Object = { userId: this.user._id, avatar: this.uploadedImageUrl, password: this.profileForm.controls['password'].value };
     this.authService.updateAvatar(query).subscribe({
       next: (response: any) => {
+        this.isLoading = false;
         this.user = response.data;
+        this._toastr.success('Your profile was updated successfully!', 'Success', {
+          toastClass: 'custom-toast', // Add a custom class
+        });
         this.buildForm();
       }, error: (error: any) => {
 
@@ -133,12 +147,12 @@ export class MyProfileComponent implements OnInit {
   }
 
   onCancel() {
-    console.log(this.selectedFile)
     if(this.selectedFile) {
-      this.uploadedImageUrl = false;
+      this.uploadedImageUrl = '';
       this.onDeleteCloudinaryImage();
     }
     this.profileForm.controls['password'].setValue('');
     this.profileForm.controls['confirmPassword'].setValue('');
+    this.isPasswordsMatching = false;
   }
 }

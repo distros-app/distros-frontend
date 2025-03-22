@@ -54,6 +54,8 @@ export class CreateNewCampaignComponent implements OnInit {
   campaignDetails: string = '';
   isNoClients!: boolean;
   isUpdate!: boolean;
+  isOneTimePayment!: boolean;
+  isMonthlyPayment!: boolean;
   query: any = {
     userId: ''
   }
@@ -98,32 +100,49 @@ export class CreateNewCampaignComponent implements OnInit {
       clientName: [!this.isUpdate || (this.isUpdate && this.campaign.profilePic) ? '' : this.campaign.clientName, []], //fix the manual user field logic on update campaign screen
       profilePic: [!this.isUpdate ? '' : this.campaign.profilePic, []],
       compensation: [!this.isUpdate ? '' : this.campaign.compensation, [Validators.required]],
-      duration: [!this.isUpdate ? '' : this.campaign.compensationDuration, [Validators.required]],
+      compensationDuration: [!this.isUpdate ? '' : this.campaign.compensationDuration, [Validators.required]],
       isEndDate: [!this.isUpdate ? false : this.campaign.isEndDate, [Validators.required]],
       startDate: [!this.isUpdate ? '' : this.campaign.startDate, [Validators.required]],
       endDate: [!this.isUpdate ? '' : this.campaign.endDate, []],
       details: [!this.isUpdate ? '' : this.campaign.details, []],
       status: [!this.isUpdate ? '' : this.campaign.status, [Validators.required]]
     });
+
+    if(this.isUpdate) {
+      if(this.campaignForm.controls['compensationDuration'].value == 'One-Time Payment') {
+        if(this.oneTimePaymentRadioButton) {
+          this.oneTimePaymentRadioButton.checked = true;
+        }
+      } else if(this.campaignForm.controls['compensationDuration'].value == 'Per Month') {
+        if(this.perMonthRadioButton) {
+          this.perMonthRadioButton.checked = true;
+        }
+      }
+
+      if(this.endDateRadioButton) {
+        this.endDateRadioButton.checked = this.campaignForm.controls['isEndDate'].value;
+        this.isEndDateRadioChecked = this.campaignForm.controls['isEndDate'].value;
+      }
+    }
   }
 
   dropdownSelected(menu: string, item: any) {
       let sortItem = _.clone(item.name);
-      console.log('sortItem:', sortItem);
       //document.getElementById(menu)!.innerHTML = sortItem.length > 17 ? sortItem.slice(0, 17) + '...' : sortItem;
-  
-      switch(menu) {
-        case 'client':
-          this.query.platform = item;
-          this.selectedClient = item;
-          this.campaignForm.controls['clientName'].setValue(null);
-          break;
-        case 'status':
-          this.statusDropdownSelected = item.name;
-          this.campaignForm.controls['status'].setValue(this.statusDropdownSelected);
-          break;
-        default:
-          break;
+      if(sortItem != 'No influencers have been added to a list yet') {
+        switch(menu) {
+          case 'client':
+            this.query.platform = item;
+            this.selectedClient = item;
+            this.campaignForm.controls['clientName'].setValue(null);
+            break;
+          case 'status':
+            this.statusDropdownSelected = item.name;
+            this.campaignForm.controls['status'].setValue(this.statusDropdownSelected);
+            break;
+          default:
+            break;
+        }
       }
   }
 
@@ -147,8 +166,7 @@ export class CreateNewCampaignComponent implements OnInit {
       if(response) {
         this.influencerLists = response.data;
       }
-
-      if(!this.influencerLists.length) {
+      if(!this.influencerLists?.length) {
         this.isNoClients = true;
         this.clients.push({name: 'No influencers have been added to a list yet'});
       } else {
@@ -170,8 +188,7 @@ export class CreateNewCampaignComponent implements OnInit {
 
   getInfluencerFromAllLists() {
     for(let list of this.influencerLists) {
-      console.log(this.influencerLists)
-      for(let influencer of list.influencers) {
+      for(let influencer of list?.influencers) {
         if(!this.clients.some(existing => existing._id === influencer._id)) {
           this.clients.push(influencer);
         }
@@ -192,13 +209,13 @@ export class CreateNewCampaignComponent implements OnInit {
   oneTimePaymentRadioChange() {
     this.isOneTimePaymentRadioButton = !this.isOneTimePaymentRadioButton;
     this.oneTimePaymentRadioButton.checked = this.isOneTimePaymentRadioButton;
-    this.campaignForm.controls['duration'].setValue('One-Time Payment');
+    this.campaignForm.controls['compensationDuration'].setValue('One-Time Payment');
   }
 
   perMonthRadioChange() {
     this.isPerMonthRadioButton = !this.isPerMonthRadioButton;
     this.perMonthRadioButton.checked = this.isPerMonthRadioButton;
-    this.campaignForm.controls['duration'].setValue('Per Month');
+    this.campaignForm.controls['compensationDuration'].setValue('Per Month');
   }
 
   endDateRadioChange() {

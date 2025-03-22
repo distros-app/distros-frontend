@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 import { NgIf } from '@angular/common';
+import AES from 'crypto-js/aes';
+import Utf8 from 'crypto-js/enc-utf8';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +20,7 @@ export class LoginComponent implements OnInit {
   isUserNotFound: boolean = false;
   isLoading: boolean = false;
   rememberMe: boolean = false;
+  private secretKey = 'your-strong-secret-key';
   
 
   constructor(private fb: FormBuilder) {
@@ -32,10 +35,11 @@ export class LoginComponent implements OnInit {
     const savedCredentials = localStorage.getItem('savedCredentials');
     if (savedCredentials) {
       this.rememberMe = true;
-      const { email, password } = JSON.parse(savedCredentials);
+      const parsedData = JSON.parse(savedCredentials);
+      const decryptedPassword = AES.decrypt(parsedData.password, this.secretKey).toString(Utf8);
       this.form.patchValue({
-        email,
-        password,
+        email: parsedData.email,
+        password: decryptedPassword,
         rememberMe: true // Set 'rememberMe' to true if credentials are found
       });
     }
@@ -53,9 +57,10 @@ export class LoginComponent implements OnInit {
           // Check if "Remember Me" is checked
           this.form.controls['rememberMe'].setValue(this.rememberMe);
           if (this.form.value.rememberMe) {
+            const encryptedPassword = AES.encrypt(this.form.value.password, this.secretKey).toString();
             localStorage.setItem('savedCredentials', JSON.stringify({
               email: this.form.value.email,
-              password: this.form.value.password
+              password: encryptedPassword
             }));
           } else {
             localStorage.removeItem('savedCredentials');

@@ -236,14 +236,30 @@ h5 {
 }
 
 .empty-list-img {
-    margin-left: 6.5rem;
+    margin-left: 7rem !important;
  }
 
 .empty-list-btn {
-    width: 175px !important;
-    max-width: 175px !important;
+    min-width: 185px !important;
+    width: 185px !important;
+    max-width: 185px !important;
     margin-top: 2.5rem !important;
     margin-left: 5.5rem !important;
+    transition: 1s !important;
+    background-color: black !important;
+    color: white !important;
+    border-color: #12e19f !important;
+
+    &:hover {
+        transform: scale(1.1) !important;
+        background-color: black !important;
+        color: #12e19f !important;
+        border-color: #12e19f !important;
+        box-shadow: 0 0 15px #12e19f !important;
+        min-width: 185px !important;
+        width: 185px !important;
+        max-width: 185px !important;
+    }
 }
 
 .empty-influencers {

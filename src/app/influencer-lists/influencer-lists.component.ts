@@ -37,6 +37,7 @@ export class InfluencerListsComponent implements OnInit {
   influencersInSelectedList: Array<any> = [];
   hasMoreData: boolean = true;
   isPageLoading: boolean = true;
+  isMoreLoading: boolean = false;
   query: any = {
     page: 1,
     limit: 10,
@@ -99,7 +100,8 @@ export class InfluencerListsComponent implements OnInit {
     const { scrollTop, scrollHeight, clientHeight } = event.target;
 
     // Check if the user has scrolled to the bottom
-    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && this.hasMoreData) {
+    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && !this.isPageLoading && this.hasMoreData) {
+      this.isMoreLoading = true;
       this.fetchMyInfluencerLists();
     }
   }
@@ -123,7 +125,8 @@ export class InfluencerListsComponent implements OnInit {
       .subscribe((result: any) => {
         self.dialogRef = null;
         if (result) {
-          this.fetchMyInfluencerLists();
+          this.isLoading = true;
+          this.fetchMyInfluencerLists(true);
         }
       });
   }
@@ -147,6 +150,7 @@ export class InfluencerListsComponent implements OnInit {
         .subscribe((result: any) => {
           self.dialogRef = null;
           if (result) {
+            this.isLoading = true;
             this._toastr.success('Saved Successfully', 'Success');
           }
         });
@@ -167,6 +171,7 @@ export class InfluencerListsComponent implements OnInit {
           this.influencerListsData = _.cloneDeep(this.influencerLists);
           this.calculateTotalInfluencers();
           this.isLoading = false;
+          this.isMoreLoading = false;
           this.hasMoreData = (response.data.length == this.query.limit);
           this.query.page++;
           this.isPageLoading = false;
@@ -236,8 +241,8 @@ export class InfluencerListsComponent implements OnInit {
       .subscribe((result: any) => {
         self.dialogRef = null;
         if (result) {
-          //this.fetchMyInfluencerLists();
-          this.influencerLists.push(result);  
+          this.isLoading = true;
+          this.fetchMyInfluencerLists(true);
         }
       });
   }
@@ -264,7 +269,8 @@ export class InfluencerListsComponent implements OnInit {
       .subscribe((result: any) => {
         self.dialogRef = null;
         if (result) {
-          this.fetchMyInfluencerLists();
+          this.isLoading = true;
+          this.fetchMyInfluencerLists(true);
         }
       });
   }

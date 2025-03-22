@@ -107,7 +107,7 @@ h1 {
 
 .form-outline i {
   position: absolute;
-  top: 30%;
+  top: 28%;
   right: 3rem;
   transform: translateY(-50%);
   pointer-events: none;
@@ -182,13 +182,19 @@ a.dropdown-item {
   color: black !important;
   margin-left: 2em !important;
   border: 1px solid black !important;
+  min-width: 175px !important;
   transition: 1s !important;
+  width: 175px !important;
+  max-width: 175px !important;
   
   &:hover {
     border: 1px solid #12e19f !important;
     box-shadow: 0 0 15px #12e19f !important;
     color: white !important;
     transform: scale(1.1) !important;
+    min-width: 175px !important;
+    width: 175px !important;
+    max-width: 175px !important;
   }
 }
 
@@ -471,7 +477,7 @@ th {
 
 ::ng-deep .custom-toast {
   background-color: black !important; /* Custom background */
-  color: white !important;             /* Custom text color */
+  color: #12e19f !important;             /* Custom text color */
   border: 1px solid #12e19f !important;
   box-shadow: 0 0 15px #12e19f !important;
   height: 80px !important;
@@ -506,17 +512,31 @@ th {
 }
 
 .more-filter-button {
-  color: white;
-  border-color: gray;
+  margin-top: 10px !important;
+  color: white !important;
+  border-color: gray !important;
+  border: 1px solid gray !important;
+  border-radius: 6px !important;
   background-color: black !important;
-  min-width: 150 !important;
+  min-width: 150px !important;
   width: 150px !important;
   max-width: 150px !important;
+  padding: 12px 20px 13px !important;
   
   &:hover {
-    min-width: 150 !important;
+    margin-top: 10px !important;
+    min-width: 150px !important;
+    border-radius: 6px !important;
     width: 150px !important;
     max-width: 150px !important;
     box-shadow: 0 0 15px gray !important;
+    border-color: gray !important;
+    border: 1px solid gray !important;
+    padding: 12px 20px 13px !important;
   }
+  
+}
+
+.more-filters-title {
+  font-weight: 500 !important;
 }

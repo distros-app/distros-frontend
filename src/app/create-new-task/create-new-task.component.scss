@@ -109,8 +109,9 @@ hr {
     background-color: black !important;
     color: white !important;
     border-color: red !important;
-    width: 150px !important;
-    min-width: 150px !important;
+    width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
     margin-right: 15px;
     transition: 1s;
     
@@ -120,6 +121,9 @@ hr {
         box-shadow: 0 0 15px red !important;
         transform: scale(1.1);
         color: red !important;
+        width: 170px !important;
+        min-width: 170px !important;
+        max-width: 170px !important;
     }
   }
 
@@ -127,8 +131,9 @@ hr {
     background-color: black !important;
     color: white !important; 
     border-color: #12e19f !important;
-    width: 150px !important;
-    min-width: 150px !important;
+    width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
     transition: 1s !important;
     
     &:hover {
@@ -137,6 +142,9 @@ hr {
         transform: scale(1.1) !important;
         box-shadow: 0 0 15px #12e19f !important;
         cursor: pointer !important;
+        width: 170px !important;
+        min-width: 170px !important;
+        max-width: 170px !important;
     }
   }
 

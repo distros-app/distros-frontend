@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit, ViewChild, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 //import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import * as _ from 'lodash';
 import { ActionsService } from '../actions/actions.service';
 import { Editor, NgxEditorModule } from 'ngx-editor';
+import { ToastrService } from 'ngx-toastr';
 
 interface UploadResponse {
   imageUrl: string; // Adjust this to match your API response structure
@@ -37,6 +38,7 @@ export class ReportBugOrRequestFeatureComponent implements OnInit {
   isLoading: boolean = false;
   isReportBug!: boolean;
   influencerEmails!: Array<string>;
+  toastrService = inject(ToastrService);
   editorConfig: /*AngularEditorConfig*/any = {
     editable: true,
     spellcheck: true,
@@ -70,7 +72,7 @@ export class ReportBugOrRequestFeatureComponent implements OnInit {
   };
 
   constructor(private dialogRef: MatDialogRef<any>, /*private angularEditorModule: AngularEditorModule, */
-              private fb: FormBuilder, private _ActionsService: ActionsService) {
+              private fb: FormBuilder, private _ActionsService: ActionsService, private _toastr: ToastrService) {
   }
 
   ngOnInit() {
@@ -81,14 +83,13 @@ export class ReportBugOrRequestFeatureComponent implements OnInit {
 
   buildForm() {
     this.editorForm = this.fb.group({
-      userId: [this.userId, [Validators.required]],
+      user: [this.userId, [Validators.required]],
       noteTitle: ['', [Validators.required]],
       editorContent: ['', [Validators.required]], // Initialize with empty or default value
     });
   }
 
   isFormValid() {
-    console.log(this.editorForm)
     if(this.editorForm.valid && this.editorForm.controls['editorContent'].value !== "<p></p>") {
       return true;
     }
@@ -184,22 +185,30 @@ export class ReportBugOrRequestFeatureComponent implements OnInit {
     // Capture design updates
   }
 
-  onCreateNote() {
+  onSend() {
     this.isLoading = true;
     const htmlContent = this.editorForm.get('editorContent')?.value; // Extract HTML content
-    console.log('HTML Content:', htmlContent);
 
     if(this.editorForm.valid) {
-      this._ActionsService.createNote(this.editorForm.value).subscribe({
+      this.isLoading = true;
+
+      const action = this.isReportBug ? this._ActionsService.sendBug : this._ActionsService.sendFeatureSuggestion;
+      action.call(this._ActionsService, this.editorForm.value).subscribe({
         next: (response: any) => {
           setTimeout(() => {
-            if(response) {
+            if (response) {
+              this._toastr.success('Your email was sent successfully!', 'Success', {
+                toastClass: 'custom-toast',
+              });
               this.dialog.close(true);
             }
             this.isLoading = false;
-          }, 500)
+          }, 500);
         },
-        error: (error: Error) => {
+        error: () => {
+          this._toastr.success('Sorry, your email could not be sent', 'Error', {
+            toastClass: 'custom-toast-error',
+          });
           this.isLoading = false;
         }
       });

@@ -7,15 +7,55 @@
             <span class="file-upload-title">Update Existing Influencers in DB:</span>
         </div>
         <div>
-            <input (change)="onFileSelected($event)" #fileInput type="file">
+            <input (change)="onFileSelected($event, 'Update DB')" #fileInput type="file">
         </div>
     </div>
     <div class="button-container add-new-influencers">
         <div>
-            <span class="file-upload-title">Add New Influencers to DB:</span>
+            <span class="file-upload-title">Extract Urls for Apify:</span>
         </div>
         <div>
-            <input (change)="onFileSelected($event)" #fileInput type="file">
+            <input (change)="extractUsernames($event)" #fileInput type="file">
+        </div>
+    </div>
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Add New Dating Coaches to DB:</span>
+        </div>
+        <div>
+            <input (change)="onFileSelected($event, 'Dating')"  #fileInput type="file">
+        </div>
+    </div>
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Add New Fitness Coaches to DB:</span>
+        </div>
+        <div>
+            <input (change)="onFileSelected($event, 'Fitness')"  #fileInput type="file">
+        </div>
+    </div>
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Add New Real Estate Coaches to DB:</span>
+        </div>
+        <div>
+            <input (change)="onFileSelected($event, 'Real Estate')"  #fileInput type="file">
+        </div>
+    </div>
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Add New Health & Wellness Coaches to DB:</span>
+        </div>
+        <div>
+            <input (change)="onFileSelected($event, 'Health & Wellness')"  #fileInput type="file">
+        </div>
+    </div>
+    <div class="button-container add-new-influencers">
+        <div>
+            <span class="file-upload-title">Add New Sales Coaches to DB:</span>
+        </div>
+        <div>
+            <input (change)="onFileSelected($event, 'Sales')"  #fileInput type="file">
         </div>
     </div>
 

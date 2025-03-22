@@ -55,13 +55,13 @@ export class AdminComponent implements OnInit {
   }
 
   // Triggered when the user selects a file
-  onFileSelected(event: any) {
+  onFileSelected(event: any, category: string) {
     this.selectedFile = event.target.files[0]; // Get the selected file
     if (this.selectedFile) {
       const reader = new FileReader(); // Create a FileReader to read file contents
       reader.onload = () => {
         const csvContent = reader.result as string; // Read file content as a string
-        this.parseCSV(csvContent); // Call parseCSV with the CSV content
+        this.parseCSV(csvContent, category); // Call parseCSV with the CSV content
       };
       reader.readAsText(this.selectedFile); // Read the file as text
     }
@@ -73,9 +73,10 @@ export class AdminComponent implements OnInit {
     const jsonParsed: any = await this.readFile(this.selectedFile);
     let excelForm: any = [];
     let i = 0;
+
     for(let row of jsonParsed) {
       const form = {
-        username: this.extractUsername(row['IG']),
+        username: this.extractUsername(row['Profile link']),
       };
       
       if(form.username) excelForm.push(form);
@@ -131,40 +132,55 @@ extractUsername(url: any) {
   }
 }
 
-  async testImportFile() {
+  async testImportFile(category: string) {
     if(this.selectedFile) {
       this.isLoading = true;
-      this._AdminService.testImportFile(this.parsedData).subscribe((response: any) => {
-        if(response) {
-          this.isLoading = false;
-        } else {
-          this.isLoading = false;
-        }
-      });
+      if(category !== 'Update DB') {
+        this._AdminService.testImportFile({data: this.parsedData, category: category}).subscribe((response: any) => {
+          if(response) {
+            this.isLoading = false;
+          } else {
+            this.isLoading = false;
+          }
+        });
+      } else {
+
+      }
     }
   }
 
-  readFile(file: any) {
-    return new Promise((resolve) => {
+  readFile(file: File): Promise<any> {
+    return new Promise((resolve, reject) => {
       const reader = new FileReader();
+  
       reader.onload = () => {
-        const text = reader.result;
-        const json = this.csvToJSON(text);
-        return resolve(json);
+        if (typeof reader.result === "string") {
+          try {
+            const json = this.csvToJSON(reader.result);
+            resolve(json);
+          } catch (error: any) {
+            reject(new Error("Error parsing CSV to JSON: " + error.message));
+          }
+        } else {
+          reject(new Error("FileReader result is not a string"));
+        }
       };
+  
+      reader.onerror = () => reject(new Error("Error reading file"));
+      
       reader.readAsText(file);
     });
   }
+  
 
     // Parses the CSV content using PapaParse
-    parseCSV(csvData: string) {
+    parseCSV(csvData: string, category: string) {
       this.papa.parse(csvData, {
         header: true, // Use the first row as headers
         skipEmptyLines: true, // Skip empty lines
         complete: async(result: any) => {
           this.parsedData = result.data; // Save the parsed data
-          console.log('Parsed Data:', this.parsedData); // Log the data for debugging
-          await this.testImportFile();
+          await this.testImportFile(category);
         },
         error: (error: any) => {
           console.error('Error parsing CSV:', error); // Log errors if any

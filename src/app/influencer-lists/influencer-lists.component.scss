@@ -151,7 +151,7 @@ img {
 
 h5 {
     color: #12e19f;
-    margin: 0 0 0 8px !important;
+    margin: 0 0 10px 8px !important;
     font-size: 18px;
     font-weight: bold;
 }
@@ -169,14 +169,29 @@ h5 {
 
 .empty-list-img {
     margin-left: 5.25em;
-    margin-bottom: 15px;
+    margin-bottom: 35px;
  }
 
 .empty-list-btn {
     margin-top: 2.5rem !important;
-    margin-left: 5rem !important;
-    width: 140px !important;
-    min-width: 140px !important;
+    margin-left: 4rem !important;
+    width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
+    background-color: black !important;
+    color: white !important;
+    border-color: #12e19f !important;
+    transition: 1s !important;
+
+    &:hover {
+        width: 170px !important;
+        min-width: 170px !important;
+        max-width: 170px !important;
+        background-color: black !important;
+        border-color: #12e19f !important;
+        color: #12e19f !important;
+        transform: scale(1.1) !important;
+    }
 }
 
 .empty-influencers-title {
@@ -191,6 +206,7 @@ h5 {
 
 .empty-influencers-img {
     margin-left: 10rem;
+    margin-bottom: 30px;
  }
 
 .empty-influencers-btn {

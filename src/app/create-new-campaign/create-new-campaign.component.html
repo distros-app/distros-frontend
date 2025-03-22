@@ -30,7 +30,7 @@
 
                   <div class="dropdown-menu" aria-labelledby="list">
                       <div *ngFor="let client of clients" class="clients-container" (click)="dropdownSelected('client', client)">
-                        <div>
+                        <div *ngIf="client.profilePic?.secure_url">
                             <img crossorigin='anonymous' [src]="client.profilePic.secure_url" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img"> 
                         </div>
                         <div>
@@ -65,7 +65,7 @@
                     <div class="start-date-container">
                         <div class="date start-date">
                             <mat-form-field>
-                                <mat-label>Start Date</mat-label>
+                                <mat-label>Start Date*</mat-label>
                                 <input matInput [matDatepicker]="picker" formControlName="startDate" (dateChange)="updateStartDate($event)"/>
                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                 <mat-datepicker #picker></mat-datepicker>

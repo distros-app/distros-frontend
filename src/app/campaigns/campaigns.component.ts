@@ -31,6 +31,7 @@ export class CampaignsComponent implements OnInit {
   isPageLoading: boolean = true;
   hasMoreData: boolean = true;
   isListSelected: boolean = false;
+  isMoreLoading: boolean = false;
   campaignsExist!: boolean;
   campaigns: Array<any> = [];
   campaignStatuses: Array<any> = [{name: 'Pending'}, {name: 'Active'}, {name: 'Paused'}, {name: 'Cancelled'}];
@@ -73,7 +74,8 @@ export class CampaignsComponent implements OnInit {
     const { scrollTop, scrollHeight, clientHeight } = event.target;
 
     // Check if the user has scrolled to the bottom
-    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && this.hasMoreData) {
+    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && !this.isPageLoading && this.hasMoreData) {
+      this.isMoreLoading = true;
       this.fetchMyCampaigns();
     }
   }
@@ -87,14 +89,16 @@ export class CampaignsComponent implements OnInit {
     this._CampaignsService.fetchMyCampaigns(this.query).subscribe((response: any) => {
       if(response) {
         this.campaigns = _.concat(response.data, this.campaigns);
-        this.campaignsExist = (this.campaigns.length || !this.isPageLoading) ? true : false;
+        this.campaignsExist = this.campaigns.length ? true : false;
         this.isLoading = false;
         this.isPageLoading = false;
+        this.isMoreLoading = false;
         this.hasMoreData = (response.data.length == this.query.limit);
       } else {
         this.isLoading = false;
         this.isPageLoading = false;
         this.hasMoreData = false;
+        this.isMoreLoading = false;
       }
     });
   }
@@ -124,6 +128,7 @@ export class CampaignsComponent implements OnInit {
       .subscribe((response: any) => {
         self.dialogRef = null;
         if(response) {
+          this.isLoading = true;
           this.fetchMyCampaigns(true);
         } else {
           this.isLoading = false;
@@ -152,6 +157,7 @@ export class CampaignsComponent implements OnInit {
       .subscribe((response: any) => {
         self.dialogRef = null;
         if(response) {
+          this.isLoading = true;
           this.fetchMyCampaigns(true);
         } else {
           this.isLoading = false;
@@ -180,7 +186,8 @@ export class CampaignsComponent implements OnInit {
       .subscribe((response: any) => {
         self.dialogRef = null;
         if(response) {
-          this.fetchMyCampaigns();
+          this.isLoading = true;
+          this.fetchMyCampaigns(true);
         }
       });
   }

@@ -238,13 +238,13 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5 d-flex justify-content-center">
-                        <span *ngIf="!isLoading && !this.hasMoreData" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
-                        <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status">
+                        <span *ngIf="!isMoreLoading && !this.hasMoreData" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
+                        <div *ngIf="isMoreLoading" class="spinner-border spinner-border-sm text-success" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>  
                     </div>
                 </div>
-                <div *ngIf="!isPageLoading && !tasks.length" class="empty-list-container">
+                <div *ngIf="!isPageLoading && !isLoading && !tasks.length" class="empty-list-container">
                     <div class="empty-list">
                         <div class="empty-list-img-container">
                             <svg xmlns="http://www.w3.org/2000/svg" width="150" height="250" fill="currentColor" class="bi bi-journal-check empty-list-img" viewBox="0 0 16 16">
@@ -265,7 +265,7 @@
             </div>
         </main>
         <div class="card-footer border-0 py-5 d-flex justify-content-center">
-            <div *ngIf="isPageLoading" class="spinner-border spinner-border-md text-success" role="status">
+            <div *ngIf="isPageLoading || isLoading" class="spinner-border spinner-border-md text-success" role="status">
                 <span class="sr-only">Loading...</span>
             </div>  
         </div>

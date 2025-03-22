@@ -110,20 +110,20 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5 d-flex justify-content-center">
-                        <span *ngIf="!isLoading && !this.hasMoreData" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
-                        <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status">
+                        <span *ngIf="!isMoreLoading && !this.hasMoreData" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
+                        <div *ngIf="isMoreLoading" class="spinner-border spinner-border-sm text-success" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>  
                     </div>
                 </div>
-                <div *ngIf="(!isPageLoading && !influencerListsData?.length)" class="empty-list-container">
+                <div *ngIf="(!isPageLoading && !isLoading && !influencerListsData?.length)" class="empty-list-container">
                     <div class="empty-list">
                         <img class="empty-list-img" src="../../assets/images/list.png" />
                         <h5>You haven't created any lists yet</h5>
                         <span class="empty-list-title">Create a New List to get started</span>
                         <div>
                             <button (click)="openCreateNewListModal()" [disabled]="isPageLoading" class="btn btn-secondary results-button empty-list-btn" type="button" role="button">
-                                New List
+                                <i class="bi bi-folder-plus icon-button"></i> New List
                             </button>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
             </div>
         </main>
         <div class="card-footer border-0 py-5 d-flex justify-content-center">
-            <div *ngIf="isPageLoading" class="spinner-border spinner-border-md text-success" role="status">
+            <div *ngIf="isPageLoading || isLoading" class="spinner-border spinner-border-md text-success" role="status">
                 <span class="sr-only">Loading...</span>
             </div>  
         </div>

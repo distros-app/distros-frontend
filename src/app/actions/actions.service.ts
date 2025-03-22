@@ -19,6 +19,17 @@ export class ActionsService {
     );
   }
 
+  sendFeatureSuggestion(payload: RegisterPayLoad) {
+    return this._http.post<ApiResponse<any>>(`${ApiEndpoint.Actions.FeatureSuggestion}`,
+        payload
+    );
+  }
+
+  sendBug(payload: RegisterPayLoad) {
+    return this._http.post<ApiResponse<any>>(`${ApiEndpoint.Actions.ReportBug}`,
+        payload
+    );
+  }
 
   toQueryString(paramsObject: any): string {
     let result: string = '';

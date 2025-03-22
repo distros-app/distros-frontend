@@ -75,11 +75,21 @@ main {
 .empty-list-btn {
     color: white;
     border-color: #12e19f !important;
-    background-color: #12e19f  !important;
+    background-color: black !important;
     margin-left: 20px;
+    min-width: 170px !important;
+    width: 170px !important;
+    max-width: 170px !important;
+    transition: 1s !important;
     
     &:hover {
       box-shadow: 0 0 15px #12e19f !important;
+      border-color: #12e19f !important;
+      background-color: black !important;
+      min-width: 170px !important;
+      width: 170px !important;
+      max-width: 170px !important;
+      transform: scale(1.1) !important;
     }
 }
 
@@ -149,7 +159,7 @@ h5 {
 }
 
 .empty-list-title {
-   margin-left: 2rem;
+   margin-left: 3rem !important;
    color: #12e19f;
 }
 
@@ -205,9 +215,9 @@ h5 {
     width: 30px;
 }
 
-.empty-list-img-container {
-  margin-left: 1rem;
-  margin-bottom: -2rem;
+::ng-deep .empty-list-img-container {
+  margin-left: 2rem !important;
+  margin-bottom: -2rem !important;
 }
 
 .dropdown {
@@ -653,4 +663,18 @@ h5 {
     color: black !important;
     background-color: #12e19f !important;
     cursor: pointer !important;
+}
+
+::ng-deep div.NgxEditor__Content {
+    height: 42vh !important;
+    background-color: black !important;
+    color: white !important;
+    border: 1px solid #12e19f !important;
+}
+
+::ng-deep div.NgxEditor__Content:focus {
+    background-color: black !important;
+    color: white !important;
+    border: 2px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
 }

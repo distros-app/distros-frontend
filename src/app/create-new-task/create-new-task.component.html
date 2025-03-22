@@ -12,7 +12,7 @@
         <form [formGroup]="toDoForm">
             <div>
                 <div class="input-box">
-                    <input class="form-control" formControlName="name" type="text" placeholder="Title*">
+                    <input class="form-control" formControlName="title" type="text" placeholder="Title*">
                 </div>
             </div>
             <div data-mdb-input-init class="form-outline mb-1 description-field">
@@ -43,7 +43,7 @@
                     <div class="time">
                         <mat-form-field class="time-field">
                             <mat-label>Time</mat-label>
-                            <input matInput placeholder="HH:mm" formControlName="time" type="time" (ngModelChange)="onTimeChange($event)"/>
+                            <input matInput placeholder="HH:mm" formControlName="dueDateTime" type="time" (ngModelChange)="onTimeChange($event)"/>
                         </mat-form-field>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
         </div>
         <div class="flag-section">
             <div class="flag" (click)="onFlagTask()">
-                <p class="flag-title"><mat-slide-toggle (change)="onToggleChange($event)"labelPosition="before">Flag Task</mat-slide-toggle></p>
+                <p class="flag-title"><mat-slide-toggle (change)="onToggleChange($event)"labelPosition="before" [checked]="toDoForm.get('flagged')?.value">Flag Task</mat-slide-toggle></p>
             </div>
         </div>
     </div>

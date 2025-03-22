@@ -276,6 +276,7 @@ hr {
     justify-content: flex-end !important;
     align-items: center !important;
     margin-top: 40px !important;
+    padding: 20px !important
 }
 
 .delete-button {
@@ -295,5 +296,5 @@ hr {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important
+    color: #12e19f !important
 }

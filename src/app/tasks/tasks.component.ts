@@ -43,6 +43,7 @@ export class TasksComponent implements OnInit {
   updateId!: any;
   pageSize = 10; // Number of items to load per scroll
   hasMoreData: boolean = true;
+  isMoreLoading: boolean = false;
   
   isEditEnabled: boolean = false;
   authService = inject(AuthService);
@@ -85,7 +86,8 @@ export class TasksComponent implements OnInit {
     const { scrollTop, scrollHeight, clientHeight } = event.target;
 
     // Check if the user has scrolled to the bottom
-    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && this.hasMoreData) {
+    if (scrollTop + clientHeight >= scrollHeight -10 && !this.isLoading && !this.isPageLoading && this.hasMoreData) {
+      this.isMoreLoading = true;
       this.fetchMyTasks();
     }
   }
@@ -96,14 +98,14 @@ export class TasksComponent implements OnInit {
       this.tasks = [];
     }
 
-    this.isLoading = true;
     this._TasksService.fetchMyTasks(this.query).subscribe((response: any) => {
       if(response) {
         setTimeout(() => {
           this.tasks = _.concat(this.tasks, response.data);
           this.isLoading = false;
           this.isPageLoading = false;
-          //this.convertTaskData();
+          this.isMoreLoading = false;
+          this.convertTaskData();
           //this.sortTasks();
           this.hasMoreData = (response.data.length == this.query.limit);
           this.isLoading = false;
@@ -158,7 +160,8 @@ export class TasksComponent implements OnInit {
               self.dialogRef = null;
               this.isDeleting = true;
               if (response) {
-                this.fetchMyTasks();
+                this.isLoading = true;
+                this.fetchMyTasks(true);
               }
             });
   }
@@ -233,7 +236,8 @@ export class TasksComponent implements OnInit {
     this.query.task = task;
     this._TasksService.updateTask(this.query).subscribe((response: any) => {
       if(response) {
-        this.fetchMyTasks();
+        this.isLoading = true;
+        this.fetchMyTasks(true);
       } else {
         //error
       }
@@ -268,7 +272,8 @@ export class TasksComponent implements OnInit {
         .subscribe((result: any) => {
           self.dialogRef = null;
           if (result) {
-            this.fetchMyTasks();
+            this.isLoading = true;
+            this.fetchMyTasks(true);
           }
         });
     }
@@ -295,7 +300,8 @@ export class TasksComponent implements OnInit {
         .subscribe((result: any) => {
           self.dialogRef = null;
           if (result) {
-            this.fetchMyTasks();
+            this.isLoading = true;
+            this.fetchMyTasks(true);
           }
         });
     }
@@ -387,6 +393,7 @@ export class TasksComponent implements OnInit {
       default:
         break;
     }
+    this.isLoading = true;
     this.fetchMyTasks(true);
   }
 }

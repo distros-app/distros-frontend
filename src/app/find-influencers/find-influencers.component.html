@@ -147,7 +147,7 @@
                                           <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink2', 'Dating')">Dating Coaches</a>
                                           <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink2', 'Fitness')">Fitness Coaches</a>
                                           <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink2', 'Real Estate')">Real Estate Coaches</a>
-                                          <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink2', 'Credit Reapair')">Credit Repair Coaches</a>
+                                          <!-- <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink2', 'Credit Reapair')">Credit Repair Coaches</a> -->
                                           <a class="dropdown-item" (click)="dropdownSelected('dropdownMenuLink2', 'Health & Wellness')">Health & Wellness Coaches</a>
                                         </div>
                                     </div>
@@ -165,8 +165,13 @@
                                     </div>
                                     -->
                                     <div class="dropdown show" (click)="openMoreFiltersModal()">
-                                        <button class="btn btn-secondary more-filter-button" type="button" role="button" aria-haspopup="true" aria-expanded="false">
-                                          <span>More filters</span><span class="filter-icon"><i class="bi bi-sliders"></i></span>
+                                        <button 
+                                            class="more-filter-button" 
+                                            type="button" 
+                                            role="button" 
+                                            aria-haspopup="true" 
+                                            aria-expanded="false">
+                                          <span class="more-filters-title" >More Filters</span><span class="filter-icon"><i class="bi bi-sliders"></i></span>
                                         </button>
                                     </div>
                                     <div class="dropdown show">

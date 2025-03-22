@@ -22,6 +22,8 @@ export const ApiEndpoint = {
         CreateNote: `${apiUrl}/actions/create-note`,
         UpdateNote: `${apiUrl}/actions/update-note`,
         DeleteNote: `${apiUrl}/actions/delete-note`,
+        ReportBug: `${apiUrl}/actions/report-bug`,
+        FeatureSuggestion: `${apiUrl}/actions/feature-suggestion`
     },
     Campaigns: {
         CreateCampaign: `${apiUrl}/campaigns/create-campaign`,

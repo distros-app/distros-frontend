@@ -114,6 +114,7 @@ export class NotesComponent implements OnInit{
   }
 
   fetchMyNotes(reset: boolean = false) {
+    this.isLoading = true;
     this._NotesService.fetchMyNotes(this.query).subscribe((response: any) => {
       if(response) {
         this.notes = response.data;
@@ -191,7 +192,7 @@ export class NotesComponent implements OnInit{
       .subscribe((result: any) => {
         self.dialogRef = null;
         if (result) {
-          this.fetchMyNotes();
+          this.fetchMyNotes(true);
           //this._toastr.success('Note Created Successfully', 'Success');
         }
       });

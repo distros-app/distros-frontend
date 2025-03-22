@@ -58,11 +58,9 @@ export class CreateNewListComponent implements OnInit {
 
   fetchMyInfluencerLists() {
     this.query.userId = this.userId;
-    console.log(this.query)
     this._ListsService.fetchMyInfluencerLists(this.query).subscribe((response: any) => {
       if(response) {
         this.influencerLists = response.data;
-        console.log(this.influencerLists)
         this.getInfluencerListNames();
         this.buildForm();
       }
@@ -84,7 +82,7 @@ export class CreateNewListComponent implements OnInit {
     this._CreateListService.createNewList(this.listForm.value).subscribe((response: any) => {
       setTimeout(() => {
         if(response) {
-          this.dialog.close(response.data);
+          this.dialog.close(true);
         } else {
           this.isLoading = false;
         }

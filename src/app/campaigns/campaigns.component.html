@@ -184,20 +184,20 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5 d-flex justify-content-center">
-                        <span *ngIf="!isLoading && !hasMoreData && campaignsExist" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
-                        <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status">
+                        <span *ngIf="!isMoreLoading && !hasMoreData && campaignsExist" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
+                        <div *ngIf="isMoreLoading" class="spinner-border spinner-border-sm text-success" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>  
                     </div>
                 </div>
-                <div *ngIf="(!isPageLoading && !campaignsExist)" class="empty-list-container">
+                <div *ngIf="(!isPageLoading && !isLoading && !campaignsExist)" class="empty-list-container">
                     <div class="empty-list">
                         <img class="empty-list-img" src="../../assets/images/contract.png" />
                         <h5>You don't have any active Campaigns</h5>
                         <span class="empty-list-title">Create a new Campaign to get started</span>
                         <div>
                             <button (click)="openCreateNewCampaignModal()" [disabled]="isPageLoading" class="btn btn-secondary results-button empty-list-btn" type="button" role="button">
-                                New Campaign
+                                <i class="bi bi-pen icon-button"></i> New Campaign
                             </button>
                         </div>
                     </div>
@@ -205,7 +205,7 @@
             </div>
         </main>
         <div class="card-footer border-0 py-5 d-flex justify-content-center">
-            <div *ngIf="isPageLoading" class="spinner-border spinner-border-md text-success" role="status">
+            <div *ngIf="isPageLoading || isLoading" class="spinner-border spinner-border-md text-success" role="status">
                 <span class="sr-only">Loading...</span>
             </div>  
         </div>

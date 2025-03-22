@@ -70,13 +70,20 @@
 .empty-list-btn {
     color: white;
     border-color: #12e19f !important;
-    background-color: #12e19f  !important;
+    background-color: black  !important;
     margin-left: 25px;
-    width: 140px !important;
-    min-width: 140px !important;
+    width: 150px !important;
+    min-width: 150px !important;
+    transition: 1s;
+    padding: 12px 20px;
     
     &:hover {
+      padding: 12px 20px;
       box-shadow: 0 0 15px #12e19f !important;
+      border-color: #12e19f !important;
+      color: #12e19f !important;
+      background-color: black  !important;
+      transform: scale(1.1) !important;
     }
 }
 
@@ -165,7 +172,8 @@ h5 {
 }
 
 .empty-list-img {
-    margin-left: 3rem;
+    margin-left: 3.4vw !important;
+    margin-bottom: 25px !important;
     color: #12e19f !important;
  }
 

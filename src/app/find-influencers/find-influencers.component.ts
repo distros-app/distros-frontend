@@ -81,6 +81,8 @@ export class FindInfluencersComponent implements OnInit {
 
   ngOnInit() {
      //token=apify_api_6eUggFxip0w6sGQbbX7T0jjFctbRsF47xxJn (Apify API token)
+    this.platformDropdownSelected = 'Instagram'; //TEMPORARY (WE'LL ADD NEW PLATFORMS LATER)
+    this.query.platform = 'Instagram'; //TEMPORARY (WE'LL ADD NEW PLATFORMS LATER)
     this.me();
   }
 
@@ -95,8 +97,8 @@ export class FindInfluencersComponent implements OnInit {
           this.emailViewLimit = this.user.tempViewLimit;
         } else {
           if(this.user.subscription.type === 'FREE') this.emailViewLimit = 25;
-          if(this.user.subscription.type === 'PRO') this.emailViewLimit = 1000;
-          if(this.user.subscription.type === 'SCALE') this.emailViewLimit = 3000;
+          if(this.user.subscription.type === 'PRO') this.emailViewLimit = 500;
+          if(this.user.subscription.type === 'SCALE') this.emailViewLimit = 1500;
         }
         this.nextPeriod = this.user?.nextPaymentDate?.split(',')[0];
         this.isPageLoaded = true;
@@ -345,8 +347,13 @@ export class FindInfluencersComponent implements OnInit {
   }
 
   copyEmail(email: string) {
-    this._toastr.success('Email was copied!', 'Success', {
-      toastClass: 'custom-toast', // Add a custom class
+    navigator.clipboard.writeText(email).then(() => {
+      this._toastr.success('Email was copied!', 'Success', {
+        toastClass: 'custom-toast',
+      });
+    }).catch(err => {
+      console.error('Failed to copy email: ', err);
+      this._toastr.error('Failed to copy email!', 'Error');
     });
   }
 
@@ -355,10 +362,10 @@ export class FindInfluencersComponent implements OnInit {
   }
 
   onClearFilters() {
-    this.query.platform = '';
+    //this.query.platform = '';
     this.query.followers = '';
     this.query.category = '';
-    this.platformDropdownSelected = 'Platform';
+    //this.platformDropdownSelected = 'Platform';
     this.followersDropdownSelected  = 'Followers';
     this.categoryDropdownSelected = 'Category';
   }
