@@ -135,18 +135,45 @@ extractUsername(url: any) {
   async testImportFile(category: string) {
     if(this.selectedFile) {
       this.isLoading = true;
-      if(category !== 'Update DB') {
-        this._AdminService.testImportFile({data: this.parsedData, category: category}).subscribe((response: any) => {
-          if(response) {
-            this.isLoading = false;
-          } else {
-            this.isLoading = false;
-          }
-        });
-      } else {
-
-      }
+      this._AdminService.testImportFile({data: this.parsedData, category: category}).subscribe((response: any) => {
+        if(response) {
+          this.exportToCSV(response.possibleEmails);
+          this.isLoading = false;
+        } else {
+          this.isLoading = false;
+        }
+      });
     }
+  }
+
+  exportToCSV(emails: string[]) {
+    if (!emails.length) {
+      console.warn('No emails to export.');
+      return;
+    }
+  
+    // Define CSV header
+    let csvContent = "Emails\n";  
+  
+    // Append each email as a new row
+    emails.forEach(email => {
+      csvContent += `${email}\n`;
+    });
+  
+    // Create a Blob from the CSV content
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+  
+    // Create a temporary anchor element and trigger download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'possible_emails.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Revoke the blob URL after download
+    window.URL.revokeObjectURL(url);
   }
 
   readFile(file: File): Promise<any> {

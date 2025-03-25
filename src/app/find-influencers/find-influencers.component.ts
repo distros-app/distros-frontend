@@ -231,6 +231,8 @@ export class FindInfluencersComponent implements OnInit {
       .subscribe((result: any) => {
         self.dialogRef = null;
         if (result) {
+          this.isLoading = true;
+          this.fetchAllInfluencers(true);
         }
       });
   }

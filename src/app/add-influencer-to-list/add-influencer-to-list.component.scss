@@ -115,6 +115,7 @@ hr {
     filter: invert(1); /* Inverts colors (useful for Bootstrap btn-close) */
     z-index: 9999; /* Ensures it is on top */
     position: relative; /* Ensures z-index takes effect */
+    margin-top: 0 !important;
 }
 
 ::ng-deep .btn-close {
@@ -186,8 +187,9 @@ hr {
     background-color: black !important;
     color: white !important;
     border-color: red !important;
-    width: 150px !important;
-    min-width: 150px !important;
+    width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
     margin-right: 15px;
     transition: 1s;
     
@@ -197,6 +199,9 @@ hr {
         box-shadow: 0 0 15px red !important;
         transform: scale(1.1);
         color: red !important;
+        width: 170px !important;
+        min-width: 170px !important;
+        max-width: 170px !important;
     }
   }
 
@@ -204,8 +209,9 @@ hr {
     background-color: black !important;
     color: white;
     border-color: #12e19f !important;
-    width: 150px !important;
-    min-width: 150px !important;
+    width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
     transition: 1s;
     
     &:hover {
@@ -213,6 +219,9 @@ hr {
         color: #12e19f !important;
         transform: scale(1.1);
         box-shadow: 0 0 15px #12e19f !important;
+        width: 170px !important;
+        min-width: 170px !important;
+        max-width: 170px !important;
         cursor: pointer;
     }
   }
@@ -225,7 +234,7 @@ hr {
 }
 
 ::ng-deep .spinner-color {
-    color: white !important
+    color: #12e19f !important
 }
 
 ::ng-deep .list-container {
