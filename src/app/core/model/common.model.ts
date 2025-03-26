@@ -6,17 +6,21 @@ export interface User {
     subscriptionStartDate: any,
     nextPaymentDate: string,
     recentSearches: Array<any>,
-    recurringRevenue: number,
-    thisMonthRevenue: number,
+    thisMonthRecurringRevenue: number,
+    thisMonthTotalRevenue: number,
     influencersEmailViewed: Array<string>,
     influencersEmailViewedCount: number,
-    totalClients: number, 
-    newClients: number,
+    thisMonthTotalClients: number, 
+    thisMonthNewClients: number,
     admin: boolean,
     avatar: string,
     stripeSessionId: string;
     stripeSubscriptionId: string;
     tempViewLimit: number;
+    lastMonthRecurringRevenue: number;
+    lastMonthTotalRevenue: number;
+    lastMonthNewClients: number;
+    lastMonthTotalClients: number;
 }
 export interface LoginPayLoad {
     email: string,

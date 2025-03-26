@@ -166,6 +166,7 @@ export class CreateNewCampaignComponent implements OnInit {
       if(response) {
         this.influencerLists = response.data;
       }
+      
       if(!this.influencerLists?.length) {
         this.isNoClients = true;
         this.clients.push({name: 'No influencers have been added to a list yet'});
@@ -188,7 +189,7 @@ export class CreateNewCampaignComponent implements OnInit {
 
   getInfluencerFromAllLists() {
     for(let list of this.influencerLists) {
-      for(let influencer of list?.influencers) {
+      for (let influencer of list?.influencers ?? []) {
         if(!this.clients.some(existing => existing._id === influencer._id)) {
           this.clients.push(influencer);
         }

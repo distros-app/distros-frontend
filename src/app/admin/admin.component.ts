@@ -137,13 +137,49 @@ extractUsername(url: any) {
       this.isLoading = true;
       this._AdminService.testImportFile({data: this.parsedData, category: category}).subscribe((response: any) => {
         if(response) {
-          this.exportToCSV(response.possibleEmails);
+          if(response.possibleEmails) {
+            this.exportToCSV(response.possibleEmails);
+          }
+          
+          if(response.verifiedLeads) {
+            this.exportLeadsToCSV(response.verifiedLeads);
+          }
           this.isLoading = false;
         } else {
           this.isLoading = false;
         }
       });
     }
+  }
+
+  exportLeadsToCSV(leads: Array<any>) {
+    if (!leads.length) {
+      console.warn('No leads to export.');
+      return;
+    }
+  
+    // Define CSV header
+    let csvContent = "Leads\n";  
+  
+    // Append each email as a new row
+    leads.forEach(lead => {
+      csvContent += `${lead}\n`;
+    });
+  
+    // Create a Blob from the CSV content
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+  
+    // Create a temporary anchor element and trigger download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'growman-freelance-copywriters.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    
+    // Revoke the blob URL after download
+    window.URL.revokeObjectURL(url);
   }
 
   exportToCSV(emails: string[]) {

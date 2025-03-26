@@ -2,13 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { User } from '../core/model/common.model';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf, NgClass],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
@@ -27,6 +27,12 @@ export class DashboardComponent implements OnInit {
   thisMonthRevenueCounter: number = 0;
   newClientsCounter: number = 0;
   totalClientsCounter: number = 0;
+
+  //Analytics
+  recurringRevenueChange: number = 0;
+  totalRevenueChange: number = 0;
+  newClientsChange: number = 0;
+  totalClientsChange: number = 0;
 
   // Flags to track intervals
   isWithinTen1: boolean = false;
@@ -59,6 +65,12 @@ export class DashboardComponent implements OnInit {
           this.startClientsCounter();
           this.startMonthlyRevenueCounter();
           this.startTotalClientsCounter();
+
+          //analytics
+          this.calculateRecurringRevenueChange();
+          this.calculateTotalRevenueChange();
+          this.calculateNewClientsChange();
+          this.calculateTotalClientsChange();
         }
   
         this.checkFirstOfMonthAndCalculate();
@@ -94,12 +106,48 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  calculateNewClientsChange() {
+    if (this.user.lastMonthNewClients === 0) {
+      this.newClientsChange = this.user.thisMonthNewClients > 0 ? 100 : 0; // Avoid division by zero
+    } else {
+      let change = ((this.user.thisMonthNewClients - this.user.lastMonthNewClients) / this.user.lastMonthNewClients) * 100;
+      this.newClientsChange =  Math.round(change); // Round to the nearest whole number
+    }
+  }
+
+  calculateTotalClientsChange() {
+    if (this.user.lastMonthTotalClients === 0) {
+      this.totalClientsChange = this.user.thisMonthTotalClients > 0 ? 100 : 0; // Avoid division by zero
+    } else {
+      let change = ((this.user.thisMonthTotalClients - this.user.lastMonthTotalClients) / this.user.lastMonthTotalClients) * 100;
+      this.totalClientsChange =  Math.round(change); // Round to the nearest whole number
+    }
+  }
+
+  calculateTotalRevenueChange() {
+    if (this.user.lastMonthTotalRevenue === 0) {
+      this.totalRevenueChange = this.user.thisMonthTotalRevenue > 0 ? 100 : 0; // Avoid division by zero
+   } else {
+      let change = ((this.user.thisMonthTotalRevenue - this.user.lastMonthTotalRevenue) / this.user.lastMonthTotalRevenue) * 100;
+      this.totalRevenueChange =  Math.round(change); // Round to the nearest whole number
+   }
+  }
+
+  calculateRecurringRevenueChange() {
+    if (this.user.lastMonthRecurringRevenue === 0) {
+       this.recurringRevenueChange = this.user.thisMonthRecurringRevenue > 0 ? 100 : 0; // Avoid division by zero
+    } else {
+      let change = ((this.user.thisMonthRecurringRevenue - this.user.lastMonthRecurringRevenue) / this.user.lastMonthRecurringRevenue) * 100;
+      this.recurringRevenueChange =  Math.round(change); // Round to the nearest whole number
+    }
+  }
+
   startMonthlyRevenueCounter() {
     this.thisMonthRevenue = 0;
     this.thisMonthRevenueCounter = 0;
     this.thisMonthRevenueStop = setInterval(() => {
-      this.isWithinTen2 = ((Number(this.user?.thisMonthRevenue) - this.thisMonthRevenueCounter) <= 10) ? true : false;
-      if(this.thisMonthRevenueCounter < Number(this.user.recurringRevenue)) {
+      this.isWithinTen2 = ((Number(this.user?.thisMonthTotalRevenue) - this.thisMonthRevenueCounter) <= 10) ? true : false;
+      if(this.thisMonthRevenueCounter < Number(this.user?.thisMonthTotalRevenue)) {
         this.thisMonthRevenueCounter += this.isWithinTen2 ? 1 : 100;
         this.thisMonthRevenue = new Intl.NumberFormat('en-US', {
           style: 'currency',
@@ -115,7 +163,7 @@ export class DashboardComponent implements OnInit {
     this.totalClients = 0;
     this.totalClientsCounter = 0;
     this.totalClientsStop = setInterval(() => {
-      if(this.totalClientsCounter < Number(this.user.totalClients)) {
+      if(this.totalClientsCounter < Number(this.user?.thisMonthTotalClients)) {
         this.totalClientsCounter++;
         this.totalClients = this.totalClientsCounter;
       } else {
@@ -127,7 +175,7 @@ export class DashboardComponent implements OnInit {
   startRevenueCounter() {
     this.recurringRevenueCounter = 0;
     this.recurringRevenueStop = setInterval(() => {
-      const targetRevenue = Number(this.user?.recurringRevenue) || 0;
+      const targetRevenue = Number(this.user?.thisMonthRecurringRevenue) || 0;
       this.isWithinTen1 = (targetRevenue - this.recurringRevenueCounter) <= 10;
       
       if (this.recurringRevenueCounter < targetRevenue) {
@@ -145,7 +193,7 @@ export class DashboardComponent implements OnInit {
   startClientsCounter() {
     this.newClientsCounter = 0;
     this.newClientsStop = setInterval(() => {
-      const targetClients = Number(this.user?.newClients) || 0;
+      const targetClients = Number(this.user?.thisMonthNewClients) || 0;
       
       if (this.newClientsCounter < targetClients) {
         this.newClientsCounter++;
@@ -169,7 +217,7 @@ export class DashboardComponent implements OnInit {
       // Fetch or calculate totals for last month and this month
       this.calculateRevenueAndClients(lastMonth, currentMonth);
     } else {
-      console.log('user:', this.user);
+      
     }
   }
 
@@ -181,11 +229,11 @@ export class DashboardComponent implements OnInit {
     this.recurringRevenue = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
-    }).format(this.user?.recurringRevenue);
+    }).format(this.user?.thisMonthRecurringRevenue);
     this.thisMonthRevenue = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
-    }).format(this.user?.thisMonthRevenue);
+    }).format(this.user?.thisMonthTotalRevenue);
   }
 
   openArticle1() {
