@@ -234,6 +234,7 @@ export class CreateNewCampaignComponent implements OnInit {
     if(!this.campaignForm.controls['clientName'].value) {
       this.campaignForm.controls['clientName'].setValue(this.selectedClient.name);
     }
+    
     this._CampaignsService.createCampaign(this.campaignForm.value).subscribe((response: any) => {
       setTimeout(() => {
         if(response) {

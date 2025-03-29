@@ -219,3 +219,43 @@ h1 {
     color: #12e19f !important;
     margin-right: 3px !important;
 }
+
+  .password-icon {
+    z-index: 1000 !important;
+
+    &:hover {
+        cursor: pointer !important;
+    }
+  }
+
+  .input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-box input {
+    width: 100%;
+    padding-right: 40px; /* Ensure space for the icon */
+}
+
+.password-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.password-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.password-icon:hover svg {
+    color: #12e19f; /* Darker color on hover */
+}

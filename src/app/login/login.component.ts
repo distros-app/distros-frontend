@@ -2,14 +2,14 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import AES from 'crypto-js/aes';
 import Utf8 from 'crypto-js/enc-utf8';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, NgIf, RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, NgIf, RouterLink, NgClass],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   isUserNotFound: boolean = false;
   isLoading: boolean = false;
   rememberMe: boolean = false;
+  showPassword = false;
   private secretKey = 'your-strong-secret-key';
   
 
@@ -43,6 +44,10 @@ export class LoginComponent implements OnInit {
         rememberMe: true // Set 'rememberMe' to true if credentials are found
       });
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
   
   async onLogin() {

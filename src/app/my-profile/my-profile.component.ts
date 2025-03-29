@@ -27,8 +27,10 @@ export class MyProfileComponent implements OnInit {
   selectedFile: any;
   uploadedImageUrl: any;
   uploadedImagePublicId!: string;
-  isPasswordsMatching: boolean = false;
+  isPasswordsMatching: boolean = true;
   isImageLoading: boolean = false;
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   toastrService = inject(ToastrService);
   cloudinaryPreset = 'avatar';
   DEFAULT_PROFILE_IMAGE = '../../assets/images/profile-user.png';
@@ -48,12 +50,21 @@ export class MyProfileComponent implements OnInit {
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]]
     });
+    
     this.profileForm.controls['password'].valueChanges.subscribe(() => {
       this.isBothPasswordsMatching();
     });
     this.profileForm.controls['confirmPassword'].valueChanges.subscribe(() => {
       this.isBothPasswordsMatching();
     });
+  }
+
+  canSave() {
+    if (!this.isPasswordsMatching) return false;
+  
+    const { name, email, password, confirmPassword } = this.profileForm.controls;
+  
+    return name.dirty || email.dirty || (password.dirty && confirmPassword.dirty);
   }
 
   me() {
@@ -77,6 +88,11 @@ export class MyProfileComponent implements OnInit {
     this.isLoading = true;
   }
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    this.showConfirmPassword = this.showPassword;
+  }
+  
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
     if(this.selectedFile) this.onUpload();
@@ -131,7 +147,7 @@ export class MyProfileComponent implements OnInit {
 
   onUpdate() {
     this.isLoading = true;
-    let query: Object = { userId: this.user._id, avatar: this.uploadedImageUrl, password: this.profileForm.controls['password'].value };
+    let query: Object = { name: this.profileForm.controls['name'].value, email: this.profileForm.controls['email'].value, userId: this.user._id, avatar: this.uploadedImageUrl, password: this.profileForm.controls['password'].value };
     this.authService.updateAvatar(query).subscribe({
       next: (response: any) => {
         this.isLoading = false;
