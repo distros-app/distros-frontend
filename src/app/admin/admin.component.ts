@@ -21,6 +21,7 @@ export class AdminComponent implements OnInit {
   parsedData: any[] = [];
   csvColumns: Array<string> = ['Name', 'Username', 'Followers', 'Category'];
   selectedFile!: File;
+  isPullingEmails = false;
   payload: any = {
     data: []
   };
@@ -133,17 +134,22 @@ extractUsername(url: any) {
 }
 
   async testImportFile(category: string) {
-    if(this.selectedFile) {
+    if(this.selectedFile || this.isPullingEmails) {
       this.isLoading = true;
       this._AdminService.testImportFile({data: this.parsedData, category: category}).subscribe((response: any) => {
         if(response) {
           if(response.possibleEmails) {
             this.exportToCSV(response.possibleEmails);
           }
+
+          if(response.pulledEmails) {
+            this.exportToCSV(response.pulledEmails);
+          }
           
           if(response.verifiedLeads) {
             this.exportLeadsToCSV(response.verifiedLeads);
           }
+
           this.isLoading = false;
         } else {
           this.isLoading = false;
@@ -210,6 +216,11 @@ extractUsername(url: any) {
     
     // Revoke the blob URL after download
     window.URL.revokeObjectURL(url);
+  }
+
+  pullPossibleEmails() {
+    this.isPullingEmails = true;
+    this.testImportFile('Pull Possible Emails');
   }
 
   readFile(file: File): Promise<any> {

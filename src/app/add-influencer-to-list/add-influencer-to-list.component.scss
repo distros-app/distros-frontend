@@ -226,6 +226,13 @@ hr {
     }
   }
 
+  .dropdown-item.disabled {
+    pointer-events: none; /* Prevents clicking */
+    color: gray !important; /* Ensures gray color */
+    opacity: 0.6; /* Makes it look disabled */
+    cursor: not-allowed;
+  }
+
 .buttons-container {
     display: flex;
     align-items: center;

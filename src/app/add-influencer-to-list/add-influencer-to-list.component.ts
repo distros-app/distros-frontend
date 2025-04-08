@@ -84,15 +84,24 @@ export class AddInfluencerToListComponent implements OnInit {
     this._ListsService.fetchMyInfluencerLists(this.query).subscribe((response: any) => {
       if(response) {
         this.influencerLists = response.data;
-      }
 
-      if(!this.influencerLists.length) {
-        this.isInfluencerListEmpty = true;
-        this.influencerLists.push({name: 'No lists exist'});
-      } else {
-        this.isInfluencerListEmpty = false;
+        if(!this.influencerLists.length) {
+          this.isInfluencerListEmpty = true;
+          this.influencerLists.push({name: 'No lists exist'});
+        } else {
+          this.isInfluencerListEmpty = false;
+  
+          for (let list of this.influencerLists) {
+            for(let influencer of list.influencers) {
+              if(influencer._id == this.newInfluencer._id) {
+                list.isDisabled = true;
+                continue; 
+              }
+            }
+          }
+        }
+        this.buildForm();
       }
-      this.buildForm();
     });
   }
 

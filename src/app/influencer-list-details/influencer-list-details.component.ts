@@ -139,7 +139,6 @@ export class InfluencerListDetailsComponent {
   calculateTotalInfluencers() {
     this.totalInfluencers = 0;
     this.influencersInSelectedList = [];
-    console.log(this.influencerListsData)
     const influencers = this.influencerListsData.influencers;
 
     for(let influencer of influencers) {

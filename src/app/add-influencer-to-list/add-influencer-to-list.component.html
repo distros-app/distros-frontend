@@ -21,7 +21,13 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="list">
                   <div *ngFor="let list of influencerLists">
-                      <a class="dropdown-item" (click)="dropdownSelected('list', list)">{{ list.name }}</a>
+                    <a class="dropdown-item" 
+                    [class.disabled]="list.isDisabled"
+                    [style.color]="list.isDisabled ? 'gray' : 'black'"
+                    [title]="list.isDisabled ? 'Already added to this list' : ''"
+                    (click)="!list.isDisabled && dropdownSelected('list', list)">
+                        {{ list.name }}
+                    </a>
                   </div>
               </div>
         </div>

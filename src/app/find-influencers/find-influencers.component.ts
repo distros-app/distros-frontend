@@ -112,6 +112,13 @@ export class FindInfluencersComponent implements OnInit {
         hours = hours % 12 || 12;
         this.nextPeriodStartTime = `${hours}:${minutes} ${ampm}`;
 
+        const savedFilters = localStorage.getItem('filters');
+        if (savedFilters) {
+          const filters = JSON.parse(savedFilters);
+          this.query.excludesInfluencersInLists = filters[0].checked;
+          this.query.excludeHiddenInfluencers = filters[1].checked;
+        }
+
         this.isPageLoaded = true;
         this.isLoading = false;
       }

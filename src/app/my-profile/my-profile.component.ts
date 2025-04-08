@@ -23,6 +23,7 @@ export class MyProfileComponent implements OnInit {
   profileForm!: FormGroup;
   fb = inject(FormBuilder);
   imageUrl: string | ArrayBuffer | null = null;
+  newProfilePicUploaded: boolean = false;
   user: any;
   selectedFile: any;
   uploadedImageUrl: any;
@@ -64,7 +65,7 @@ export class MyProfileComponent implements OnInit {
   
     const { name, email, password, confirmPassword } = this.profileForm.controls;
   
-    return name.dirty || email.dirty || (password.dirty && confirmPassword.dirty);
+    return name.dirty || email.dirty || (password.dirty && confirmPassword.dirty) || this.newProfilePicUploaded;
   }
 
   me() {
@@ -95,7 +96,10 @@ export class MyProfileComponent implements OnInit {
   
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
-    if(this.selectedFile) this.onUpload();
+    if(this.selectedFile) {
+      this.onUpload();
+      this.newProfilePicUploaded = true;
+    }
   }
 
   async onDeleteCloudinaryImage() {
@@ -166,6 +170,7 @@ export class MyProfileComponent implements OnInit {
     if(this.selectedFile) {
       this.uploadedImageUrl = '';
       this.onDeleteCloudinaryImage();
+      this.newProfilePicUploaded = false;
     }
     this.profileForm.controls['password'].setValue('');
     this.profileForm.controls['confirmPassword'].setValue('');
