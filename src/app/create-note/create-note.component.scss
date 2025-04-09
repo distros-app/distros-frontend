@@ -334,3 +334,12 @@ hr {
     background-color: #12e19f !important;
     cursor: pointer !important;
 }
+
+::ng-deep .NgxEditor__Content h1,
+::ng-deep .NgxEditor__Content h2,
+::ng-deep .NgxEditor__Content h3,
+::ng-deep .NgxEditor__Content h4,
+::ng-deep .NgxEditor__Content h5,
+::ng-deep .NgxEditor__Content h6 {
+  color: white !important;
+}

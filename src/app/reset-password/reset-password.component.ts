@@ -19,6 +19,7 @@ export class ResetPasswordComponent implements OnInit {
   router = inject(Router);
   token!: string;
   isLoading: boolean = false;
+  showPassword: boolean = false;
   toastrService = inject(ToastrService);
   isPasswordsMatching: boolean = false;
 
@@ -59,6 +60,10 @@ export class ResetPasswordComponent implements OnInit {
       this.resetForm.controls['password'].value == this.resetForm.controls['confirmPassword'].value) {
       this.isPasswordsMatching = true;
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   onSubmit() {

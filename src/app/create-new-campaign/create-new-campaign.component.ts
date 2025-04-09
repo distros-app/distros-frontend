@@ -68,19 +68,6 @@ export class CreateNewCampaignComponent implements OnInit {
   ngOnInit() {
     this.isUpdate = (this.campaign && this.campaign._id);
     if(!this.isUpdate) this.triggerConfetti();
-    if(this.isUpdate) {
-      const clientInDistros = this.campaign.clientName && this.campaign.profilePic;
-      if(clientInDistros) {
-        for(let client of this.clients) {
-          if(client.name === this.campaign.clientName) {
-            this.selectedClient = client;
-          }
-        }
-      } else {
-        this.selectedClient = false;
-      }
-      this.statusDropdownSelected = this.campaign.status;
-    }
     this.dialog = this.dialogRef;
     this.me();
   }
@@ -97,6 +84,7 @@ export class CreateNewCampaignComponent implements OnInit {
     this.campaignForm = this.fb.group({
       _id: [!this.isUpdate ? '' : this.campaign._id, []],
       userId: [this.userId, [Validators.required]],
+      name: [!this.isUpdate ? '' : this.campaign.name, []],
       clientName: [!this.isUpdate || (this.isUpdate && this.campaign.profilePic) ? '' : this.campaign.clientName, []], //fix the manual user field logic on update campaign screen
       profilePic: [!this.isUpdate ? '' : this.campaign.profilePic, []],
       compensation: [!this.isUpdate ? '' : this.campaign.compensation, [Validators.required]],
@@ -110,24 +98,31 @@ export class CreateNewCampaignComponent implements OnInit {
 
     if(this.isUpdate) {
       if(this.campaignForm.controls['compensationDuration'].value == 'One-Time Payment') {
-        if(this.oneTimePaymentRadioButton) {
-          this.oneTimePaymentRadioButton.checked = true;
-        }
+        this.oneTimePaymentRadioChange();
       } else if(this.campaignForm.controls['compensationDuration'].value == 'Per Month') {
-        if(this.perMonthRadioButton) {
-          this.perMonthRadioButton.checked = true;
-        }
+        this.perMonthRadioChange();
       }
 
-      if(this.endDateRadioButton) {
-        this.endDateRadioButton.checked = this.campaignForm.controls['isEndDate'].value;
-        this.isEndDateRadioChecked = this.campaignForm.controls['isEndDate'].value;
+      if(this.campaignForm.controls['isEndDate'].value) {
+        this.endDateRadioChange();
       }
+
+      const clientInDistros = this.campaign.name && this.campaign.profilePic;
+      if(clientInDistros) {
+        for(let client of this.clients) {
+          if(client.fullName === this.campaign.name) {
+            this.selectedClient = client;
+          }
+        }
+      } else {
+        this.selectedClient = false;
+      }
+      this.statusDropdownSelected = this.campaign.status;
     }
   }
 
   dropdownSelected(menu: string, item: any) {
-      let sortItem = _.clone(item.name);
+      let sortItem = _.clone(item.fullName);
       //document.getElementById(menu)!.innerHTML = sortItem.length > 17 ? sortItem.slice(0, 17) + '...' : sortItem;
       if(sortItem != 'No influencers have been added to a list yet') {
         switch(menu) {
@@ -135,6 +130,8 @@ export class CreateNewCampaignComponent implements OnInit {
             this.query.platform = item;
             this.selectedClient = item;
             this.campaignForm.controls['clientName'].setValue(null);
+            this.campaignForm.controls['name'].setValue(item.fullName);
+            this.campaignForm.controls['profilePic'].setValue(item.profilePic);
             break;
           case 'status':
             this.statusDropdownSelected = item.name;
@@ -148,6 +145,8 @@ export class CreateNewCampaignComponent implements OnInit {
 
   onEnterClientManually() {
     this.selectedClient = null;
+    this.campaignForm.controls['name'].setValue(null);
+    this.campaignForm.controls['profilePic'].setValue(null);
   }
 
   me() {
@@ -155,7 +154,6 @@ export class CreateNewCampaignComponent implements OnInit {
       next: (response: any) => {
         this.userId = response.data._id
         this.query.userId = this.userId;
-        this.buildForm();
         this.fetchMyInfluencerLists();
       }
     });
@@ -165,17 +163,18 @@ export class CreateNewCampaignComponent implements OnInit {
     this._ListsService.fetchMyInfluencerLists(this.query).subscribe((response: any) => {
       if(response) {
         this.influencerLists = response.data;
+
+        if(!this.influencerLists?.length) {
+          this.isNoClients = true;
+          this.clients.push({fullName: 'No influencers have been added to a list yet'});
+        } else {
+          this.isNoClients = false;
+        }
+  
+        this.getInfluencerListNames();
+        this.getInfluencerFromAllLists();
+        this.buildForm();
       }
-      
-      if(!this.influencerLists?.length) {
-        this.isNoClients = true;
-        this.clients.push({name: 'No influencers have been added to a list yet'});
-      } else {
-        this.isNoClients = false;
-      }
-      this.buildForm();
-      this.getInfluencerListNames();
-      this.getInfluencerFromAllLists();
     });
   }
 
@@ -209,20 +208,17 @@ export class CreateNewCampaignComponent implements OnInit {
 
   oneTimePaymentRadioChange() {
     this.isOneTimePaymentRadioButton = !this.isOneTimePaymentRadioButton;
-    this.oneTimePaymentRadioButton.checked = this.isOneTimePaymentRadioButton;
     this.campaignForm.controls['compensationDuration'].setValue('One-Time Payment');
   }
 
   perMonthRadioChange() {
     this.isPerMonthRadioButton = !this.isPerMonthRadioButton;
-    this.perMonthRadioButton.checked = this.isPerMonthRadioButton;
     this.campaignForm.controls['compensationDuration'].setValue('Per Month');
   }
 
   endDateRadioChange() {
     this.isEndDateRadioChecked = !this.isEndDateRadioChecked;
-    this.endDateRadioButton.checked = this.isEndDateRadioChecked;
-    this.campaignForm.controls['isEndDate'].setValue(this.endDateRadioButton.checked);
+    this.campaignForm.controls['isEndDate'].setValue('1');
 
     if(!this.isEndDateRadioChecked) {
       this.campaignForm.controls['endDate'].setValue(null);
@@ -231,8 +227,8 @@ export class CreateNewCampaignComponent implements OnInit {
 
   onSave() {
     this.isLoading = true;
-    if(!this.campaignForm.controls['clientName'].value) {
-      this.campaignForm.controls['clientName'].setValue(this.selectedClient.name);
+    if(!this.campaignForm.controls['name'].value && this.selectedClient) {
+      this.campaignForm.controls['name'].setValue(this.selectedClient.fullName);
     }
     
     this._CampaignsService.createCampaign(this.campaignForm.value).subscribe((response: any) => {
@@ -249,6 +245,7 @@ export class CreateNewCampaignComponent implements OnInit {
 
   onUpdate() {
     this.isLoading = true;
+
     this._CampaignsService.updateCampaign(this.campaignForm.value).subscribe((response: any) => {
       setTimeout(() => {
         if(response) {

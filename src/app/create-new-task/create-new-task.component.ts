@@ -159,7 +159,10 @@ export class CreateNewTaskComponent  implements OnInit{
 
   onSave() {
     this.isLoading = true;
-    this.toDoForm.controls['time'].setValue(this.timeSelected);
+    if(this.timeSelected) {
+      this.toDoForm.controls['dueDateTime'].setValue(this.timeSelected);
+    }
+    
     this._CreateTaskService.createNewTask(this.toDoForm.value).subscribe((response: any) => {
       setTimeout(() => {
         if(response) {

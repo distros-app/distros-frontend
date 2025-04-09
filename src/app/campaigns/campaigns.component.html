@@ -142,7 +142,7 @@
                                     <td>
                                         <img crossorigin='anonymous' [src]="campaign.profilePic?.secure_url ||'../../assets/images/profile-user.png'" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img">
                                         <span class="text-heading font-semibold">
-                                            {{ campaign.clientName }}
+                                            {{ campaign.name || campaign.clientName }}
                                         </span>
                                     </td>
                                     <td>

@@ -55,7 +55,6 @@ export class CreateNewEventComponent implements OnInit {
   }
 
   buildForm() {
-    console.log('event:', this.event)
     this.eventForm = this.fb.group({
       name: [this.isUpdate ? this.event.name : '', [Validators.required]],
       userId: [this.userId, [Validators.required]],
@@ -172,6 +171,7 @@ export class CreateNewEventComponent implements OnInit {
     this.isLoading = true;
     this.eventForm.controls['startTime'].setValue(this.startTimeSelected);
     this.eventForm.controls['endTime'].setValue(this.endTimeSelected)
+
     this._EventsService.createEvent(this.eventForm.value).subscribe((response: any) => {
       setTimeout(() => {
         if(response) {

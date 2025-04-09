@@ -19,7 +19,7 @@
                                 <img crossorigin="anonymous" [src]="selectedClient?.profilePic?.secure_url" alt="Profile" class="avatar avatar-sm rounded-circle me-2 influencer-img">
                             </div>
                             <div class="client-name">
-                                {{ selectedClient.name | truncate: 13 }}
+                                {{ selectedClient.fullName | truncate: 13 }}
                             </div>
                         </div>
                       </ng-container>
@@ -34,7 +34,7 @@
                             <img crossorigin='anonymous' [src]="client.profilePic.secure_url" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img"> 
                         </div>
                         <div>
-                            <a class="dropdown-item client-name">{{ client.name }}</a>
+                            <a class="dropdown-item client-name">{{ client.fullName }}</a>
                         </div>
                       </div>
                   </div>
@@ -54,10 +54,12 @@
             </div>
         </div>
         <div class="radio-buttons">
-            <mat-radio-group aria-label="Select an option">
-                <mat-radio-button #oneTimePaymentRadioButton (click)="oneTimePaymentRadioChange()" value="1">One-Time Payment*</mat-radio-button>
-                <mat-radio-button #perMonthRadioButton (click)="perMonthRadioChange()" value="2">Per Month*</mat-radio-button>
-              </mat-radio-group>
+            <form [formGroup]="campaignForm">
+                <mat-radio-group formControlName="compensationDuration" aria-label="Select an option">
+                  <mat-radio-button value="One-Time Payment" (click)="oneTimePaymentRadioChange()">One-Time Payment*</mat-radio-button>
+                  <mat-radio-button value="Per Month" (click)="perMonthRadioChange()">Per Month*</mat-radio-button>
+                </mat-radio-group>
+            </form>
         </div>
         <div>
             <form [formGroup]="campaignForm">
@@ -72,9 +74,11 @@
                             </mat-form-field>
                         </div>
                         <div class="radio-buttons-2">
-                            <mat-radio-group aria-label="Select an option">
-                                <mat-radio-button value="1" #endDateRadioButton (click)="endDateRadioChange()">Does this contract have a set end date?</mat-radio-button>
-                              </mat-radio-group>
+                            <form [formGroup]="campaignForm">
+                                <mat-radio-group formControlName="isEndDate" aria-label="Select an option">
+                                  <mat-radio-button value="1" (click)="endDateRadioChange()">Does this contract have a set end date?</mat-radio-button>
+                                </mat-radio-group>
+                            </form>
                         </div>
                         <div *ngIf="isEndDateRadioChecked" class="date end-date">
                             <mat-form-field>

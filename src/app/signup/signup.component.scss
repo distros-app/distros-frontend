@@ -112,7 +112,7 @@ h2 {
     padding: 10px;
 }
 
-.input-box i{
+.input-box span{
     position: absolute;
     right: 20px;
     top: 50%;
@@ -188,6 +188,17 @@ h2 {
     color: red;
 }
 
+.input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-box input {
+    width: 100%;
+    padding-right: 40px; /* Ensure space for the icon */
+}
+
 .input-success {
     justify-self: center;
     margin-top: 10px;
@@ -203,4 +214,27 @@ h2 {
 ::ng-deep .spinner-color {
     color: #12e19f !important;
     margin-right: 2px !important;
+}
+
+.password-icon svg {
+    width: 20px;
+    height: 20px;
+    color: #666;
+    transition: color 0.3s;
+}
+
+.password-icon:hover svg {
+    color: #12e19f; /* Darker color on hover */
+    cursor: pointer;
+}
+
+::ng-deep .custom-toast {
+    background-color: black !important; /* Custom background */
+    color: #12e19f !important;             /* Custom text color */
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    height: 80px !important;
+    width: 360px !important;
+    padding: 14px 20px !important;
+    border-radius: 5px !important;
 }

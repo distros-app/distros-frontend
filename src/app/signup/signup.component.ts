@@ -23,6 +23,7 @@ export class SignupComponent implements OnInit {
   isLoading: boolean = false;
   userAlreadyExists: boolean = false;
   accountAlreadyExistsOnThisDevice: boolean = false;
+  showPassword: boolean = false;
   response: boolean = false;
   deviceKey!: any;
     
@@ -82,7 +83,7 @@ export class SignupComponent implements OnInit {
               this.response = true;
               setTimeout(() => {
                 this.router.navigate(['/login']);
-              }, 1500);
+              }, 2500);
             },
             error: (error: any) => {
               if (error == 'Forbidden') { //Fingerprint error triggered (an account already exists on this device)
@@ -107,5 +108,9 @@ export class SignupComponent implements OnInit {
         }, 500)
       }
     }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

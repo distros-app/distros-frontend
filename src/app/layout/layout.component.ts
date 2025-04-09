@@ -44,7 +44,6 @@ export class LayoutComponent implements OnInit {
   };
 
   openReportBugModal() {
-    console.log(this.user._id)
       const config = new MatDialogConfig();
   
       config.autoFocus = false;
@@ -71,7 +70,6 @@ export class LayoutComponent implements OnInit {
   }
 
   openRequestFeatureModal() {
-    console.log(this.user._id)
       const config = new MatDialogConfig();
   
       config.autoFocus = false;
@@ -98,7 +96,6 @@ export class LayoutComponent implements OnInit {
   }
 
   openCreateNote() {
-    console.log(this.user._id)
       const config = new MatDialogConfig();
   
       config.autoFocus = false;
@@ -155,8 +152,8 @@ export class LayoutComponent implements OnInit {
         config.disableClose = false;
         config.viewContainerRef = this._viewContainerRef;
         config.hasBackdrop = true;
-        config.minWidth = '45vw';
-        config.maxWidth = '45vw';
+        config.minWidth = '50vw';
+        config.maxWidth = '50vw';
         config.minHeight = '58vh';
         config.maxHeight = '58vh';
         config.panelClass = 'custom-dialog-container';

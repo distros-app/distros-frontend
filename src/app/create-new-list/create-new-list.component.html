@@ -22,7 +22,7 @@
                 <button (click)="dialog.close(false)" class="btn btn-secondary cancel-button" type="button" role="button">
                     Cancel
                 </button>
-                <button (click)="onSave()" [disabled]="listForm.invalid || listForm.controls['name'].value.trim() === ''" class="btn btn-secondary send-button" type="button" role="button">
+                <button (click)="onSave()" [disabled]="listForm.invalid || listForm.controls['name'].value.trim() === '' || listAlreadyExists" class="btn btn-secondary send-button" type="button" role="button">
                     <div>
                         <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success spinner-color" role="status">
                             <span class="sr-only">Loading...</span>

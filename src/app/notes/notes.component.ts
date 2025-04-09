@@ -182,8 +182,8 @@ export class NotesComponent implements OnInit{
     config.hasBackdrop = true;
     config.minWidth = '40vw';
     config.maxWidth = '40vw';
-    config.minHeight = '75vh';
-    config.maxHeight = '75vh';
+    config.minHeight = '80vh';
+    config.maxHeight = '80vh';
     self.dialogRef = this._dialog.open(CreateNoteComponent, config);
     //self.dialogRef.componentInstance.data = [];
     self.dialogRef.componentInstance.userId = this.query.userId;
