@@ -182,19 +182,19 @@ a.dropdown-item {
   color: black !important;
   margin-left: 0 !important;
   border: 1px solid black !important;
-  min-width: 165px !important;
+  min-width: 175px !important;
   transition: 1s !important;
-  width: 165px !important;
-  max-width: 165px !important;
+  width: 175px !important;
+  max-width: 175px !important;
   
   &:hover {
     border: 1px solid #12e19f !important;
     box-shadow: 0 0 15px #12e19f !important;
     color: white !important;
     transform: scale(1.1) !important;
-    min-width: 165px !important;
-    width: 165px !important;
-    max-width: 165px !important;
+    min-width: 175px !important;
+    width: 175px !important;
+    max-width: 175px !important;
   }
 }
 
