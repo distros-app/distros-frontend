@@ -250,8 +250,8 @@ export class CalendarComponent implements OnInit {
      config.disableClose = false;
      config.viewContainerRef = this._viewContainerRef;
      config.hasBackdrop = true;
-     config.minWidth = '51vw';
-     config.maxWidth = '51vw';
+     config.minWidth = '58vw';
+     config.maxWidth = '58vw';
      config.minHeight = '58vh';
      config.maxHeight = '58vh';
      config.panelClass = 'custom-dialog-container';

@@ -44,7 +44,6 @@
     overflow-x: hidden;
     background-color: #000;
     color: #fff;
-    border: 1px solid white !important;
 }
 
 img{
@@ -234,7 +233,7 @@ h2 {
 }
 
 ::ng-deep .custom-dialog-container {
-    box-shadow: 0 0 30px white !important; // Adjust as needed
+    box-shadow: 0 0 35px #12e19f !important; // Adjust as needed
     border-radius: 8px !important; // Optional for rounded corners
 }
 

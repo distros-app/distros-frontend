@@ -184,6 +184,7 @@ export class NotesComponent implements OnInit{
     config.maxWidth = '40vw';
     config.minHeight = '80vh';
     config.maxHeight = '80vh';
+    config.panelClass = 'custom-dialog-container';
     self.dialogRef = this._dialog.open(CreateNoteComponent, config);
     //self.dialogRef.componentInstance.data = [];
     self.dialogRef.componentInstance.userId = this.query.userId;

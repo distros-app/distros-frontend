@@ -143,8 +143,8 @@ export class CampaignsComponent implements OnInit {
     config.disableClose = false;
     config.viewContainerRef = this._viewContainerRef;
     config.hasBackdrop = true;
-    config.minWidth = '40vw';
-    config.maxWidth = '40vw';
+    config.minWidth = '46vw';
+    config.maxWidth = '46vw';
     config.minHeight = '82vh';
     config.maxHeight = '82vh';
     config.panelClass = 'custom-dialog-container';

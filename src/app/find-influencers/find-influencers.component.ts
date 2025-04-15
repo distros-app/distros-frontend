@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, inject, OnInit, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, HostListener, inject, OnInit, ViewContainerRef } from '@angular/core';
 import { MatCommonModule, MatOptionModule, MatOptionSelectionChange } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
@@ -12,7 +12,7 @@ import { AddInfluencerToListComponent } from '../add-influencer-to-list/add-infl
 //import { Angular5Csv } from 'angular5-csv/dist/Angular5-csv';
 import { AllFiltersComponent } from '../all-filters/all-filters.component';
 import { MatMenuModule} from '@angular/material/menu';
-import { TruncatePipe } from './truncate.pipe'; 
+import { TitlecaseNamePipe } from '../actions/titlecase-name.pipe';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { AuthService } from '../core/services/auth.service';
@@ -26,11 +26,17 @@ let self: any;
   selector: 'app-find-influencers',
   standalone: true,
   imports: [RouterOutlet, RouterLink, RouterLinkActive, MatFormFieldModule, MatSelectModule, FormsModule,
-            ReactiveFormsModule, NgFor, NgIf, MatMenuModule, NgClass, InfiniteScrollModule],
+            ReactiveFormsModule, NgFor, NgIf, MatMenuModule, NgClass, InfiniteScrollModule, TitlecaseNamePipe],
   templateUrl: './find-influencers.component.html',
   styleUrls: ['./find-influencers.component.scss']
 })
 export class FindInfluencersComponent implements OnInit {
+  @HostListener('document:keydown.enter', ['$event'])
+  handleEnterKey(event: KeyboardEvent) {
+    event.preventDefault(); // optional, prevents default form submission
+    this.fetchAllInfluencers(true);
+  }
+
   toastrService = inject(ToastrService);
   authService = inject(AuthService);
   keywordSearch: string = '';
@@ -360,6 +366,9 @@ export class FindInfluencersComponent implements OnInit {
   cleanupQueryData() {
     if(this.query.category === 'Dating') this.query.category = 'Dating Coach';
     if(this.query.category === 'Fitness') this.query.category = 'Fitness Coach';
+    if(this.query.category === 'Sales') this.query.category = 'Sales Coach';
+    if(this.query.category === 'Real Estate') this.query.category = 'Real Estate Coach';
+    if(this.query.category === 'H & W') this.query.category = 'Health & Wellness Coach';
 
     if(this.query.followers === 'Nano') this.query.followers = '1,000 - 9,999';
     if(this.query.followers === 'Micro') this.query.followers = '10,000 - 99,999';
@@ -367,14 +376,7 @@ export class FindInfluencersComponent implements OnInit {
   }
 
   copyEmail(email: string) {
-    navigator.clipboard.writeText(email).then(() => {
-      this._toastr.success('Email was copied!', 'Success', {
-        toastClass: 'custom-toast',
-      });
-    }).catch(err => {
-      console.error('Failed to copy email: ', err);
-      this._toastr.error('Failed to copy email!', 'Error');
-    });
+   
   }
 
   onSubmit() {

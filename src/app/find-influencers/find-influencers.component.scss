@@ -180,21 +180,21 @@ a.dropdown-item {
 .results-button {
   background-color: #12e19f !important;
   color: black !important;
-  margin-left: 1em !important;
+  margin-left: 0 !important;
   border: 1px solid black !important;
-  min-width: 175px !important;
+  min-width: 165px !important;
   transition: 1s !important;
-  width: 175px !important;
-  max-width: 175px !important;
+  width: 165px !important;
+  max-width: 165px !important;
   
   &:hover {
     border: 1px solid #12e19f !important;
     box-shadow: 0 0 15px #12e19f !important;
     color: white !important;
     transform: scale(1.1) !important;
-    min-width: 175px !important;
-    width: 175px !important;
-    max-width: 175px !important;
+    min-width: 165px !important;
+    width: 165px !important;
+    max-width: 165px !important;
   }
 }
 
@@ -288,17 +288,17 @@ button:hover {
   color: #fff !important;
   background-color: #000 !important;
   border-color: #12e19f !important;
-  width: 165px !important;
-  max-width: 165px !important;
-  min-width: 165px !important;
+  width: 140px !important;
+  max-width: 140px !important;
+  min-width: 140px !important;
 
   &.option-selected {
     color: #12e19f !important;
   }
 
   &:hover {
-    width: 165px !important;
-    max-width: 165px !important;
+    width: 140px !important;
+    max-width: 140px !important;
   }
 }
 

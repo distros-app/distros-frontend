@@ -11,7 +11,7 @@
 }
 
 ::ng-deep .custom-dialog-container {
-    box-shadow: 0 0 30px white !important; // Adjust as needed
+    box-shadow: 0 0 15px 10px #12e19f !important;
     border-radius: 8px !important; // Optional for rounded corners
 }
 
@@ -41,7 +41,6 @@
     background-color: black;
     padding: 0 40px 0;
     color: white;
-    border: 1px solid white;
 }
 
 img{

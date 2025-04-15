@@ -225,8 +225,13 @@
                                 <tr *ngFor="let influencer of allInfluencers; let i = index" [ngClass]="{'blurred': user.subscription == 'FREE FOREVER' && i >= 5}" id="{{ 'item-' + i }}" class="poof-item">
                                     <td>
                                         <img crossorigin='anonymous' [src]="influencer.profilePic.secure_url" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img">
-                                        <span class="text-heading font-semibold name-field">
-                                            {{ influencer.fullName }}
+                                        <a href="{{influencer.profileUrlIG}}" target="_blank" *ngIf="influencer.profileUrlIG">
+                                            <span class="text-heading font-semibold name-field">
+                                                {{ influencer.fullName | titlecaseName }}
+                                            </span>
+                                        </a>
+                                        <span class="text-heading font-semibold name-field" *ngIf="!influencer.profileUrlIG">
+                                            {{ influencer.fullName | titlecaseName }}
                                         </span>
                                     </td>
                                     <td>
@@ -358,6 +363,3 @@
         </main>
     </div>
 </div>
-
-
-
