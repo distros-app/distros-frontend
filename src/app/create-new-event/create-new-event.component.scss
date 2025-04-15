@@ -210,9 +210,10 @@ hr {
 }
 
 .buttons-container {
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     margin-bottom: 0px;
     padding: 20px 16px 30px 20px;
 }
