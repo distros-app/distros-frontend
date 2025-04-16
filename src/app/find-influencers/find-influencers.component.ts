@@ -355,7 +355,7 @@ export class FindInfluencersComponent implements OnInit {
           this.query.page++;
           this.isLoading = false;
           this.hasMoreData = true;
-        }, 1000);
+        }, 250);
       } else {
         this.isLoading = false;
         this.hasMoreData = false;
@@ -375,8 +375,31 @@ export class FindInfluencersComponent implements OnInit {
     if(this.query.followers === 'Macro') this.query.followers = '100,000 - 999,999';
   }
 
-  copyEmail(email: string) {
-   
+  copyEmail(email: string): void {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(email).then(() => {
+        console.log('Email copied to clipboard:', email);
+        // Optionally show a toast or snack bar here
+        // this.toastService.success('Email copied!');
+      }).catch(err => {
+        console.error('Failed to copy email:', err);
+        // Optionally show an error toast
+      });
+    } else {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea');
+      textarea.value = email;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        console.log('Email copied to clipboard (fallback):', email);
+        // this.toastService.success('Email copied!');
+      } catch (err) {
+        console.error('Fallback copy failed:', err);
+      }
+      document.body.removeChild(textarea);
+    }
   }
 
   onSubmit() {
