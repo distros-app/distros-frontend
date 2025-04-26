@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
   }
 
   fetchSubscriptionType() {
-    const type = 'FREE TRIAL'; //make dynamic later
+    const type = 'FREE'; //make dynamic later
     this.form.get('subscription.type')?.setValue(type);
   }
 
@@ -73,7 +73,7 @@ export class SignupComponent implements OnInit {
             next: (response: any) => {
               this.userAlreadyExists = false;
               this.accountAlreadyExistsOnThisDevice = false;
-              this._toastr.success('Your account was created successfully. Welcome to Distros!', 'Success', {
+              this._toastr.success('Your account was created. Welcome to Distros!', 'Success', {
                 toastClass: 'custom-toast',
               });
               const deviceKey = uuidv4();
