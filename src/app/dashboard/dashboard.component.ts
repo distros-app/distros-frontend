@@ -79,19 +79,20 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-   
   }
 
   fetchSubscriptionDetails() {
     if(this.user.stripeSessionId && !this.user.stripeSubscriptionId) {
       let baseURL: string = '';
-
-      if(this.user.subscription.type === 'PRO') {
-        //baseURL = "http://localhost:3000/api/subscribe-stripe-pro/details";
-        baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro/details";
+      if(this.user.subscription.type === 'FREE') {
+        //baseURL = "http://localhost:3000/api/subscribe-stripe/details";
+        baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe/details";
+      } else if(this.user.subscription.type === 'PRO') {
+        baseURL = "http://localhost:3000/api/subscribe-stripe-pro/details";
+        //baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro/details";
       } else if(this.user.subscription.type === 'SCALE') {
-        //baseURL = "http://localhost:3000/api/subscribe-stripe-scale/details";
-        baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro/details";
+        baseURL = "http://localhost:3000/api/subscribe-stripe-scale/details";
+        //baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro/details";
       }
 
       this.HttpClient.post<{ status: string }>(baseURL, { sessionId: this.user.stripeSessionId, user: this.user })

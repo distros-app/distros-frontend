@@ -61,7 +61,10 @@ export class MembershipComponent implements OnInit {
     if(this.user.stripeSessionId && !this.user.stripeSubscriptionId) {
       let baseURL: string = '';
 
-      if(this.user.subscription.type === 'PRO') {
+      if(this.user.subscription.type === 'FREE') {
+        //baseURL = "http://localhost:3000/api/subscribe-stripe/details";
+        baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe/details";
+      } else if(this.user.subscription.type === 'PRO') {
         //baseURL = "http://localhost:3000/api/subscribe-stripe-pro/details";
         baseURL = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-pro/details";
       } else if(this.user.subscription.type === 'SCALE') {
