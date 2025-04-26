@@ -104,8 +104,8 @@ export class MembershipComponent implements OnInit {
   subscribeToScale() {
     this.isOpeningAdvanced = true;
     setTimeout(() => {
-      //const baseURL: string = "http://localhost:3000/api/subscribe-stripe-scale";
-      const baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-scale";
+    //const baseURL: string = "http://localhost:3000/api/subscribe-stripe-scale";
+    const baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/subscribe-stripe-scale";
 
       const plan = _.find(this.stripeProductIds, { plan: 'Scale' });
       //const plan = _.find(this.stripeProductIds, {plan: 'Testing'});
@@ -158,7 +158,7 @@ export class MembershipComponent implements OnInit {
               catchError(error => {
                 this.isCancelingPro = false;
                 this._toastr.success('Failed to cancel your membership. Please contact support.', 'Error', {
-                  toastClass: 'custom-toast',
+                  toastClass: 'custom-toast-red',
                 });
                 return throwError(() => error); // Rethrow the error if needed
               })
@@ -203,7 +203,7 @@ export class MembershipComponent implements OnInit {
               catchError(error => {
                 this.isCancelingAdvanced = false;
                 this._toastr.success('Failed to cancel your membership. Please contact support.', 'Error', {
-                  toastClass: 'custom-toast',
+                  toastClass: 'custom-toast-red',
                 });
                 return throwError(() => error); // Rethrow the error if needed
               })

@@ -315,12 +315,24 @@ body {
 	font-size: 12px;
 }
 
-::ng-deep .custom-toast {
+::ng-deep .custom-toast-red {
 	z-index: 1000 !important;
 	background-color: black !important; /* Custom background */
 	color: red !important;             /* Custom text color */
 	border: 1px solid red !important;
 	box-shadow: 0 0 15px red !important;
+	height: 80px !important;
+	width: 360px !important;
+	padding: 12px 20px !important;
+	border-radius: 5px !important;
+}
+
+::ng-deep .custom-toast {
+	z-index: 1000 !important;
+	background-color: black !important; /* Custom background */
+	color: #12e19f !important;             /* Custom text color */
+	border: 1px solid #12e19f !important;
+	box-shadow: 0 0 15px #12e19f !important;
 	height: 80px !important;
 	width: 360px !important;
 	padding: 12px 20px !important;
