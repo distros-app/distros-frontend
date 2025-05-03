@@ -67,17 +67,19 @@ export class CreateNewCampaignComponent implements OnInit {
 
   ngOnInit() {
     this.isUpdate = (this.campaign && this.campaign._id);
-    if(!this.isUpdate) this.triggerConfetti();
     this.dialog = this.dialogRef;
+    this.triggerConfetti();
     this.me();
   }
 
   triggerConfetti() {
-    confetti({
-      particleCount: 1000,
-      spread: 150,
-      origin: { y: 0.4 }
-    });
+    if(!this.isUpdate) {
+      confetti({
+        particleCount: 1000,
+        spread: 150,
+        origin: { y: 0.4 }
+      });
+    }
   }
 
   buildForm() {
