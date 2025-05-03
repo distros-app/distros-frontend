@@ -188,18 +188,18 @@ extractUsername(url: any) {
     window.URL.revokeObjectURL(url);
   }
 
-  exportToCSV(emails: string[]) {
-    if (!emails.length) {
-      console.warn('No emails to export.');
+  exportToCSV(influencers: Array<any>) {
+    if (!influencers.length) {
+      console.warn('No influencers to export.');
       return;
     }
   
     // Define CSV header
-    let csvContent = "Emails\n";  
+    let csvContent = "Usernames\n";  
   
     // Append each email as a new row
-    emails.forEach(email => {
-      csvContent += `${email}\n`;
+    influencers.forEach(influencer => {
+      csvContent += `${influencer.usernameIG}\n`;
     });
   
     // Create a Blob from the CSV content
@@ -209,7 +209,7 @@ extractUsername(url: any) {
     // Create a temporary anchor element and trigger download
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'possible_emails.csv';
+    a.download = 'influencers.csv';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

@@ -105,7 +105,7 @@ export class FindInfluencersComponent implements OnInit {
         } else {
           if(this.user.subscription.type === 'FREE') this.emailViewLimit = 25;
           if(this.user.subscription.type === 'PRO') this.emailViewLimit = 500;
-          if(this.user.subscription.type === 'SCALE') this.emailViewLimit = 1500;
+          if(this.user.subscription.type === 'SCALE') this.emailViewLimit = 2000;
         }
         this.nextPeriod = this.user?.nextPaymentDate?.split(',')[0];
 
