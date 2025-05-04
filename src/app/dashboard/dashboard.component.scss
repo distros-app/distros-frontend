@@ -112,7 +112,7 @@ header {
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1737647939/yoga-6723315_1280_aaqm7g.jpg'); /* Replace with your image path */
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
     background-size: cover; /* Ensures the image covers the entire div */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */
@@ -210,4 +210,8 @@ h1 {
 
 span.h3 {
     color: white !important;
+}
+
+.energy {
+    margin-left: -4px !important;
 }
