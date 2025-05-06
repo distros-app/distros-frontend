@@ -356,7 +356,8 @@
                         </div>
                     </div>
                     <div class="card-footer border-0 py-5 d-flex justify-content-center">
-                        <span *ngIf="!hasMoreData && !isLoading" class="text-muted text-sm text-success">New Infopreneurs are added daily so check back tomorrow for more!</span>
+                        <span *ngIf="noResultsFound && hasMoreData && !isLoading" class="text-muted text-sm text-red">No influencers found matching the name you entered</span>
+                        <span *ngIf="!hasMoreData && !noResultsFound && !isLoading" class="text-muted text-sm text-success text-green">New Infopreneurs are added daily so check back tomorrow for more!</span>
                         <div *ngIf="isLoading" class="spinner-border spinner-border-sm text-success" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>  
