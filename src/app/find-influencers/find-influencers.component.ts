@@ -371,8 +371,8 @@ export class FindInfluencersComponent implements OnInit {
     if(this.query.category === 'H & W') this.query.category = 'Health & Wellness Coach';
 
     if(this.query.followers === 'Nano') this.query.followers = '1,000 - 9,999';
-    if(this.query.followers === 'Micro') this.query.followers = '10,000 - 99,999';
-    if(this.query.followers === 'Macro') this.query.followers = '100,000 - 999,999';
+    if(this.query.followers === 'Micro / Macro') this.query.followers = '10,000 - 999,999';
+    //if(this.query.followers === 'Macro') this.query.followers = '100,000 - 999,999';
   }
 
   copyEmail(email: string): void {
