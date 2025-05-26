@@ -18,11 +18,10 @@
                 <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$0/month</h3>
                 <ul class="pricing-plan-features">
                   <!--<li>Analyze unlimited influencer profiles</li>-->
-                  <li>Collect 25 influencer emails</li>
-                  <li>Client/Campaign tracker</li>
-                  <li>Unlimited notes</li>
-                  <li>Task tracker</li>
-                  <li>AI Calendar</li>
+                  <li>Collect <span class="limit">25</span> Influencer Emails</li>
+                  <li>Campaign & Task tracker</li>
+                  <li><span class="limit">Unlimited</span> Notes & Lists</li>
+                  <li>Calendar</li>
                   <li>Analytics</li>
                 </ul>
                 <button [disabled]="true" class="btn pricing-plan-purchase-btn">
@@ -45,15 +44,17 @@
               <div class="card-body">
                   <i class="fas fa-unlock-alt pricing-plan-icon icon"></i>
                 <p class="pricing-plan-title">Pro</p>
-                <h3 *ngIf="isDisplayYearly" class="pricing-plan-cost ml-auto">$20/month*</h3>
-                <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$20/month</h3>
+                <h3 *ngIf="isDisplayYearly" class="pricing-plan-cost ml-auto">$27/month*</h3>
+                <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$27/month</h3>
                 <ul class="pricing-plan-features">
                   <!--<li>Analyze unlimited influencer profiles</li>-->
-                  <li>Collect 500 influencer emails</li>
-                  <li>Client/Campaign tracker</li>
-                  <li>Unlimited notes</li>
-                  <li>Task tracker</li>
-                  <li>AI Calendar</li>
+                  <li>AI Personalized Matches</li>
+                  <li><span class="limit">100's</span> of influencers hand picked for you weekly</li>
+                  <li>Collect <span class="limit">500</span> Influencer Emails</li>
+                  <li>Campaign & Task tracker</li>
+                  <li><span class="limit">Unlimited</span> Notes & Lists</li>
+                  <li>1-1 Support</li>
+                  <li>Calendar</li>
                   <li>Analytics</li>
                 </ul>
                 <button *ngIf="user.subscription?.type !== 'PRO'" (click)="subscribeToPro()" class="btn pricing-plan-purchase-btn">
@@ -85,15 +86,17 @@
               <div class="card-body">
                 <i class="fas fa-rocket pricing-plan-icon icon"></i>
                 <p class="pricing-plan-title">Scale</p>
-                <h3 *ngIf="isDisplayYearly" class="pricing-plan-cost ml-auto">$40/month*</h3>
-                <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$40/month</h3>
+                <h3 *ngIf="isDisplayYearly" class="pricing-plan-cost ml-auto">$57/month*</h3>
+                <h3 *ngIf="!isDisplayYearly" class="pricing-plan-cost ml-auto">$57/month</h3>
                 <ul class="pricing-plan-features">
                   <!--<li>Analyze unlimited influencer profiles</li>-->
-                  <li>Collect 2,000 influencer emails</li>
-                  <li>Client/Campaign tracker</li>
-                  <li>Unlimited notes</li>
-                  <li>Task tracker</li>
-                  <li>AI Calendar</li>
+                   <li>AI Personalized Matches</li>
+                  <li><span class="limit">100's</span> of influencers hand picked for you weekly</li>
+                  <li>Collect <span class="limit">2,000</span> Influencer Emails</li>
+                  <li>Campaign & Task tracker</li>
+                  <li><span class="limit">Unlimited</span> Notes & Lists</li>
+                   <li>1-1 Support</li>
+                   <li>Calendar</li>
                   <li>Analytics</li>
                 </ul>
                 <button *ngIf="user.subscription?.type !== 'SCALE'" (click)="subscribeToScale()" class="btn pricing-plan-purchase-btn">

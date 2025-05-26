@@ -37,8 +37,8 @@ body {
 	-webkit-transition: all 0.6s;
 	transition: all 0.6s;
 	background-color: black;
-	height: 37em;
-	max-height: 37em;
+	height: 41em;
+	max-height: 41em;
 
 	&:hover {
 		box-shadow: 0 2px 40px 0 #12e19f;
@@ -313,6 +313,11 @@ body {
 .cancel-note {
 	margin-top: 5px;
 	font-size: 12px;
+}
+
+.limit {
+	font-weight: bold !important;
+	color: #12e19f !important;
 }
 
 ::ng-deep .custom-toast-red {
