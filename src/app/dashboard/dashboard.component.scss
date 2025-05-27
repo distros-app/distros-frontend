@@ -9,6 +9,7 @@
 
 .parent {
     overflow-y: auto;
+    background-color: black !important;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
@@ -42,6 +43,12 @@
     margin-top: 50px !important;
 }
 
+.matches-container {
+    display: flex !important;
+    justify-content: end !important;
+    margin: 15px 0 -35px 0!important;
+}
+
 .recent-searches {
     font-size: 12px !important;
     height: 10em;
@@ -51,7 +58,6 @@
 .featured-section {
     font-size: 12px !important;
     height: 10em !important;
-    margin: 0 !important;
 }
 
 .dashboard-body {
@@ -75,6 +81,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    padding-bottom: 25px !important;
 }
 
 .card-body {
@@ -202,6 +209,7 @@ main {
 
 .main-background {
     background-color: black !important;
+    padding-bottom: 20px !important;
 }
 
 h1 {
@@ -215,3 +223,391 @@ span.h3 {
 .energy {
     margin-left: -4px !important;
 }
+
+.results-button {
+  background-color: black !important;
+  color: #12e19f !important;
+  margin-left: 0 !important;
+  border: 1px solid #12e19f !important;
+  min-width: 225px !important;
+  transition: 1s !important;
+  width: 225px !important;
+  max-width: 225px !important;
+  
+  &:hover {
+    border: 1px solid #12e19f !important;
+    box-shadow: 0 0 15px #12e19f !important;
+    color: white !important;
+    transform: scale(1.1) !important;
+    min-width: 225px !important;
+    width: 225px !important;
+    max-width: 225px !important;
+  }
+}
+
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background: black;
+  padding: 15px 0 30px 0;
+}
+
+.carousel-track {
+  display: flex;
+  width: 77vw;
+  animation: scroll 20s linear infinite;
+}
+
+.carousel-slide {
+  flex: 0 0 auto;
+  width: calc(100% / 6); /* 8 visible at once */
+  height: 300px !important;
+  box-sizing: border-box;
+  margin-right: 16px;
+  background-color: gray;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Ensure no horizontal scroll leaks */
+body {
+  overflow-x: hidden;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Optional responsiveness */
+@media (max-width: 1024px) {
+  .carousel-slide {
+    width: calc(100% / 4);
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-slide {
+    width: calc(100% / 2);
+  }
+}
+
+.footer {
+    height: 20% !important;
+    background-color: black !important;
+}
+
+h4 {
+    padding-top: 5px !important;
+    color: white !important;
+}
+
+h5 {
+    margin-top: -15px !important;
+    color: gray !important;
+}
+
+.slider-body-1 {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  height: 90% !important;
+}
+
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1000 !important;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  height: 20%;
+}
+
+.slider-body-2 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://www.instagram.com/reel/DKH7ec4pSCb/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-2 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-3 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-3 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-4 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-4 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-5 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-5 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-6 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-6 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-7 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-7 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-8 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-8 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-9 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-9 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-10 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-10 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-11 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-11 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.slider-body-12 {
+    font-size: 14px;
+    background-color: white;
+    color: white !important;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-right: 30px;
+    height: 80%;
+    width: 100%;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+        url('https://res.cloudinary.com/dza3ed8yw/image/upload/v1746317511/ai-generated-8635362_1280_m6iuvr.png'); /* Replace with your image path */
+    background-size: cover; /* Ensures the image covers the entire div */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+}
+
+.slider-body-12 h3 {
+    color: white; /* Makes the text white */
+    font-weight: 500;
+}
+
+.footer-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns content to the left */
+}
+
+.explore-distros {
+    margin-bottom: -5px !important;
+}
+
+.explore {
+    margin-bottom: 0.1px !important;
+}
+
+
+

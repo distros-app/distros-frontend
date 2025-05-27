@@ -1,18 +1,32 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { User } from '../core/model/common.model';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import Swiper from 'swiper';
+import { Autoplay } from 'swiper/modules';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf, NgClass],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgIf, NgClass, NgFor],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild('videoRef1') videoRef1!: any;
+  @ViewChild('videoRef2') videoRef2!: any;
+  @ViewChild('videoRef3') videoRef3!: any;
+  @ViewChild('videoRef4') videoRef4!: any;
+  @ViewChild('videoRef5') videoRef5!: any;
+  @ViewChild('videoRef6') videoRef6!: any;
+  @ViewChild('videoRef7') videoRef7!: any;
+  @ViewChild('videoRef8') videoRef8!: any;
+  @ViewChild('videoRef9') videoRef9!: any;
+  @ViewChild('videoRef10') videoRef10!: any;
+  @ViewChild('videoRef11') videoRef11!: any;
+  @ViewChild('videoRef12') videoRef12!: any;
   authService = inject(AuthService);
   user: User | any = {};
 
@@ -79,6 +93,60 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    const video1 = this.videoRef1.nativeElement;
+    video1.muted = true;
+    video1.click();
+
+    const video2 = this.videoRef2.nativeElement;
+    video2.muted = true;
+    video2.click();
+
+    const video3 = this.videoRef3.nativeElement;
+    video3.muted = true;
+    video3.click();
+
+    const video4 = this.videoRef4.nativeElement;
+    video4.muted = true;
+    video4.click();
+
+    const video5 = this.videoRef5.nativeElement;
+    video5.muted = true;
+    video5.click();
+
+    const video6 = this.videoRef6.nativeElement;
+    video6.muted = true;
+    video6.click();
+
+    const video7 = this.videoRef7.nativeElement;
+    video7.muted = true;
+    video7.click();
+
+    const video8 = this.videoRef8.nativeElement;
+    video8.muted = true;
+    video8.click();
+
+    const video9 = this.videoRef9.nativeElement;
+    video9.muted = true;
+    video9.click();
+
+    const video10 = this.videoRef10.nativeElement;
+    video10.muted = true;
+    video10.click();
+
+    const video11 = this.videoRef11.nativeElement;
+    video11.muted = true;
+    video11.click();
+
+    const video12 = this.videoRef12.nativeElement;
+    video12.muted = true;
+    video12.click();
+}
+
+  onOpen() {
+    
   }
 
   fetchSubscriptionDetails() {
