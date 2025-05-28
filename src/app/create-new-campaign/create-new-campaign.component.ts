@@ -167,7 +167,7 @@ export class CreateNewCampaignComponent implements OnInit {
       if(response) {
         this.influencerLists = response.data;
 
-        if(!this.influencerLists?.length) {
+        if(!this.influencerLists?.length || (this.influencerLists?.length && !this.influencerLists.some(list => list.influencers?.length > 0))) {
           this.isNoClients = true;
           this.clients.push({fullName: 'No influencers have been added to a list yet'});
         } else {
