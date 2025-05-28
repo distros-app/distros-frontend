@@ -60,7 +60,7 @@ export class AddInfluencerToListComponent implements OnInit {
     this.form = this.fb.group({
       userId: new FormControl(this.userId, [Validators.required]),
       listName: new FormControl('', [Validators.required]),
-      influencerStatus: new FormControl('', [Validators.required]),
+      influencerStatus: new FormControl('', []),
       description: new FormControl('', []),
       newInfluencer: new FormControl(this.newInfluencer, [Validators.required])
     });

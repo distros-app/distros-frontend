@@ -17,6 +17,8 @@ export class AuthService {
         return token ? true : false;
     }
     router = inject(Router);
+    //baseURL: string = "http://localhost:3000/api/users";
+    baseURL: string = "https://distros-8f63ee867795.herokuapp.com/api/users";
     
     constructor(private _http: HttpClient) {
 
@@ -74,6 +76,11 @@ export class AuthService {
         return this._http.get<ApiResponse<User>>(`${ApiEndpoint.Auth.Me}`);
     }
 
+    fetchMyMatches(query: any) {
+        let queryParams: string = this.toQueryString(query);
+        return this._http.get(`${this.baseURL}?${queryParams}`);
+    }
+
     logout() {
         localStorage.removeItem(LocalStorage.token);
         this.router.navigate(['login']);
@@ -98,4 +105,24 @@ export class AuthService {
                 })
             );
     }
+
+    toQueryString(paramsObject: any): string {
+    let result: string = '';
+
+    if (paramsObject) {
+      result = Object
+        .keys(paramsObject)
+        .map((key: string) => {
+          if(Array.isArray(paramsObject[key])) {
+            return paramsObject[key].map((innerKey: string) => `${encodeURIComponent(key)}=${encodeURIComponent(innerKey)}`)
+              .join('&');
+          } else {
+            return `${encodeURIComponent(key)}=${encodeURIComponent(paramsObject[key])}`;
+          }
+        })
+        .join('&');
+    }
+
+    return result;
+  }
 }

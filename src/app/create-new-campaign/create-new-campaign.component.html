@@ -19,7 +19,7 @@
                                 <img crossorigin="anonymous" [src]="selectedClient?.profilePic?.secure_url" alt="Profile" class="avatar avatar-sm rounded-circle me-2 influencer-img">
                             </div>
                             <div class="client-name">
-                                {{ selectedClient.fullName | truncate: 13 }}
+                                {{ selectedClient.fullName | titlecaseName | truncate: 13 }}
                             </div>
                         </div>
                       </ng-container>
@@ -34,7 +34,7 @@
                             <img crossorigin='anonymous' [src]="client.profilePic.secure_url" alt="flag" class="avatar avatar-sm rounded-circle me-2 influencer-img"> 
                         </div>
                         <div>
-                            <a class="dropdown-item client-name">{{ client.fullName }}</a>
+                            <a class="dropdown-item client-name">{{ client.fullName | titlecaseName }}</a>
                         </div>
                       </div>
                   </div>

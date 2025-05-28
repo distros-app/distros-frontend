@@ -11,11 +11,11 @@
 }
 
 .parent{
-    height: 725px;
+   height: 30vh !important;
     width: 100%;
     overflow-y: hidden;
     overflow-x: hidden;
-    background-color: #fff;
+    background-color: black;
 }
 
 img{
@@ -261,4 +261,9 @@ hr {
 
 ::ng-deep .btn-close {
     margin-right: 5px !important;
+}
+
+::ng-deep .custom-dialog-container {
+    box-shadow: 0 0 15px 10px red !important;
+    border-radius: 8px !important; // Optional for rounded corners
 }

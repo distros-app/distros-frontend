@@ -15,13 +15,14 @@ import { CampaignsService } from '../campaigns/campaigns.service';
 import { CreateListService } from '../create-new-list/create-new-list.service';
 import { TruncatePipe } from '../find-influencers/truncate.pipe';
 import * as _ from 'lodash';
+import { TitlecaseNamePipe } from '../actions/titlecase-name.pipe';
 
 
 @Component({
   selector: 'app-create-new-campaign',
   standalone: true,
   imports: [NgIf, FormsModule, ReactiveFormsModule, DragDropModule, NgFor, MatRadioModule, MatFormFieldModule, 
-            MatNativeDateModule, MatDatepickerModule, MatInputModule, NgStyle, TruncatePipe, NgClass],
+            MatNativeDateModule, MatDatepickerModule, MatInputModule, NgStyle, TruncatePipe, NgClass, TitlecaseNamePipe],
   templateUrl: './create-new-campaign.component.html',
   styleUrls: ['./create-new-campaign.component.scss']
 })

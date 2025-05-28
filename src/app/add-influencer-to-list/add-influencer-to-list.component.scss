@@ -14,13 +14,13 @@
 }
 
 .form {
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     padding: 10px 40px 30px; 
     background-color: black;
     color: white;
     width: 100%;
-    height: 60vh;
+    height: 35vh;
 }
 
 .form-title {
@@ -90,16 +90,16 @@ hr {
     color: #fff !important;
     background-color: #000 !important;
     border-color: #12e19f !important;
-    min-width: 165px !important;
-    width: 165px !important;
+    min-width: 235px !important;
+    width: 235px !important;
 }
 
 ::ng-deep .list-button-2 {
     color: #fff !important;
     background-color: #000 !important;
     border-color: #12e19f !important;
-    min-width: 165px !important;
-    width: 165px !important;
+    min-width: 235px !important;
+    width: 235px !important;
     margin-left: 25px !important;
 }
 
@@ -150,7 +150,7 @@ hr {
 }
 
 .save-button-container {
-    margin-top: 20px;
+    margin-top: 60px;
 }
 
 .save-button{
@@ -252,8 +252,8 @@ hr {
     color: #fff !important;
     background-color: #000 !important;
     border-color: #12e19f !important;
-    min-width: 165px !important;
-    width: 165px !important;
+    min-width: 235px !important;
+    width: 235px !important;
 
     &.option-selected {
         color: #12e19f !important;

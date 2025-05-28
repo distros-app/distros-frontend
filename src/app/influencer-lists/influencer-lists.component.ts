@@ -27,6 +27,7 @@ let self: any;
 export class InfluencerListsComponent implements OnInit {
   authService = inject(AuthService);
   userId!: string;
+  user!: any;
   totalInfluencers: number = 0;
   isLoading: boolean = false;
   tableDataMessage: string = 'Please select a Current List';
@@ -60,6 +61,7 @@ export class InfluencerListsComponent implements OnInit {
   me() {
     this.authService.me().subscribe({
       next: (response: any) => {
+        this.user = response.data;
         this.userId = response.data._id;
         this.query.userId = this.userId;
         this.fetchMyInfluencerLists();
@@ -84,15 +86,13 @@ export class InfluencerListsComponent implements OnInit {
     self.dialogRef = this._dialog.open(InfluencerListDetailsComponent, config);
     self.dialogRef.componentInstance.influencerLists = list;
     self.dialogRef.componentInstance.influencerListsData = list;
+    self.dialogRef.componentInstance.user = this.user;
     self.dialogRef.componentInstance.userId = this.userId;
     self.dialogRef
       .afterClosed()
       .subscribe((result: any) => {
         self.dialogRef = null;
-       
-        if (result) {
-          
-        }
+          this.fetchMyInfluencerLists(true);
       });
   }
 

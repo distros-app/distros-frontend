@@ -1,14 +1,14 @@
 <div class="parent">
     <div class="form-wrapper drag" cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle>
         <div>
-            <h1 class="form-title">{{ listName }}</h1>
+            <h1 class="form-title">Your Personalized AI Matches</h1>
         </div>
         <div class="close-btn">
             <button type="button" (click)="dialog.close(false)" class="btn-close" aria-label="Close"></button>
         </div>
     </div>
     <hr class="hr" />
-    <div class="card shadow border-0 mb-7 body-section">
+    <div *ngIf="yourInfluencers?.length" class="card shadow border-0 mb-7 body-section">
         <div class="card-header">
             <h5 class="mb-0 table-title">Influencers</h5>
         </div>
@@ -25,11 +25,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let influencer of influencersInSelectedList">
+                    <tr *ngFor="let influencer of yourInfluencers">
                         <td>
                             <img crossorigin='anonymous' [src]="influencer.profilePic.secure_url" class="avatar avatar-sm rounded-circle me-2 influencer-img">
                             <span class="text-heading font-semibold name-column">
-                                {{ influencer.fullName | titlecaseName }}
+                                {{ influencer.fullName }}
                             </span>
                         </td>
                         <td>
@@ -55,7 +55,7 @@
                         </td>
                         <td class="text-start">
                             <span>
-                                <button [matMenuTriggerFor]="emailsMenu" type="button" [disabled]="influencer.emails?.length == 0" class="btn btn-sm btn-square btn-neutral text-danger-hover" data-bs-toggle="tooltip" data-bs-placement="top" title="View Email" (click)="viewEmail(influencer)">
+                                <button [matMenuTriggerFor]="emailsMenu" type="button" [disabled]="influencer.emails?.length == 0" class="btn btn-sm btn-square btn-neutral text-danger-hover" data-bs-toggle="tooltip" data-bs-placement="top" title="View or Send email" (click)="viewEmail(influencer)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-open" viewBox="0 0 16 16">
                                         <path d="M8.47 1.318a1 1 0 0 0-.94 0l-6 3.2A1 1 0 0 0 1 5.4v.817l5.75 3.45L8 8.917l1.25.75L15 6.217V5.4a1 1 0 0 0-.53-.882zM15 7.383l-4.778 2.867L15 13.117zm-.035 6.88L8 10.082l-6.965 4.18A1 1 0 0 0 2 15h12a1 1 0 0 0 .965-.738ZM1 13.116l4.778-2.867L1 7.383v5.734ZM7.059.435a2 2 0 0 1 1.882 0l6 3.2A2 2 0 0 1 16 5.4V14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5.4a2 2 0 0 1 1.059-1.765z"/>
                                       </svg>
@@ -64,7 +64,7 @@
                                     <div>
                                         <div *ngFor="let email of influencer.emails">
                                             <button class="custom-menu-item" title="Click to copy" mat-menu-item (click)="copyEmail(email)">
-                                                <span>{{ email?.toLowerCase() }} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy icon-margin-left" viewBox="0 0 16 16">
+                                                <span>{{ email }} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy icon-margin-left" viewBox="0 0 16 16">
                                                     <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
                                                   </svg></span>
                                             </button>
@@ -72,17 +72,19 @@
                                     </div>
                                 </mat-menu>
                             </span>
-                              <span>
-                                        <button type="button" (click)="onRemove(influencer)" class="btn btn-sm btn-square btn-neutral text-danger-hover trash-button" title="Remove influencer from list">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                        </span>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-         <div class="card-footer border-0 py-5 d-flex justify-content-center">
+        <div class="card-footer border-0 py-5 d-flex justify-content-center">
         </div>
+    </div>
+    <div *ngIf="!yourInfluencers?.length" class="empty-list-container">
+        <div class="empty-list">
+                <img class="empty-list-img" src="../../assets/images/robot.png" />
+                 <h5>Welcome! Your account is brand new!</h5>
+                <span class="empty-list-title">Our AI needs about a week to analyze your preferences & deliver personalized influencer matches. Get started by searching for influencers, collecting emails & adding them to your lists to kickstart the process!</span>
+            </div>
     </div>
 </div>

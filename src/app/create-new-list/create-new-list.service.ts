@@ -29,6 +29,11 @@ export class CreateListService {
     );
   }
 
+  deleteInfluencerFromList(query: any) {
+    let queryParams: string = this.toQueryString(query);
+    return this._http.delete<ApiResponse<any>>(`${ApiEndpoint.Lists.DeleteInfluencerFromList}?${queryParams}`);
+  }
+
   deleteList(query: any) {
     let queryParams: string = this.toQueryString(query);
     return this._http.delete<ApiResponse<any>>(`${ApiEndpoint.Lists.DeleteList}?${queryParams}`);

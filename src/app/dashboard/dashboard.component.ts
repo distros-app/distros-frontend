@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { AuthService } from '../core/services/auth.service';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { User } from '../core/model/common.model';
@@ -6,7 +6,10 @@ import { NgClass, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import Swiper from 'swiper';
 import { Autoplay } from 'swiper/modules';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { YourMatchesComponent } from '../your-matches/your-matches.component';
 
+let self: any;
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -69,7 +72,8 @@ export class DashboardComponent implements OnInit {
     totalClients: null,
   };
 
-  constructor(private HttpClient: HttpClient) {
+  constructor(private HttpClient: HttpClient, public _viewContainerRef: ViewContainerRef, public _dialog: MatDialog) {
+    self = this;
     this.authService.me().subscribe({
       next: (response: any) => {
         this.user = response.data;
@@ -148,6 +152,34 @@ export class DashboardComponent implements OnInit {
   onOpen() {
     
   }
+
+  openYourMatchesModal() {
+      const config = new MatDialogConfig();
+  
+      const influencerList: Array<any> = [];
+  
+      config.autoFocus = false;
+      config.hasBackdrop = true;
+      config.disableClose = false;
+      config.viewContainerRef = this._viewContainerRef;
+      config.minWidth = '60vw';
+      config.maxWidth = '60vw';
+      config.minHeight = '90vh';
+      config.maxHeight = '90vh';
+      config.panelClass = 'custom-dialog-container';
+      self.dialogRef = this._dialog.open(YourMatchesComponent, config);
+      self.dialogRef.componentInstance.user = this.user;
+      self.dialogRef.componentInstance.userId = this.user._id;
+      self.dialogRef
+        .afterClosed()
+        .subscribe((result: any) => {
+          self.dialogRef = null;
+         
+          if (result) {
+            
+          }
+        });
+    }
 
   fetchSubscriptionDetails() {
     if(this.user.stripeSessionId && !this.user.stripeSubscriptionId) {

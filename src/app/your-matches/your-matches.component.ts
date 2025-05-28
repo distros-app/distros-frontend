@@ -12,19 +12,18 @@ import { AddInfluencerToListComponent } from '../add-influencer-to-list/add-infl
 import { ToastrService } from 'ngx-toastr';
 import * as _ from "lodash";
 import { MatMenuModule } from '@angular/material/menu';
-import { TitlecaseNamePipe } from '../actions/titlecase-name.pipe';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 let self: any;
 @Component({
-  selector: 'app-influencer-list-details',
+  selector: 'app-your-matches',
   standalone: true,
-  imports: [NgIf, NgFor, MatMenuModule, TitlecaseNamePipe, DragDropModule],
-  templateUrl: './influencer-list-details.component.html',
-  styleUrls: ['./influencer-list-details.component.scss']
+  imports: [NgIf, NgFor, MatMenuModule, DragDropModule],
+  templateUrl: './your-matches.component.html',
+  styleUrls: ['./your-matches.component.scss']
 })
 
-export class InfluencerListDetailsComponent {
+export class YourMatchesComponent {
   authService = inject(AuthService);
   userId!: string;
   user!: User;
@@ -36,66 +35,82 @@ export class InfluencerListDetailsComponent {
   influencerLists: any;
   listName: string = 'Trainers Heat #1';
   influencerListsData: any;
+  yourInfluencers: Array<any> = [];
   influencersInSelectedList: Array<any> = [];
   dialog!: MatDialogRef<any>;
   query: any = {
-    userId: '',
-    listId: '',
-    influencerId: ''
+    userId: ''
   }
 
   constructor(private _findInfluencersService: FindInfluencersService,
               private _ListsService: CreateListService,
               public _viewContainerRef: ViewContainerRef,
-               public _dialog: MatDialogRef<any>,
+              public _dialog: MatDialogRef<any>,
               private _toastr: ToastrService) {
                 self = this;
               }
 
   ngOnInit() {
     this.dialog = this._dialog;
-    this.calculateTotalInfluencers();
-    this.query.userId = this.userId;
-    this.query.listId = this.influencerLists._id;
+    this.fetchMyMatches();
+    //this.calculateTotalInfluencers();
+    //this.me();
   }
 
-  copyEmail(email: string): void {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(email).then(() => {
-        console.log('Email copied to clipboard:', email);
-        // Optionally show a toast or snack bar here
-        // this.toastService.success('Email copied!');
-      }).catch(err => {
-        console.error('Failed to copy email:', err);
-        // Optionally show an error toast
-      });
-    } else {
-      // Fallback for older browsers
-      const textarea = document.createElement('textarea');
-      textarea.value = email;
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        document.execCommand('copy');
-        console.log('Email copied to clipboard (fallback):', email);
-        // this.toastService.success('Email copied!');
-      } catch (err) {
-        console.error('Fallback copy failed:', err);
+  me() {
+    this.authService.me().subscribe({
+      next: (response: any) => {
+        this.userId = response.data._id;
+        this.user = response.data;
+        this.query.userId = this.userId;
+        this.fetchMyInfluencerLists();
       }
-      document.body.removeChild(textarea);
-    }
+    })
+  }
+
+  fetchMyMatches() {
+     let query = {
+        userId: this.user._id
+      }
+      
+      this.authService.fetchMyMatches(query).subscribe({
+        next: (response: any) => {
+          this.yourInfluencers = response.data;
+        }
+      })
+  }
+
+  openSendEmailModal(influencer: any) {
+
+  }
+
+  copyEmail(email: string) {
+
   }
 
 
   onRemove(influencer: any) {
-    this.query.influencerId = influencer._id;
-    this._ListsService.deleteInfluencerFromList(this.query).subscribe((response: any) => {
-      if(response) {
-        this.influencerLists = response.data;
-        this.influencerListsData = _.cloneDeep(this.influencerLists);
-        this.calculateTotalInfluencers();
-      }
-    });
+    const config = new MatDialogConfig();
+
+    config.autoFocus = false;
+    config.disableClose = false;
+    config.viewContainerRef = this._viewContainerRef;
+    config.hasBackdrop = true;
+    config.minWidth = '40vw';
+    config.maxWidth = '40vw';
+    config.minHeight = '30vh';
+    config.maxHeight = '30vh';
+    //self.dialogRef = this._dialog.open(RemoveInfluencerComponent, config);
+    self.dialogRef.componentInstance.userId = this.userId;
+    self.dialogRef.componentInstance.influencer = influencer;
+    self.dialogRef
+      .afterClosed()
+      .subscribe((result: any) => {
+        self.dialogRef = null;
+        if (result) {
+          this.fetchMyInfluencerLists();
+        }
+      });
   }
 
   openAddToListModal(influencer: any) {
@@ -165,7 +180,7 @@ export class InfluencerListDetailsComponent {
   }
 
   viewEmail(influencer: any) {
-    if(!this.user?.influencersEmailViewed?.includes(influencer._id)) {
+    if(!this.user.influencersEmailViewed.includes(influencer._id)) {
       let updateCountQuery = {
         userId: this.user._id,
         influencerId: influencer._id

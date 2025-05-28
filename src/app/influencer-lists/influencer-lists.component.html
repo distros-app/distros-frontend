@@ -100,7 +100,7 @@
                                     <td class="text-start actions-field">
                                         <a *ngIf="list.influencers.length" class="btn btn-sm btn-neutral open-list-button" (click)="openInfluencerListDetailsModal(list)" title="View profile">View</a>
                                         <span>
-                                            <button type="button" (click)="openDeleteListModal(list)" class="btn btn-sm btn-square btn-neutral text-danger-hover trash-button" title="Remove from list">
+                                            <button type="button" (click)="openDeleteListModal(list)" class="btn btn-sm btn-square btn-neutral text-danger-hover trash-button" title="Delete list">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </span>
@@ -110,7 +110,7 @@
                         </table>
                     </div>
                     <div class="card-footer border-0 py-5 d-flex justify-content-center">
-                        <span *ngIf="!isMoreLoading && !this.hasMoreData" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
+                        <span *ngIf="influencerListsData && (influencerListsData.length > 10 && !isMoreLoading && !this.hasMoreData)" class="text-muted text-sm end-of-list">{{ "You've reached the end of the list" }}</span>
                         <div *ngIf="isMoreLoading" class="spinner-border spinner-border-sm text-success" role="status">
                             <span class="sr-only">Loading...</span>
                         </div>  

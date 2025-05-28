@@ -28,10 +28,85 @@
 }
 
 .parent {
-    width: 100%;
-    background-color: black;
-    color: white;
-    height: 90vh !important;
+  height: 100%;
+  width: 100%;
+  display: block;
+  background-color: black;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  height: 90vh !important;
+  min-height: 90vh; /* Ensure it fills viewport height if parent is body */
+}
+
+.empty-list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* Limit width for readability */
+}
+
+.empty-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  background: black;
+}
+
+.empty-list-img {
+  max-width: 150px;
+  margin-bottom: 20px;
+}
+
+.empty-list h5 {
+    margin-top: -5px;
+    margin-left: 1.5em;
+    font-size: 20px;
+    font-weight: bold;
+    color: #12e19f;
+}
+
+.empty-list-title {
+  color: white;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.table-container {
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+.engagement-green {
+  color: #28a745; /* Green for >3% */
+}
+
+.engagement-orange {
+  color: #f0ad4e; /* Orange for 1%–3% */
+}
+
+.engagement-red {
+  color: #dc3545; /* Red for <1% */
 }
 
 .card {
@@ -124,6 +199,9 @@ hr {
 }
 
 .empty-list-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
     margin-top: 12vh;
 }
 
@@ -190,6 +268,8 @@ button.dropdown-item {
 }
 
 .empty-list-container {
+    margin-top: 9em;
+    margin-left: 11em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,7 +281,7 @@ img {
 }
 
 h5 {
-    margin-left: 0.5rem;
+    margin-top: 15px;
     font-size: 18px;
     font-weight: bold;
     color: #12e19f;
@@ -325,3 +405,6 @@ h5 {
     background-color: #12e19f !important;
     color: white;
   }
+
+  
+

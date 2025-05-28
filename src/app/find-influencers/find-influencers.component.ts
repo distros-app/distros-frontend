@@ -245,8 +245,8 @@ export class FindInfluencersComponent implements OnInit {
     config.hasBackdrop = true;
     config.minWidth = '35vw';
     config.maxWidth = '35vw';
-    config.minHeight = '60vh';
-    config.maxHeight = '60vh';
+    config.minHeight = '35vh';
+    config.maxHeight = '35vh';
     config.panelClass = 'custom-dialog-container';
     self.dialogRef = this._dialog.open(AddInfluencerToListComponent, config);
     self.dialogRef.componentInstance.data = [];

@@ -41,6 +41,7 @@ export const ApiEndpoint = {
         CreateList: `${apiUrl}/lists/create-list`,
         UpdateList: `${apiUrl}/lists/update-list`,
         DeleteList: `${apiUrl}/lists/delete-list`,
+        DeleteInfluencerFromList: `${apiUrl}/lists/delete-influencer-from-list`,
     },
     Tasks: {
         CreateTask: `${apiUrl}/tasks/create-task`,
